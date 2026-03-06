@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Alex P. Leith — Mixed-methods researcher, data scientist, and software builder. NSF-funded. Research partnerships with Riot Games and VRChat.">
-  <title>Alex P. Leith — SIM-DAD LLC</title>
+  <meta name="description" content="SIM-DAD LLC — Novel, bespoke solutions for data analysis and design challenges. Research-informed, engineering-ready consulting. Founded June 2024.">
+  <title>SIM-DAD LLC</title>
   <style>
     *, *::before, *::after {
       box-sizing: border-box;
@@ -367,13 +367,55 @@
       color: var(--red);
     }
 
-    /* ─── EXPERTISE ──────────────────────────────────────── */
+    /* ─── TEAM ───────────────────────────────────────────── */
 
-    .expertise-intro {
-      font-size: 1.0625rem;
-      line-height: 1.8;
-      max-width: 65ch;
-      margin-bottom: 48px;
+    .team-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2px;
+      background: var(--black);
+    }
+
+    .team-primary {
+      background: var(--white);
+      padding: 48px 40px;
+    }
+
+    .team-secondary {
+      background: var(--light);
+      padding: 48px 40px;
+    }
+
+    .team-role {
+      font-size: 0.5875rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .team-name {
+      font-size: 1.375rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      margin-bottom: 20px;
+    }
+
+    .team-bio {
+      font-size: 0.9375rem;
+      line-height: 1.75;
+      color: #333333;
+      margin-bottom: 28px;
+    }
+
+    .team-links-pair {
+      display: flex;
+      gap: 48px;
+      border-top: var(--rule-thin);
+      padding-top: 28px;
+      margin-bottom: 36px;
     }
 
     .partnerships {
@@ -458,90 +500,6 @@
       text-decoration: underline;
     }
 
-    /* ─── RESUME ─────────────────────────────────────────── */
-
-    .resume-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2px;
-      background: var(--black);
-    }
-
-    .resume-primary {
-      background: var(--black);
-      color: var(--white);
-      padding: 48px 40px;
-    }
-
-    .resume-primary h3 {
-      font-size: 1.25rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-    }
-
-    .resume-primary p {
-      font-size: 0.9375rem;
-      color: #AAAAAA;
-      line-height: 1.65;
-      margin-bottom: 28px;
-      max-width: 44ch;
-    }
-
-    .resume-secondary {
-      background: var(--light);
-      padding: 48px 40px;
-    }
-
-    .resume-secondary h3 {
-      font-size: 1rem;
-      font-weight: 900;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 12px;
-    }
-
-    .resume-secondary p {
-      font-size: 0.8125rem;
-      color: var(--gray);
-      line-height: 1.65;
-      margin-bottom: 28px;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--black);
-      background: var(--white);
-      text-decoration: none;
-      padding: 14px 28px;
-    }
-
-    .btn-primary:hover {
-      background: var(--red);
-      color: var(--white);
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      font-size: 0.6875rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white);
-      background: var(--black);
-      text-decoration: none;
-      padding: 14px 28px;
-    }
-
-    .btn-secondary:hover {
-      background: var(--red);
-    }
-
     /* ─── FOOTER ─────────────────────────────────────────── */
 
     footer {
@@ -589,7 +547,8 @@
       .scale-grid { grid-template-columns: 1fr 1fr; }
       .projects-grid { grid-template-columns: 1fr; }
       .partnerships { grid-template-columns: 1fr; }
-      .resume-grid { grid-template-columns: 1fr; }
+      .team-grid { grid-template-columns: 1fr; }
+      .team-links-pair { flex-direction: column; gap: 24px; }
       footer { padding: 28px 24px; }
       .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
       .footer-links { flex-wrap: wrap; justify-content: center; }
@@ -607,16 +566,15 @@
   <header>
     <div class="header-inner">
       <div class="header-name">
-        Alex P.<br><span>Leith</span>
+        SIM-DAD<br><span>LLC</span>
       </div>
       <div class="header-right">
-        <p class="header-tagline">Mixed-methods researcher and data scientist with 10+ years of experience designing studies, analyzing large-scale behavioral datasets, and building the software to support both.</p>
+        <p class="header-tagline">Novel, bespoke solutions for data analysis and design challenges. Research-informed, engineering-ready, and built to your specific problem.</p>
         <div class="header-pills">
-          <span class="pill pill-red">NSF Co-PI &mdash; $1.59M</span>
-          <span class="pill">R &middot; Python &middot; SQL</span>
-          <span class="pill">NLP &middot; ML</span>
-          <span class="pill">Docker &middot; Next.js</span>
-          <span class="pill">Social VR &middot; HCI</span>
+          <span class="pill pill-red">Data Consulting</span>
+          <span class="pill">Research &middot; Analysis &middot; Design</span>
+          <span class="pill">Software Development</span>
+          <span class="pill">Founded June 2024</span>
         </div>
       </div>
     </div>
@@ -626,51 +584,45 @@
   <nav>
     <div class="nav-inner">
       <a href="#summary">About</a>
-      <a href="#competencies">Skills</a>
+      <a href="#competencies">Capabilities</a>
       <a href="#scale">At Scale</a>
       <a href="#projects">Projects</a>
-      <a href="#expertise">Expertise</a>
-      <a href="#resume">R&eacute;sum&eacute;</a>
+      <a href="#team">Team</a>
     </div>
   </nav>
 
   <!-- ─── MAIN ──────────────────────────────────────────── -->
   <main>
 
-    <!-- SUMMARY -->
+    <!-- ABOUT -->
     <section id="summary">
-      <p class="section-label">Profile</p>
-      <h2>Researcher.<br>Builder.<br>Director.</h2>
+      <p class="section-label">Who We Are</p>
+      <h2>About<br>SIM-DAD LLC.</h2>
       <div class="summary-grid">
         <div class="summary-body">
-          <p>I design and execute research programs from end to end — from study design and IRB-governed data collection through NLP pipelines, statistical modeling, and production software deployment. My work lives at the intersection of behavioral research and applied engineering.</p>
-          <p>I have led a 30+ person cross-institutional research consortium as part of a $1.59M NSF award, established formal data-access partnerships with Riot Games and VRChat, and built production web applications and open-source tools used in active deployment. My technical stack spans R, Python, SQL, Docker, modern web frameworks, and large-scale ML/NLP.</p>
-          <p>Domain expertise is in social VR/XR, virtual meetings, parasocial media, and human-computer interaction — with a track record of translating complex behavioral data into peer-reviewed findings and actionable software.</p>
-          <p style="font-size:0.8125rem; color:#777777; margin-top:8px;">For academic work and lab research: <a href="https://sim-lab-siue.github.io" target="_blank" rel="noopener" style="color:var(--red); text-decoration:none;">SIM Lab @ SIUE</a></p>
+          <p>SIM-DAD LLC delivers novel, bespoke solutions to data analysis and design challenges. We work with organizations to understand their specific needs &mdash; then build the research programs, analytical pipelines, and production tools to meet them.</p>
+          <p>Our work spans the full stack: from study design and IRB-governed data collection through NLP pipelines, statistical modeling, and production software deployment. We bring research rigor to applied problems and engineering discipline to research challenges.</p>
+          <p>Our capabilities are grounded in a track record that includes a $1.59M NSF-funded research program, formal data-access agreements with Riot Games and VRChat, large-scale behavioral datasets, and open-source software tools in active deployment.</p>
         </div>
         <div class="summary-sidebar">
           <div class="sidebar-block">
             <h3>Contact</h3>
-            <a href="mailto:aleith@siue.edu">aleith@siue.edu</a>
-            <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a>
-            <a href="https://github.com/apleith" target="_blank" rel="noopener">github.com/apleith</a>
-            <a href="https://orcid.org/0000-0003-1310-6763" target="_blank" rel="noopener">ORCID 0000-0003-1310-6763</a>
+            <a href="mailto:ap@simdadllc.com">ap@simdadllc.com</a>
+            <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">github.com/SIM-DAD</a>
           </div>
           <div class="sidebar-block">
-            <h3>Affiliations</h3>
-            <a href="https://sim-lab-siue.github.io" target="_blank" rel="noopener">SIM Lab @ SIUE</a>
-            <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
-            <a href="https://beyondmeet.space" target="_blank" rel="noopener">Beyond Meet Space</a>
-            <a href="https://github.com/SIM-Lab-SIUE" target="_blank" rel="noopener">github.com/SIM-Lab-SIUE</a>
+            <h3>Leadership</h3>
+            <a href="#team">Alex P. Leith &mdash; Founder</a>
+            <a href="#team">Janet V. Leith &mdash; COO</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- COMPETENCIES -->
+    <!-- CAPABILITIES -->
     <section id="competencies">
-      <p class="section-label">Technical Profile</p>
-      <h2>Core Competencies</h2>
+      <p class="section-label">What We Do</p>
+      <h2>Company Capabilities</h2>
       <div class="competencies-grid">
         <div class="comp-card">
           <div class="comp-heading">Research &amp; Analysis</div>
@@ -686,7 +638,7 @@
           </ul>
         </div>
         <div class="comp-card">
-          <div class="comp-heading">Languages &amp; Data</div>
+          <div class="comp-heading">Data Engineering</div>
           <ul class="comp-list">
             <li>R / RStudio</li>
             <li>Python</li>
@@ -699,7 +651,7 @@
           </ul>
         </div>
         <div class="comp-card">
-          <div class="comp-heading">Engineering &amp; Tools</div>
+          <div class="comp-heading">Software Development</div>
           <ul class="comp-list">
             <li>Git / GitHub</li>
             <li>Docker &amp; Docker Compose</li>
@@ -708,19 +660,19 @@
             <li>REST API design</li>
             <li>ggplot2 &amp; Shiny</li>
             <li>Tableau</li>
-            <li>LLM / AI tools</li>
+            <li>LLM / AI integration</li>
           </ul>
         </div>
         <div class="comp-card">
-          <div class="comp-heading">Leadership</div>
+          <div class="comp-heading">Project Delivery</div>
           <ul class="comp-list">
-            <li>Research lab direction</li>
+            <li>Research program direction</li>
             <li>Cross-institutional PM</li>
-            <li>30+ person consortium</li>
+            <li>Large consortium management</li>
             <li>Grant writing &amp; management</li>
             <li>IRB &amp; data governance</li>
             <li>Open-source development</li>
-            <li>Graduate mentorship</li>
+            <li>Stakeholder reporting</li>
           </ul>
         </div>
       </div>
@@ -739,16 +691,16 @@
         <div class="scale-card">
           <div class="scale-number">2.8<span>M+</span></div>
           <div class="scale-label">Tweets in Research Corpora</div>
-          <p class="scale-desc">1.43M VRChat tweets and 1.41M remote work tweets from 887,888 unique users — structured in PostgreSQL, analyzed via STM and NLP pipelines.</p>
+          <p class="scale-desc">1.43M VRChat tweets and 1.41M remote work tweets from 887,888 unique users &mdash; structured in PostgreSQL, analyzed via STM and NLP pipelines.</p>
         </div>
         <div class="scale-card">
           <div class="scale-number">5<span>M+</span></div>
-          <div class="scale-label">Avatar Records — Riot Games</div>
+          <div class="scale-label">Avatar Records &mdash; Riot Games</div>
           <p class="scale-desc">Formal data-access agreement with Riot Games to analyze proprietary League of Legends player data. Findings published in peer-reviewed journal.</p>
         </div>
         <div class="scale-card">
           <div class="scale-number">$1.59<span>M</span></div>
-          <div class="scale-label">NSF FW-HTF-R — Co-PI</div>
+          <div class="scale-label">NSF FW-HTF-R &mdash; Co-PI</div>
           <p class="scale-desc">Led project teams of 4&ndash;8 within a 30+ person cross-institutional consortium spanning MSU, SIUE, and 4 partner institutions. 8+ publications.</p>
         </div>
         <div class="scale-card">
@@ -758,7 +710,7 @@
         </div>
         <div class="scale-card">
           <div class="scale-number">5</div>
-          <div class="scale-label">Linked Studies — NSF Program</div>
+          <div class="scale-label">Linked Studies &mdash; NSF Program</div>
           <p class="scale-desc">NLP/STM &rarr; large-scale survey &rarr; semi-structured interviews &rarr; controlled experiment &rarr; VR prototype user testing. Full mixed-methods pipeline.</p>
         </div>
       </div>
@@ -766,7 +718,7 @@
 
     <!-- PROJECTS -->
     <section id="projects">
-      <p class="section-label">Open-Source Software</p>
+      <p class="section-label">Our Work</p>
       <h2>Projects</h2>
       <div class="projects-grid">
 
@@ -797,76 +749,90 @@
       </div>
     </section>
 
-    <!-- EXPERTISE -->
-    <section id="expertise">
-      <p class="section-label">Domain Knowledge</p>
-      <h2>Research Expertise</h2>
-      <p class="expertise-intro">My subject-matter expertise spans social VR/XR, virtual meetings and remote work, parasocial relationships, and human-computer interaction. Published research serves as both academic contribution and evidence of deep domain knowledge applicable to industry research, UX, and product contexts.</p>
+    <!-- TEAM -->
+    <section id="team">
+      <p class="section-label">Our Team</p>
+      <h2>Leadership</h2>
+      <div class="team-grid">
 
-      <div class="partnerships">
-        <div class="partner-card">
-          <div class="partner-name">Riot Games</div>
-          <p class="partner-desc">Formal data-access agreement to analyze 5M+ proprietary avatar gender choice records from League of Legends. Findings published in peer-reviewed journal.</p>
-        </div>
-        <div class="partner-card">
-          <div class="partner-name">VRChat</div>
-          <p class="partner-desc">Established formal platform collaboration for NSF-funded social VR research: 1.4M+ tweets, in-world behavioral data collection, and avatar observation methodology.</p>
-        </div>
-        <div class="partner-card">
-          <div class="partner-name">Meaningful XR</div>
-          <p class="partner-desc">Co-founding organizer of a peer-reviewed annual academic conference on XR research, now in its third year (MXR 2026, University of Oregon Portland).</p>
-        </div>
-      </div>
+        <!-- Alex P. Leith — Founder -->
+        <div class="team-primary">
+          <div class="team-role">Founder</div>
+          <div class="team-name">Alex P. Leith</div>
+          <p class="team-bio">Mixed-methods researcher and data scientist with 10+ years of experience designing studies, analyzing large-scale behavioral datasets, and building the software to support both. NSF Co-PI on a $1.59M award with formal research partnerships at Riot Games and VRChat. Domain expertise in social VR/XR, virtual meetings, parasocial media, and human-computer interaction.</p>
 
-      <p class="selected-pubs-label">Selected Publications</p>
-      <ul class="pubs-list">
-        <li>
-          <span class="pub-year">2025</span>
-          <span>Leith, A.P., et al. Stress and coping in VRChat: A mixed-method case study. <span class="pub-venue">Computers in Human Behavior Reports, 20</span>(100843).</span>
-        </li>
-        <li>
-          <span class="pub-year">2025</span>
-          <span>Ratan, R.A., &hellip;Leith, A.P., Bailenson, J.N. Time matters in VR: Outcomes decline after 45 minutes. <span class="pub-venue">Computers &amp; Education, 14</span>(3).</span>
-        </li>
-        <li>
-          <span class="pub-year">2025</span>
-          <span>Beyea, D., &hellip;Leith, A.P. Zoom fatigue in review: A meta-analytical examination. <span class="pub-venue">Computers in Human Behavior Reports, 17</span>(100571).</span>
-        </li>
-        <li>
-          <span class="pub-year">2025</span>
-          <span>Lim, C., &hellip;Leith, A.P. Zoom fatigue, impression management, and virtual meeting adoption intent. <span class="pub-venue">PLOS One</span>.</span>
-        </li>
-        <li>
-          <span class="pub-year">2022</span>
-          <span>Foxman, M., &hellip;Leith, A.P. Beyond genre: Classifying virtual reality experiences. <span class="pub-venue">IEEE Transactions on Games, 14</span>(3).</span>
-        </li>
-        <li>
-          <span class="pub-year">2021</span>
-          <span>Leith, A.P. Parasocial cues: The ubiquity of parasocial relationships on Twitch. <span class="pub-venue">Communication Monographs, 88</span>(1), 111&ndash;129.</span>
-        </li>
-        <li>
-          <span class="pub-year">2019</span>
-          <span>Ratan, R.A., &hellip;Leith, A.P. Women keep it real: Avatar gender choice in League of Legends. <span class="pub-venue">Cyberpsychology, Behavior, and Social Networking, 22</span>.</span>
-        </li>
-      </ul>
-      <p class="pubs-more">Full list: <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a></p>
-    </section>
+          <div class="team-links-pair">
+            <div class="sidebar-block">
+              <h3>Links</h3>
+              <a href="mailto:aleith@siue.edu">aleith@siue.edu</a>
+              <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a>
+              <a href="https://github.com/apleith" target="_blank" rel="noopener">github.com/apleith</a>
+              <a href="https://orcid.org/0000-0003-1310-6763" target="_blank" rel="noopener">ORCID 0000-0003-1310-6763</a>
+            </div>
+            <div class="sidebar-block">
+              <h3>Affiliations</h3>
+              <a href="https://sim-lab-siue.github.io" target="_blank" rel="noopener">SIM Lab @ SIUE</a>
+              <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
+              <a href="https://beyondmeet.space" target="_blank" rel="noopener">Beyond Meet Space</a>
+            </div>
+          </div>
 
-    <!-- RESUME -->
-    <section id="resume">
-      <p class="section-label">Documents</p>
-      <h2>R&eacute;sum&eacute; &amp; CV</h2>
-      <div class="resume-grid">
-        <div class="resume-primary">
-          <h3>Industry R&eacute;sum&eacute;</h3>
-          <p>Professional summary, core competencies, research experience, selected publications, grants, and open-source projects. The primary document for industry, consulting, and applied research contexts.</p>
-          <a href="PDFs/Resume.md" class="btn-primary">View R&eacute;sum&eacute;</a>
+          <div class="partnerships">
+            <div class="partner-card">
+              <div class="partner-name">Riot Games</div>
+              <p class="partner-desc">Formal data-access agreement to analyze 5M+ proprietary avatar gender choice records from League of Legends. Findings published in peer-reviewed journal.</p>
+            </div>
+            <div class="partner-card">
+              <div class="partner-name">VRChat</div>
+              <p class="partner-desc">Established formal platform collaboration for NSF-funded social VR research: 1.4M+ tweets, in-world behavioral data collection, and avatar observation methodology.</p>
+            </div>
+            <div class="partner-card">
+              <div class="partner-name">Meaningful XR</div>
+              <p class="partner-desc">Co-founding organizer of a peer-reviewed annual academic conference on XR research, now in its third year (MXR 2026, University of Oregon Portland).</p>
+            </div>
+          </div>
+
+          <p class="selected-pubs-label">Selected Publications</p>
+          <ul class="pubs-list">
+            <li>
+              <span class="pub-year">2025</span>
+              <span>Leith, A.P., et al. Stress and coping in VRChat: A mixed-method case study. <span class="pub-venue">Computers in Human Behavior Reports, 20</span>(100843).</span>
+            </li>
+            <li>
+              <span class="pub-year">2025</span>
+              <span>Ratan, R.A., &hellip;Leith, A.P., Bailenson, J.N. Time matters in VR: Outcomes decline after 45 minutes. <span class="pub-venue">Computers &amp; Education, 14</span>(3).</span>
+            </li>
+            <li>
+              <span class="pub-year">2025</span>
+              <span>Beyea, D., &hellip;Leith, A.P. Zoom fatigue in review: A meta-analytical examination. <span class="pub-venue">Computers in Human Behavior Reports, 17</span>(100571).</span>
+            </li>
+            <li>
+              <span class="pub-year">2025</span>
+              <span>Lim, C., &hellip;Leith, A.P. Zoom fatigue, impression management, and virtual meeting adoption intent. <span class="pub-venue">PLOS One</span>.</span>
+            </li>
+            <li>
+              <span class="pub-year">2022</span>
+              <span>Foxman, M., &hellip;Leith, A.P. Beyond genre: Classifying virtual reality experiences. <span class="pub-venue">IEEE Transactions on Games, 14</span>(3).</span>
+            </li>
+            <li>
+              <span class="pub-year">2021</span>
+              <span>Leith, A.P. Parasocial cues: The ubiquity of parasocial relationships on Twitch. <span class="pub-venue">Communication Monographs, 88</span>(1), 111&ndash;129.</span>
+            </li>
+            <li>
+              <span class="pub-year">2019</span>
+              <span>Ratan, R.A., &hellip;Leith, A.P. Women keep it real: Avatar gender choice in League of Legends. <span class="pub-venue">Cyberpsychology, Behavior, and Social Networking, 22</span>.</span>
+            </li>
+          </ul>
+          <p class="pubs-more">Full list: <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a></p>
         </div>
-        <div class="resume-secondary">
-          <h3>Academic CV</h3>
-          <p>Full curriculum vitae: publications, grants, courses, committee service, and conference proceedings. 2026 draft.</p>
-          <a href="PDFs/CV.md" class="btn-secondary">View CV</a>
+
+        <!-- Janet V. Leith — COO -->
+        <div class="team-secondary">
+          <div class="team-role">Chief Operating Officer</div>
+          <div class="team-name">Janet V. Leith</div>
+          <p class="team-bio">Janet brings a background in business and management alongside extensive professional experience as a paraprofessional. As COO, she serves as the company&rsquo;s C-level project manager &mdash; overseeing daily operations, coordinating cross-functional workstreams, and ensuring project goals are met on time and to standard.</p>
         </div>
+
       </div>
     </section>
 
@@ -875,11 +841,10 @@
   <!-- ─── FOOTER ────────────────────────────────────────── -->
   <footer>
     <div class="footer-inner">
-      <span>&copy; 2026 SIM-DAD LLC &mdash; Alex P. Leith</span>
+      <span>&copy; 2026 SIM-DAD LLC</span>
       <div class="footer-links">
         <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">GitHub</a>
-        <a href="https://apleith.github.io" target="_blank" rel="noopener">Personal Site</a>
-        <a href="https://sim-lab-siue.github.io" target="_blank" rel="noopener">SIM Lab @ SIUE</a>
+        <a href="mailto:ap@simdadllc.com">Contact</a>
         <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
       </div>
     </div>
