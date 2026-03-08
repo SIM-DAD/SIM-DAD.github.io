@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TASS — Text Analysis for Social Scientists | T-Lex Project</title>
+  <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -42,6 +43,19 @@
       align-items: end;
     }
 
+    .back-link-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.25rem;
+    }
+
+    .header-logo {
+      height: 28px;
+      width: auto;
+      opacity: 0.85;
+    }
+
     .back-link {
       display: inline-block;
       color: var(--gray);
@@ -50,7 +64,6 @@
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-bottom: 1.25rem;
       transition: color 0.15s;
     }
     .back-link:hover { color: var(--red); }
@@ -517,7 +530,10 @@
   <header>
     <div class="header-inner">
       <div>
-        <a href="https://sim-dad.github.io" class="back-link">&larr; SIM DAD LLC</a>
+        <div class="back-link-row">
+          <img src="../images/logo.svg" alt="SIM-DAD LLC" class="header-logo">
+          <a href="https://sim-dad.github.io" class="back-link">&larr; SIM DAD LLC</a>
+        </div>
         <h1>T<span>A</span>SS</h1>
         <p class="tagline">Text Analysis for Social Scientists</p>
       </div>
