@@ -54,19 +54,21 @@
       align-items: end;
     }
 
-    .header-logo {
-      display: block;
-      height: 72px;
-      width: auto;
-      margin-bottom: 20px;
-    }
-
     .header-name {
+      display: flex;
+      align-items: center;
+      gap: 28px;
       font-size: clamp(3rem, 6vw, 5.5rem);
       font-weight: 900;
       letter-spacing: -0.025em;
       line-height: 0.92;
       text-transform: uppercase;
+    }
+
+    .header-logo {
+      height: clamp(52px, 6.5vw, 76px);
+      width: auto;
+      flex-shrink: 0;
     }
 
     .header-name span {

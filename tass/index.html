@@ -43,30 +43,28 @@
       align-items: end;
     }
 
-    .back-link-row {
-      display: flex;
+    .brand-back {
+      display: inline-flex;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 1.25rem;
-    }
-
-    .header-logo {
-      height: 28px;
-      width: auto;
-      opacity: 0.85;
-    }
-
-    .back-link {
-      display: inline-block;
-      color: var(--gray);
+      gap: 14px;
+      margin-bottom: 1.5rem;
       text-decoration: none;
+      color: var(--gray);
       font-size: 0.6875rem;
       font-weight: 700;
       letter-spacing: 0.18em;
       text-transform: uppercase;
       transition: color 0.15s;
     }
-    .back-link:hover { color: var(--red); }
+    .brand-back:hover { color: var(--white); }
+
+    .header-logo {
+      height: 36px;
+      width: auto;
+      opacity: 0.8;
+      transition: opacity 0.15s;
+    }
+    .brand-back:hover .header-logo { opacity: 1; }
 
     h1 {
       font-size: clamp(3rem, 8vw, 5.5rem);
@@ -530,10 +528,10 @@
   <header>
     <div class="header-inner">
       <div>
-        <div class="back-link-row">
+        <a href="https://sim-dad.github.io" class="brand-back">
           <img src="../images/logo.svg" alt="SIM-DAD LLC" class="header-logo">
-          <a href="https://sim-dad.github.io" class="back-link">&larr; SIM DAD LLC</a>
-        </div>
+          &larr; SIM-DAD LLC
+        </a>
         <h1>T<span>A</span>SS</h1>
         <p class="tagline">Text Analysis for Social Scientists</p>
       </div>
