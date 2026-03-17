@@ -3,1375 +3,815 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ScriVocalis</title>
+  <title>Ibis — Local AI Transcription for Windows</title>
+  <meta name="description" content="Ibis watches a folder on your Windows PC and transcribes every audio file using local AI. No cloud. No subscription. Your recordings never leave your machine.">
+  <meta property="og:title" content="Ibis — Local AI Transcription for Windows">
+  <meta property="og:description" content="Your voice. Your data. Your scribe. AI transcription that runs entirely on your machine — no cloud, no subscription.">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="img/icon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+    /* ── TOKENS ─────────────────────────────────────── */
     :root {
-      --bg:      #f7f6f3;
-      --surface: #ffffff;
-      --border:  #e0ddd8;
-      --text:    #1a1a18;
-      --muted:   #8a8a8a;
-      --accent:  #2563eb;
-      --danger:  #dc2626;
-      --mark:    #fde047;
+      --bg:      #f1f1f1;
+      --text:    #262626;
+      --acc1:    #e63946;
+      --acc2:    #ffa07a;
+      --acc3:    #2c3e50;
+      --white:   #ffffff;
+      --border:  #e2e2e2;
+      --muted:   #777;
+      --font:    'Inter', system-ui, -apple-system, sans-serif;
+      --radius:  10px;
     }
 
-    body.dark {
-      --bg:      #1c1c1e;
-      --surface: #2c2c2e;
-      --border:  #3a3a3c;
-      --text:    #f2f2f7;
-      --muted:   #8e8e93;
-      --accent:  #3b82f6;
-      --mark:    #78350f;
-    }
-
+    /* ── RESET ──────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-family: var(--font);
       background: var(--bg);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
       color: var(--text);
-      overflow: hidden;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      background: rgba(0,0,0,0.06);
+      padding: 0.1em 0.35em;
+      border-radius: 3px;
     }
 
-    /* ── Toolbar ─────────────────────────────────────────────────────── */
-    #toolbar {
-      background: var(--surface);
+    /* ── UTILITIES ──────────────────────────────────── */
+    .container { max-width: 1020px; margin: 0 auto; }
+
+    .label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--acc1);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      margin-bottom: 1rem;
+    }
+
+    .section-body {
+      font-size: 1.05rem;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 580px;
+    }
+
+    /* ── BUTTONS ────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1.5rem;
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform 0.15s, box-shadow 0.15s, background 0.15s, border-color 0.15s;
+    }
+    .btn-lg { padding: 0.9rem 2rem; font-size: 1rem; }
+    .btn-sm { padding: 0.55rem 1.1rem; font-size: 0.88rem; }
+
+    .btn-red {
+      background: var(--acc1);
+      color: #fff;
+    }
+    .btn-red:hover {
+      background: #c1121f;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(230,57,70,.3);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-ghost:hover { border-color: var(--text); }
+
+    .btn-navy {
+      background: var(--acc3);
+      color: #fff;
+    }
+    .btn-navy:hover {
+      background: #1c2e3e;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(44,62,80,.3);
+    }
+
+    .btn-outline-white {
+      background: transparent;
+      color: #fff;
+      border: 1.5px solid rgba(255,255,255,.45);
+    }
+    .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+
+    /* ── NAV ────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: var(--bg);
       border-bottom: 1px solid var(--border);
-      padding: 8px 16px;
+      height: 62px;
+      padding: 0 2rem;
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 34px; width: 34px; }
+    .nav-logo-name {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--text);
+      letter-spacing: -0.03em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+    }
+    .nav-links a.text-link {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 0.88rem;
+      font-weight: 500;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+    }
+    .nav-links a.text-link:hover { opacity: 1; }
+
+    /* ── HERO ───────────────────────────────────────── */
+    .hero {
+      padding: 6rem 2rem 4.5rem;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(230,57,70,.09);
+      color: var(--acc1);
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.38rem 1rem;
+      border-radius: 99px;
+      margin-bottom: 2rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 6.5vw, 4.2rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.08;
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--acc1);
+    }
+
+    .hero-sub {
+      font-size: 1.18rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.72;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 0.85rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-meta {
+      font-size: 0.8rem;
+      color: #aaa;
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
       flex-wrap: wrap;
     }
+    .hero-meta span { display: flex; align-items: center; gap: 0.3rem; }
 
-    .brand {
-      font-weight: 700; font-size: 15px; color: var(--accent); margin-right: 4px;
-      cursor: default; user-select: none;
+    /* ── DEMO FRAME ─────────────────────────────────── */
+    .demo-wrap {
+      max-width: 840px;
+      margin: 0 auto 6rem;
+      padding: 0 2rem;
     }
-    /* Unsaved indicator dot */
-    .brand.unsaved::after { content: ' ·'; font-size: 18px; line-height: 0; vertical-align: -2px; }
 
-    #voice-select {
-      padding: 5px 8px;
+    .demo-frame {
+      background: var(--acc3);
+      border-radius: 14px;
+      aspect-ratio: 16 / 9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(44,62,80,.25);
+    }
+    .demo-frame::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(230,57,70,.18) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    /* simulated window chrome */
+    .demo-chrome {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 36px;
+      background: rgba(0,0,0,.25);
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      gap: 7px;
+    }
+    .demo-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+    }
+    .demo-dot-red   { background: #ff5f57; }
+    .demo-dot-amber { background: #febc2e; }
+    .demo-dot-green { background: #28c840; }
+
+    .demo-play {
+      width: 70px; height: 70px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: default;
+      position: relative; z-index: 1;
+      box-shadow: 0 4px 20px rgba(0,0,0,.3);
+    }
+    .demo-play svg { margin-left: 4px; }
+
+    .demo-label {
+      color: rgba(255,255,255,.65);
+      font-size: 0.88rem;
+      position: relative; z-index: 1;
+    }
+
+    /* ── HOW IT WORKS ───────────────────────────────── */
+    .how-section {
+      padding: 5rem 2rem;
+    }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.75rem;
+      margin-top: 3.5rem;
+    }
+    .how-card {
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      background: var(--bg);
-      color: var(--text);
-      font-size: 13px;
-      min-width: 175px;
-      cursor: pointer;
+      border-radius: var(--radius);
+      padding: 2rem;
     }
-
-    .speed-wrap {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 13px; color: var(--muted);
+    .how-number {
+      width: 38px; height: 38px;
+      background: var(--acc1);
+      color: #fff;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.2rem;
     }
-    #rate { width: 88px; accent-color: var(--accent); }
-    #speed-label { min-width: 30px; color: var(--text); font-variant-numeric: tabular-nums; }
+    .how-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+    .how-card p { font-size: 0.9rem; color: var(--muted); line-height: 1.65; }
 
-    .tbtn {
-      padding: 5px 11px;
+    /* ── PRIVACY ────────────────────────────────────── */
+    .privacy-section {
+      background: var(--acc3);
+      color: #fff;
+      padding: 5.5rem 2rem;
+    }
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .privacy-grid .label { color: var(--acc2); }
+    .privacy-grid .section-title { color: #fff; }
+    .privacy-grid .section-body { color: rgba(255,255,255,.72); }
+    .privacy-cta { margin-top: 2.2rem; }
+
+    .privacy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.4rem;
+    }
+    .privacy-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+    .privacy-icon {
+      width: 42px; height: 42px;
+      flex-shrink: 0;
+      background: rgba(255,255,255,.1);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.15rem;
+    }
+    .privacy-item h4 { font-size: 0.93rem; font-weight: 600; margin-bottom: 0.2rem; }
+    .privacy-item p  { font-size: 0.83rem; color: rgba(255,255,255,.58); line-height: 1.55; }
+
+    /* ── AUDIENCE ───────────────────────────────────── */
+    .audience-section { padding: 5rem 2rem; }
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(195px, 1fr));
+      gap: 1.4rem;
+      margin-top: 3rem;
+    }
+    .audience-card {
+      background: var(--white);
       border: 1px solid var(--border);
-      border-radius: 6px;
-      background: var(--bg);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 13px;
+      border-radius: var(--radius);
+      padding: 1.6rem;
+    }
+    .audience-card .icon { font-size: 1.7rem; margin-bottom: 0.75rem; }
+    .audience-card h3 { font-size: 0.93rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .audience-card p  { font-size: 0.83rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── PRICING ────────────────────────────────────── */
+    .pricing-section {
+      background: var(--white);
+      padding: 5.5rem 2rem;
+    }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      max-width: 820px;
+      margin-top: 3.5rem;
+    }
+    .pricing-card {
+      border: 1.5px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem;
+      position: relative;
+    }
+    .pricing-card.featured { border-color: var(--acc1); box-shadow: 0 4px 28px rgba(230,57,70,.12); }
+
+    .pricing-pill {
+      position: absolute;
+      top: -13px; left: 50%;
+      transform: translateX(-50%);
+      padding: 0.24rem 0.85rem;
+      border-radius: 99px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
       white-space: nowrap;
-      -webkit-appearance: none;
+      color: #fff;
     }
-    .tbtn:hover { background: var(--border); }
-    #btn-manage-voices { margin-left: auto; }
-    #btn-dark { font-size: 15px; padding: 5px 9px; }
+    .pill-red  { background: var(--acc1); }
+    .pill-navy { background: var(--acc3); }
 
-    /* ── Editor ──────────────────────────────────────────────────────── */
-    #editor-wrap {
-      flex: 1; overflow: hidden;
-      display: flex; justify-content: center;
-      padding: 0 20px; background: var(--bg);
+    .pricing-tier { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: #aaa; margin-bottom: 0.75rem; }
+    .pricing-price { font-size: 3.2rem; font-weight: 800; letter-spacing: -0.05em; line-height: 1; margin-bottom: 0.25rem; }
+    .pricing-price sup { font-size: 1.3rem; font-weight: 700; vertical-align: super; letter-spacing: 0; }
+    .pricing-note { font-size: 0.83rem; color: #aaa; margin-bottom: 1.5rem; }
+    .pricing-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+    .feature-list li { display: flex; gap: 0.55rem; align-items: flex-start; font-size: 0.88rem; color: #444; }
+    .feature-list .ck  { color: var(--acc1); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .feature-list .dim { color: #ccc; flex-shrink: 0; margin-top: 1px; }
+    .feature-list .dim-text { color: #bbb; }
+
+    .pricing-card .btn { width: 100%; }
+
+    /* ── EMAIL CAPTURE ──────────────────────────────── */
+    .email-section {
+      padding: 5.5rem 2rem;
+      text-align: center;
     }
-
-    #editor {
-      width: 100%; max-width: 780px; height: 100%;
-      resize: none; border: none; outline: none;
-      background: transparent;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 17px; line-height: 1.9;
-      color: var(--text); padding: 28px 0;
-      caret-color: var(--accent);
+    .email-section .section-body { margin: 0 auto; }
+    .email-form {
+      display: flex;
+      gap: 0.65rem;
+      max-width: 430px;
+      margin: 2rem auto 0;
+      flex-wrap: wrap;
+      justify-content: center;
     }
-    #editor::selection { background: var(--mark); color: var(--text); }
-
-    /* ── TTS progress bar ────────────────────────────────────────────── */
-    #tts-progress {
-      height: 2px;
-      background: var(--border);
-      flex-shrink: 0;
-    }
-    #tts-progress-fill {
-      height: 100%;
-      background: var(--accent);
-      width: 0%;
-      transition: width 0.4s ease;
-    }
-
-    /* ── Playbar ─────────────────────────────────────────────────────── */
-    #playbar {
-      background: var(--surface);
-      border-top: 1px solid var(--border);
-      padding: 10px 24px;
-      display: flex; align-items: center;
-      justify-content: center; gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .pbtn {
-      padding: 7px 22px; border-radius: 20px;
-      border: 1px solid var(--border); cursor: pointer;
-      font-size: 14px; font-weight: 500;
-      background: var(--bg); color: var(--text);
-      transition: opacity .15s;
-      -webkit-appearance: none;
-    }
-    .pbtn:disabled { opacity: .35; cursor: default; }
-    #btn-play { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    #status     { font-size: 13px; color: var(--muted); margin-left: 14px; min-width: 180px; }
-    #word-count { font-size: 12px; color: var(--muted); margin-left: auto; font-variant-numeric: tabular-nums; }
-    #kofi-link { font-size: 11px; color: var(--muted); text-decoration: none; white-space: nowrap; }
-    #kofi-link:hover { color: var(--accent); }
-
-    /* ── Voices modal ────────────────────────────────────────────────── */
-    dialog {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0;
-      box-shadow: 0 8px 40px rgba(0,0,0,.18);
-      max-width: 460px; width: 92vw;
+    .email-form input[type="email"] {
+      flex: 1;
+      min-width: 210px;
+      padding: 0.72rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: 6px;
+      font-family: var(--font);
+      font-size: 0.93rem;
+      background: var(--white);
       color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
     }
-    dialog::backdrop { background: rgba(0,0,0,.35); }
+    .email-form input[type="email"]:focus { border-color: var(--acc1); }
+    .email-form input::placeholder { color: #bbb; }
+    .email-fine { font-size: 0.78rem; color: #bbb; margin-top: 0.7rem; }
 
-    .dlg-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 20px 12px;
-      border-bottom: 1px solid var(--border);
+    /* ── FOOTER ─────────────────────────────────────── */
+    footer {
+      background: var(--acc3);
+      padding: 3rem 2rem;
     }
-    .dlg-header h2 { font-size: 16px; font-weight: 600; }
-    #btn-close-dlg {
-      background: none; border: none; cursor: pointer;
-      font-size: 18px; color: var(--muted); line-height: 1;
+    .footer-row {
+      max-width: 1020px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
     }
-    #btn-close-dlg:hover { color: var(--text); }
+    .footer-brand-name {
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #fff;
+      letter-spacing: -0.03em;
+    }
+    .footer-brand-sub { font-size: 0.75rem; color: rgba(255,255,255,.45); margin-top: 2px; }
 
-    .dlg-body { padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 20px; }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,.55);
+      font-size: 0.85rem;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: #fff; }
 
-    .section-label {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: .06em; color: var(--muted); margin-bottom: 8px;
+    .footer-copy {
+      max-width: 1020px;
+      margin: 1.75rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,.1);
+      font-size: 0.75rem;
+      color: rgba(255,255,255,.35);
+      text-align: center;
     }
 
-    /* Custom voice list */
-    #custom-voice-list { display: flex; flex-direction: column; gap: 6px; }
-    .voice-row {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 12px; border-radius: 7px;
-      background: var(--bg); border: 1px solid var(--border);
-      font-size: 13px;
+    /* ── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 700px) {
+      .privacy-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .nav-links a.text-link { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; }
     }
-    .voice-row-name { font-weight: 500; }
-    .voice-row-ref  { font-size: 11px; color: var(--muted); margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 260px; }
-    .btn-delete {
-      background: none; border: none; cursor: pointer;
-      color: var(--muted); font-size: 15px; padding: 2px 4px; border-radius: 4px;
-      flex-shrink: 0;
-    }
-    .btn-delete:hover { color: var(--danger); }
-    #no-custom-msg { font-size: 13px; color: var(--muted); }
-
-    /* Add voice form */
-    .add-form { display: flex; flex-direction: column; gap: 10px; }
-    .add-form label { font-size: 13px; color: var(--muted); margin-bottom: 2px; display: block; }
-    .add-form input[type="text"] {
-      width: 100%; padding: 7px 10px;
-      border: 1px solid var(--border); border-radius: 6px;
-      font-size: 14px; background: var(--bg);
-    }
-    .add-form input[type="text"]:focus { outline: 2px solid var(--accent); }
-
-    #voice-file-label {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 14px; border: 1px dashed var(--border);
-      border-radius: 7px; cursor: pointer; font-size: 13px; color: var(--muted);
-      background: var(--bg);
-    }
-    #voice-file-label:hover { border-color: var(--accent); color: var(--accent); }
-    #voice-file-name { font-size: 12px; color: var(--text); }
-
-    #btn-save-voice {
-      padding: 8px 18px; background: var(--accent); color: #fff;
-      border: none; border-radius: 8px; cursor: pointer;
-      font-size: 14px; font-weight: 500; align-self: flex-start;
-    }
-    #btn-save-voice:disabled { opacity: .5; cursor: default; }
-
-    #voice-add-status { font-size: 12px; color: var(--muted); min-height: 16px; }
-    .status-ok  { color: #16a34a !important; }
-    .status-err { color: var(--danger) !important; }
-
-    .hint-text { font-size: 12px; color: var(--muted); line-height: 1.5; }
-
-    .tbtn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-    /* ── Editor wrap: needed for absolute children ───────────────────── */
-    #editor-wrap { position: relative; }
-
-    /* ── Find bar ────────────────────────────────────────────────────── */
-    #find-bar {
-      position: absolute; top: 8px; right: 8px;
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 8px; padding: 6px 10px;
-      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-      z-index: 20; box-shadow: 0 4px 20px rgba(0,0,0,.15);
-    }
-    #find-bar[hidden] { display: none; }
-    #find-input, #replace-input {
-      padding: 4px 8px; border: 1px solid var(--border);
-      border-radius: 5px; font-size: 13px;
-      background: var(--bg); color: var(--text); width: 150px;
-    }
-    #find-input:focus, #replace-input:focus { outline: 2px solid var(--accent); }
-    #find-count { font-size: 12px; color: var(--muted); min-width: 52px; white-space: nowrap; }
-    .find-btn {
-      padding: 3px 8px; border: 1px solid var(--border);
-      border-radius: 5px; background: var(--bg); color: var(--text);
-      cursor: pointer; font-size: 12px; white-space: nowrap;
-    }
-    .find-btn:hover { background: var(--border); }
-    #find-sep { width: 1px; height: 18px; background: var(--border); flex-shrink: 0; }
-
-    /* ── Outline panel ───────────────────────────────────────────────── */
-    #outline-panel {
-      position: absolute; right: 0; top: 0; bottom: 0; width: 220px;
-      background: var(--surface); border-left: 1px solid var(--border);
-      overflow-y: auto; padding: 14px 10px; display: none; z-index: 15;
-    }
-    .outline-item {
-      display: block; width: 100%; padding: 4px 8px; margin: 1px 0;
-      border: none; background: none; text-align: left; cursor: pointer;
-      font-size: 13px; color: var(--text); border-radius: 4px;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
-    .outline-item:hover { background: var(--border); }
-    .outline-h1 { font-weight: 700; }
-    .outline-h2 { padding-left: 18px; font-size: 12.5px; }
-    .outline-h3 { padding-left: 32px; font-size: 12px; color: var(--muted); }
-    #outline-empty { font-size: 13px; color: var(--muted); padding: 4px 8px; }
-
-    /* ── Focus mode ──────────────────────────────────────────────────── */
-    #toolbar { transition: transform 0.22s ease, opacity 0.22s ease; }
-    body.focus-mode #toolbar { transform: translateY(-100%); opacity: 0; pointer-events: none; }
-    #focus-exit {
-      display: none; position: fixed; top: 8px; right: 12px; z-index: 100;
-      background: none; border: 1px solid transparent;
-      color: var(--muted); font-size: 12px; padding: 4px 10px;
-      border-radius: 5px; cursor: pointer; opacity: 0.3; transition: opacity 0.2s;
-    }
-    #focus-exit:hover { opacity: 1; border-color: var(--border); }
-    body.focus-mode #focus-exit { display: block; }
-
-    /* ── Preview TTS: dim played paragraphs ──────────────────────────── */
-    #preview .tts-played  { opacity: 0.35; transition: opacity 0.35s; }
-    #preview .tts-current { background: var(--mark); border-radius: 2px; padding: 0 2px; margin: 0 -2px; }
-
-    /* ── Preview ─────────────────────────────────────────────────────── */
-    #preview {
-      display: none;
-      width: 100%; max-width: 780px;
-      overflow-y: auto;
-      font-family: Georgia, 'Times New Roman', serif;
-      font-size: 17px; line-height: 1.9;
-      color: var(--text); padding: 28px 0;
-    }
-    #preview h1 { font-size: 1.9em; font-weight: 700; line-height: 1.25; margin: 0.2em 0 0.5em; }
-    #preview h2 { font-size: 1.45em; font-weight: 700; line-height: 1.3; margin: 0.2em 0 0.45em; }
-    #preview h3 { font-size: 1.2em; font-weight: 700; line-height: 1.3; margin: 0.2em 0 0.4em; }
-    #preview h4, #preview h5, #preview h6 { font-weight: 700; margin: 0.2em 0 0.4em; }
-    #preview p  { margin: 0 0 0.7em; }
-    #preview ul, #preview ol { margin: 0 0 0.7em 1.6em; }
-    #preview li { margin: 0.2em 0; }
-    #preview blockquote {
-      border-left: 3px solid var(--border); margin: 0 0 0.7em;
-      padding: 0.2em 0 0.2em 1em; color: var(--muted);
-    }
-    #preview hr { border: none; border-top: 1px solid var(--border); margin: 1.4em 0; }
-    #preview code {
-      font-family: 'Courier New', monospace; font-size: 0.88em;
-      background: var(--border); padding: 0.1em 0.35em; border-radius: 3px;
-    }
-    #preview pre {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: 7px; padding: 1em; overflow-x: auto; margin: 0 0 0.8em;
-    }
-    #preview pre code { background: none; padding: 0; }
-    #preview a { color: var(--accent); }
-    #preview strong { font-weight: 700; }
-    #preview em { font-style: italic; }
   </style>
 </head>
 <body>
 
-<!-- ── Toolbar ──────────────────────────────────────────────────────────── -->
-<div id="toolbar">
-  <span class="brand" id="brand">ScriVocalis</span>
-
-  <select id="voice-select">
-    <optgroup label="Built-in" id="og-builtin"></optgroup>
-    <optgroup label="Custom voices" id="og-custom" style="display:none"></optgroup>
-  </select>
-
-  <div class="speed-wrap">
-    Speed <input type="range" id="rate" min="0.5" max="4" value="1" step="0.25">
-    <span id="speed-label">1×</span>
-  </div>
-
-  <button class="tbtn" id="btn-open-file">Open</button>
-  <input type="file" id="file-input" hidden accept=".docx,.md">
-
-  <button class="tbtn" id="btn-save" title="Save as Markdown (Ctrl+S)">Save .md</button>
-  <button class="tbtn" id="btn-copy-word" title="Copy as rich text for pasting into Word (Ctrl+Shift+C)">Copy for Word</button>
-  <button class="tbtn" id="btn-export-docx" title="Export as .docx">Export .docx</button>
-  <button class="tbtn" id="btn-preview" title="Toggle preview (Ctrl+P)">Preview</button>
-  <button class="tbtn" id="btn-outline" title="Document outline">Outline</button>
-  <button class="tbtn" id="btn-typewriter" title="Typewriter mode — keeps cursor centered">⌨</button>
-  <button class="tbtn" id="btn-focus" title="Focus mode — hides chrome (F11)">Focus</button>
-
-  <button class="tbtn" id="btn-dark" title="Toggle dark mode">🌙</button>
-  <button class="tbtn" id="btn-manage-voices">+ Voices</button>
-</div>
-
-<!-- ── Editor ──────────────────────────────────────────────────────────── -->
-<div id="editor-wrap">
-  <textarea id="editor" spellcheck="false"
-    placeholder="Paste text here, or open a .docx / .md file…&#10;&#10;Place your cursor anywhere and press Play."></textarea>
-  <div id="preview"></div>
-  <!-- Find & Replace bar -->
-  <div id="find-bar" hidden>
-    <input id="find-input" type="text" placeholder="Find…" autocomplete="off" spellcheck="false">
-    <span id="find-count"></span>
-    <button class="find-btn" id="find-prev" title="Previous (Shift+Enter)">↑</button>
-    <button class="find-btn" id="find-next" title="Next (Enter)">↓</button>
-    <div id="find-sep"></div>
-    <input id="replace-input" type="text" placeholder="Replace…" autocomplete="off" spellcheck="false">
-    <button class="find-btn" id="btn-replace">Replace</button>
-    <button class="find-btn" id="btn-replace-all">All</button>
-    <button class="find-btn" id="find-close" title="Close (Esc)">✕</button>
-  </div>
-  <!-- Document outline -->
-  <div id="outline-panel"></div>
-</div>
-<button id="focus-exit" title="Exit focus mode (Esc / F11)">✕ focus</button>
-
-<!-- ── TTS progress bar ─────────────────────────────────────────────────── -->
-<div id="tts-progress"><div id="tts-progress-fill"></div></div>
-
-<!-- ── Playbar ─────────────────────────────────────────────────────────── -->
-<div id="playbar">
-  <button class="pbtn" id="btn-play">▶  Play</button>
-  <button class="pbtn" id="btn-pause" disabled>⏸  Pause</button>
-  <button class="pbtn" id="btn-stop"  disabled>⏹  Stop</button>
-  <span id="status">Ready</span>
-  <span id="word-count"></span>
-  <a id="kofi-link" href="https://ko-fi.com/simdadllc" target="_blank" rel="noopener">☕ tip jar</a>
-</div>
-
-<!-- ── Voices modal ─────────────────────────────────────────────────────── -->
-<dialog id="voices-dlg">
-  <div class="dlg-header">
-    <h2>Manage Voices</h2>
-    <button id="btn-close-dlg">✕</button>
-  </div>
-  <div class="dlg-body">
-
-    <!-- Saved custom voices -->
-    <div>
-      <div class="section-label">Your Custom Voices</div>
-      <div id="custom-voice-list">
-        <span id="no-custom-msg">No custom voices yet.</span>
-      </div>
+  <!-- ══════════ NAV ══════════ -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="img/icon.svg" alt="Ibis">
+      <span class="nav-logo-name">Ibis</span>
+    </a>
+    <div class="nav-links">
+      <a href="#how-it-works" class="text-link">How it works</a>
+      <a href="#pricing" class="text-link">Pricing</a>
+      <a href="#notify" class="btn btn-red btn-sm">Get notified</a>
     </div>
+  </nav>
 
-    <!-- Add a voice -->
-    <div>
-      <div class="section-label">Add a Voice</div>
-      <p class="hint-text" style="margin-bottom:10px">
-        Record <strong>10–20 seconds</strong> of clear, quiet speech — no music or background noise.
-        Only the first 15 seconds are used; longer clips produce garbled output.
-        The voice is transcribed and cloned automatically using F5-TTS (first use downloads ~750 MB).
+  <!-- ══════════ HERO ══════════ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1a5 5 0 0 1 5 5v3h1a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2h1V6a5 5 0 0 1 5-5zm0 11a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm0-9a3 3 0 0 0-3 3v3h6V6a3 3 0 0 0-3-3z"/></svg>
+        100% local &mdash; no cloud, ever
+      </div>
+
+      <h1>Your recordings<br><em>stay on your machine.</em></h1>
+
+      <p class="hero-sub">
+        Ibis watches a folder on your Windows PC and transcribes every audio file
+        automatically — using AI that runs entirely offline. Drop a voice memo. Get a text file.
+        Nothing ever leaves your computer.
       </p>
-      <div class="add-form">
-        <div>
-          <label>Audio sample (WAV, MP3, M4A)</label>
-          <label id="voice-file-label" for="voice-file-input">
-            <span>📂 Choose file…</span>
-            <span id="voice-file-name"></span>
-          </label>
-          <input type="file" id="voice-file-input" hidden accept=".wav,.mp3,.m4a,.flac,.ogg">
-        </div>
-        <div>
-          <label>Voice name</label>
-          <input type="text" id="voice-name-input" placeholder="e.g. My Voice">
-        </div>
-        <button id="btn-save-voice" disabled>Save Voice</button>
-        <div id="voice-add-status"></div>
+
+      <div class="hero-cta">
+        <a href="#notify" class="btn btn-red btn-lg">Notify me at launch &rarr;</a>
+        <a href="#how-it-works" class="btn btn-ghost btn-lg">See how it works</a>
+      </div>
+
+      <div class="hero-meta">
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#bbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          Windows 10 &amp; 11
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#bbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          One-time purchase
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#bbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          No subscription
+        </span>
+        <span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="#bbb"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+          No internet after install
+        </span>
       </div>
     </div>
+  </section>
 
-  </div>
-</dialog>
-
-<script>
-// ── Refs ──────────────────────────────────────────────────────────────────────
-const brand        = document.getElementById('brand');
-const editor       = document.getElementById('editor');
-const voiceSel     = document.getElementById('voice-select');
-const ogBuiltin    = document.getElementById('og-builtin');
-const ogCustom     = document.getElementById('og-custom');
-const rateInput    = document.getElementById('rate');
-const speedLabel   = document.getElementById('speed-label');
-const btnPlay      = document.getElementById('btn-play');
-const btnPause     = document.getElementById('btn-pause');
-const btnStop      = document.getElementById('btn-stop');
-const statusEl     = document.getElementById('status');
-const wordCountEl  = document.getElementById('word-count');
-const progressFill = document.getElementById('tts-progress-fill');
-const btnOpenFile  = document.getElementById('btn-open-file');
-const fileInput    = document.getElementById('file-input');
-const btnSaveMd    = document.getElementById('btn-save');
-const btnManage    = document.getElementById('btn-manage-voices');
-const dlg          = document.getElementById('voices-dlg');
-const btnCloseDlg  = document.getElementById('btn-close-dlg');
-const customList   = document.getElementById('custom-voice-list');
-const noCustomMsg  = document.getElementById('no-custom-msg');
-const voiceFileIn  = document.getElementById('voice-file-input');
-const voiceFileName= document.getElementById('voice-file-name');
-const voiceNameIn  = document.getElementById('voice-name-input');
-const btnSaveVoice = document.getElementById('btn-save-voice');
-const voiceAddStat = document.getElementById('voice-add-status');
-
-// ── State ─────────────────────────────────────────────────────────────────────
-let audioCtx      = null;
-let audioSource   = null;
-let isPlaying     = false;
-let isPaused      = false;
-let stopSignal    = false;
-let rafId         = null;
-let allVoices     = [];
-let playGen       = 0;   // incremented on every new Play; lets old coroutines self-abort
-let currentFilename = 'manuscript.md';
-
-// ── Persistence: restore saved content ───────────────────────────────────────
-(function restoreDraft() {
-  const saved = localStorage.getItem('vox:draft');
-  if (saved !== null) editor.value = saved;
-  const savedFile = localStorage.getItem('vox:filename');
-  if (savedFile) currentFilename = savedFile;
-  const savedSpeed = localStorage.getItem('vox:speed');
-  if (savedSpeed) {
-    rateInput.value = savedSpeed;
-    const v = parseFloat(savedSpeed);
-    speedLabel.textContent = (v % 1 === 0 ? v.toFixed(0) : v.toFixed(2).replace(/0$/, '')) + '×';
-  }
-  updateWordCount();
-})();
-
-// ── Auto-save ─────────────────────────────────────────────────────────────────
-let saveTimer = null;
-editor.addEventListener('input', () => {
-  brand.classList.add('unsaved');
-  clearTimeout(saveTimer);
-  saveTimer = setTimeout(() => {
-    localStorage.setItem('vox:draft', editor.value);
-    brand.classList.remove('unsaved');
-  }, 500);
-  updateWordCount();
-});
-
-// ── Word count + reading time ──────────────────────────────────────────────────
-function updateWordCount() {
-  const text = editor.value.trim();
-  const words = text ? text.split(/\s+/).filter(Boolean).length : 0;
-  if (words > 0) {
-    const mins = Math.max(1, Math.round(words / 200));
-    wordCountEl.textContent = `${words.toLocaleString()} w · ${mins} min read`;
-  } else {
-    wordCountEl.textContent = '';
-  }
-}
-
-// ── Export / Save as .md ──────────────────────────────────────────────────────
-function saveMd() {
-  const blob = new Blob([editor.value], { type: 'text/markdown' });
-  const url  = URL.createObjectURL(blob);
-  const a    = document.createElement('a');
-  a.href = url; a.download = currentFilename;
-  a.click();
-  URL.revokeObjectURL(url);
-  brand.classList.remove('unsaved');
-}
-btnSaveMd.addEventListener('click', saveMd);
-
-// ── Keyboard shortcuts ────────────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && e.key === 's') { e.preventDefault(); saveMd(); }
-  if (e.key === 'Escape' && focusMode) { setFocusMode(false); return; }
-  if (e.key === 'Escape' && isPlaying) { btnStop.click(); }
-});
-
-// ── Progress bar ──────────────────────────────────────────────────────────────
-function setProgress(frac) {
-  progressFill.style.width = Math.min(1, frac) * 100 + '%';
-}
-
-// ── Voices ────────────────────────────────────────────────────────────────────
-async function loadVoices() {
-  allVoices = await fetch('/voices').then(r => r.json());
-  renderVoiceSelect();
-  renderCustomVoiceList();
-  // Restore saved voice selection
-  const savedVoice = localStorage.getItem('vox:voice');
-  if (savedVoice && [...voiceSel.options].some(o => o.value === savedVoice)) {
-    voiceSel.value = savedVoice;
-  }
-}
-
-function renderVoiceSelect() {
-  const prev = voiceSel.value;
-  ogBuiltin.innerHTML = '';
-  ogCustom.innerHTML  = '';
-
-  const builtin = allVoices.filter(v => v.type === 'builtin');
-  const custom  = allVoices.filter(v => v.type === 'custom');
-
-  builtin.forEach(v => {
-    const o = new Option(v.name, v.id);
-    ogBuiltin.append(o);
-  });
-  custom.forEach(v => {
-    const o = new Option('✦ ' + v.name, v.id);
-    ogCustom.append(o);
-  });
-
-  ogCustom.style.display = custom.length ? '' : 'none';
-
-  // Restore previous selection if still available
-  if ([...voiceSel.options].some(o => o.value === prev)) voiceSel.value = prev;
-}
-
-function renderCustomVoiceList() {
-  const custom = allVoices.filter(v => v.type === 'custom');
-  noCustomMsg.style.display = custom.length ? 'none' : '';
-  // Remove old rows
-  customList.querySelectorAll('.voice-row').forEach(el => el.remove());
-  custom.forEach(v => {
-    const name = v.id.replace('custom:', '');
-    const row  = document.createElement('div');
-    row.className = 'voice-row';
-    row.innerHTML = `
-      <div>
-        <div class="voice-row-name">✦ ${v.name}</div>
+  <!-- ══════════ DEMO FRAME ══════════ -->
+  <div class="demo-wrap">
+    <div class="demo-frame">
+      <div class="demo-chrome">
+        <div class="demo-dot demo-dot-red"></div>
+        <div class="demo-dot demo-dot-amber"></div>
+        <div class="demo-dot demo-dot-green"></div>
       </div>
-      <button class="btn-delete" title="Delete voice" data-name="${name}">🗑</button>`;
-    row.querySelector('.btn-delete').addEventListener('click', () => deleteVoice(name));
-    customList.append(row);
-  });
-}
+      <div class="demo-play">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="#e63946"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <span class="demo-label">Demo video coming soon</span>
+    </div>
+  </div>
+
+  <!-- ══════════ HOW IT WORKS ══════════ -->
+  <section class="how-section" id="how-it-works">
+    <div class="container">
+      <div class="label">How it works</div>
+      <h2 class="section-title">Set it once.<br>Forget it exists.</h2>
+      <p class="section-body">
+        Ibis lives in your system tray and watches a folder you choose.
+        Every audio file you drop in becomes a transcript, automatically,
+        while you do other things.
+      </p>
+
+      <div class="how-grid">
+        <div class="how-card">
+          <div class="how-number">1</div>
+          <h3>Point Ibis at a folder</h3>
+          <p>
+            Choose a Watch Folder on your PC during setup. Ibis monitors it silently
+            in the background from that moment on.
+          </p>
+        </div>
+        <div class="how-card">
+          <div class="how-number">2</div>
+          <h3>Drop in an audio file</h3>
+          <p>
+            Add any MP3 or WAV — from your voice recorder, phone, or podcast software.
+            Ibis detects it immediately and begins transcribing using the on-device AI model.
+          </p>
+        </div>
+        <div class="how-card">
+          <div class="how-number">3</div>
+          <h3>Your transcript is ready</h3>
+          <p>
+            A <code>.txt</code> file appears in your Transcripts folder, timestamped and named
+            to match your recording. A toast notification confirms it's done. The original
+            audio moves to Completed.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PRIVACY ══════════ -->
+  <div class="privacy-section">
+    <div class="container privacy-grid">
+      <div>
+        <div class="label">Why Ibis?</div>
+        <h2 class="section-title">Your audio is sensitive.<br>Treat it that way.</h2>
+        <p class="section-body">
+          Cloud transcription services receive your recordings, process them on remote servers,
+          and store them under terms of service you agreed to but probably didn't read. Ibis doesn't.
+          The AI model runs on your machine. Your audio never moves.
+        </p>
+        <div class="privacy-cta">
+          <a href="#notify" class="btn btn-outline-white">Get early access &rarr;</a>
+        </div>
+      </div>
+
+      <div class="privacy-list">
+        <div class="privacy-item">
+          <div class="privacy-icon">&#x1F512;</div>
+          <div>
+            <h4>No audio ever leaves your machine</h4>
+            <p>Ibis uses a fully local AI model. No internet connection is required after installation — ever.</p>
+          </div>
+        </div>
+        <div class="privacy-item">
+          <div class="privacy-icon">&#x1F4B3;</div>
+          <div>
+            <h4>One-time purchase. No subscription.</h4>
+            <p>Pay once, own it forever. No monthly fee, no per-minute charges, no usage limits.</p>
+          </div>
+        </div>
+        <div class="privacy-item">
+          <div class="privacy-icon">&#x1F310;</div>
+          <div>
+            <h4>99 languages, bundled locally</h4>
+            <p>Powered by OpenAI's Whisper large-v3-turbo model, packaged entirely inside the app installer.</p>
+          </div>
+        </div>
+        <div class="privacy-item">
+          <div class="privacy-icon">&#x26A1;</div>
+          <div>
+            <h4>Runs on any modern Windows PC</h4>
+            <p>No GPU required. Ibis uses int8-quantized CPU inference — fast on everyday consumer hardware.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════ AUDIENCE ══════════ -->
+  <section class="audience-section">
+    <div class="container">
+      <div class="label">Who uses Ibis</div>
+      <h2 class="section-title">Built for people whose<br>recordings are confidential.</h2>
+      <p class="section-body">
+        Whether you're bound by professional ethics or just value your own privacy,
+        Ibis gives you accurate transcription without putting your data in anyone else's hands.
+      </p>
+
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="icon">&#x1F4F0;</div>
+          <h3>Journalists</h3>
+          <p>Protect your sources. Transcribe interviews locally before they ever touch a remote server.</p>
+        </div>
+        <div class="audience-card">
+          <div class="icon">&#x1FA7A;</div>
+          <h3>Therapists &amp; Clinicians</h3>
+          <p>HIPAA compliance starts with keeping patient audio on your machine. Full stop.</p>
+        </div>
+        <div class="audience-card">
+          <div class="icon">&#x2696;&#xFE0F;</div>
+          <h3>Attorneys</h3>
+          <p>Attorney-client privilege applies to recordings too. Keep deposition notes where they belong.</p>
+        </div>
+        <div class="audience-card">
+          <div class="icon">&#x1F52C;</div>
+          <h3>Researchers</h3>
+          <p>IRB protocols often prohibit cloud processing of participant data. Ibis solves that cleanly.</p>
+        </div>
+        <div class="audience-card">
+          <div class="icon">&#x1F9E0;</div>
+          <h3>Knowledge Workers</h3>
+          <p>Voice notes into Obsidian, Notion, or anywhere you build your second brain. Automatically.</p>
+        </div>
+        <div class="audience-card">
+          <div class="icon">&#x1F399;&#xFE0F;</div>
+          <h3>Podcasters &amp; Creators</h3>
+          <p>Transcribe recordings for show notes, captions, and repurposed content — offline, in seconds.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ PRICING ══════════ -->
+  <section class="pricing-section" id="pricing">
+    <div class="container">
+      <div class="label">Pricing</div>
+      <h2 class="section-title">Simple. One-time. Yours.</h2>
+      <p class="section-body">
+        No tiers that lock core features behind a paywall. No surprise charges.
+        Buy once, use it forever on one machine.
+      </p>
+
+      <div class="pricing-grid">
+
+        <!-- PERSONAL -->
+        <div class="pricing-card featured">
+          <div class="pricing-pill pill-red">Available at launch</div>
+          <div class="pricing-tier">Personal</div>
+          <div class="pricing-price"><sup>$</sup>24</div>
+          <div class="pricing-note">one-time &nbsp;&middot;&nbsp; single machine</div>
+          <hr class="pricing-divider">
+          <ul class="feature-list">
+            <li><span class="ck">&#x2713;</span> Automatic watch-folder transcription</li>
+            <li><span class="ck">&#x2713;</span> Whisper large-v3-turbo AI model included</li>
+            <li><span class="ck">&#x2713;</span> 99 languages, fully offline</li>
+            <li><span class="ck">&#x2713;</span> MP3 and WAV support</li>
+            <li><span class="ck">&#x2713;</span> Windows 10 &amp; 11</li>
+            <li><span class="ck">&#x2713;</span> Runs silently in system tray</li>
+            <li><span class="ck">&#x2713;</span> No internet required after install</li>
+            <li><span class="ck">&#x2713;</span> Lifetime updates for v1.x</li>
+          </ul>
+          <a href="#notify" class="btn btn-red">Notify me at launch &rarr;</a>
+        </div>
+
+        <!-- PRO -->
+        <div class="pricing-card">
+          <div class="pricing-pill pill-navy">Coming in v2</div>
+          <div class="pricing-tier">Pro</div>
+          <div class="pricing-price"><sup>$</sup>49</div>
+          <div class="pricing-note">one-time &nbsp;&middot;&nbsp; single machine</div>
+          <hr class="pricing-divider">
+          <ul class="feature-list">
+            <li><span class="ck">&#x2713;</span> Everything in Personal</li>
+            <li><span class="ck">&#x2713;</span> Multiple watch folders</li>
+            <li><span class="ck">&#x2713;</span> LLM summarization of transcripts</li>
+            <li><span class="ck">&#x2713;</span> Custom output templates</li>
+            <li><span class="ck">&#x2713;</span> Priority support</li>
+            <li><span class="dim">&#x25CB;</span> <span class="dim-text">Speaker diarization (planned)</span></li>
+            <li><span class="dim">&#x25CB;</span> <span class="dim-text">Video file support (planned)</span></li>
+          </ul>
+          <a href="#notify" class="btn btn-navy">Join the Pro waitlist &rarr;</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════ EMAIL CAPTURE ══════════ -->
+  <section class="email-section" id="notify">
+    <div class="container">
+      <div class="label" style="text-align:center;">Early access</div>
+      <h2 class="section-title">Be the first to know.</h2>
+      <p class="section-body">
+        Ibis is in active development. Leave your email and we'll send you one notification
+        the moment it launches. No drip campaigns. No newsletters.
+        Just: it's ready.
+      </p>
+      <form class="email-form" action="#" method="post" onsubmit="return false;">
+        <input type="email" placeholder="support@simdadllc.com" required autocomplete="email">
+        <button type="submit" class="btn btn-red">Notify me</button>
+      </form>
+      <p class="email-fine">No spam. One email at launch. Unsubscribe anytime.</p>
+    </div>
+  </section>
+
+  <!-- ══════════ FOOTER ══════════ -->
+  <footer>
+    <div class="footer-row">
+      <div>
+        <div class="footer-brand-name">Ibis</div>
+        <div class="footer-brand-sub">A SIM DAD LLC product</div>
+      </div>
+      <div class="footer-links">
+        <a href="#how-it-works">How it works</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#notify">Early access</a>
+        <a href="https://simdadllc.com">simdadllc.com</a>
+      </div>
+    </div>
+    <p class="footer-copy">
+      &copy; 2026 SIM DAD LLC. All rights reserved.
+      Ibis is an independent product and is not affiliated with OpenAI.
+      Whisper is an open-source model released by OpenAI under the MIT license.
+    </p>
+  </footer>
 
-async function deleteVoice(name) {
-  if (!confirm(`Delete voice "${name}"?`)) return;
-  await fetch(`/voice/${name}`, { method: 'DELETE' });
-  await loadVoices();
-}
-
-loadVoices();
-
-// ── Speed slider ──────────────────────────────────────────────────────────────
-rateInput.addEventListener('input', () => {
-  const v = parseFloat(rateInput.value);
-  speedLabel.textContent = (v % 1 === 0 ? v.toFixed(0) : v.toFixed(2).replace(/0$/, '')) + '×';
-  localStorage.setItem('vox:speed', rateInput.value);
-});
-
-function getSpeedMult() { return parseFloat(rateInput.value); }
-
-// ── Dark mode ─────────────────────────────────────────────────────────────────
-const btnDark = document.getElementById('btn-dark');
-function applyDark(on) {
-  document.body.classList.toggle('dark', on);
-  btnDark.textContent = on ? '☀️' : '🌙';
-  btnDark.title = on ? 'Switch to light mode' : 'Switch to dark mode';
-}
-applyDark(localStorage.getItem('dark') === '1');
-btnDark.addEventListener('click', () => {
-  const on = !document.body.classList.contains('dark');
-  applyDark(on);
-  localStorage.setItem('dark', on ? '1' : '0');
-});
-
-// ── File open ─────────────────────────────────────────────────────────────────
-btnOpenFile.addEventListener('click', () => fileInput.click());
-fileInput.addEventListener('change', async () => {
-  const file = fileInput.files[0];
-  if (!file) return;
-  setStatus('Parsing…');
-  const form = new FormData();
-  form.append('file', file);
-  try {
-    const res  = await fetch('/parse', { method: 'POST', body: form });
-    const data = await res.json();
-    if (data.error) { setStatus('Error: ' + data.error); return; }
-    editor.value = data.text;
-    editor.setSelectionRange(0, 0);
-    // Track filename and persist
-    currentFilename = file.name.replace(/\.docx$/i, '.md');
-    localStorage.setItem('vox:filename', currentFilename);
-    localStorage.setItem('vox:draft', data.text);
-    brand.classList.remove('unsaved');
-    updateWordCount();
-    setStatus('Loaded: ' + file.name);
-    btnPlay.click();   // auto-play from the top
-  } catch (e) { setStatus('Parse error: ' + e.message); }
-  fileInput.value = '';
-});
-
-// ── Voice selection persistence ───────────────────────────────────────────────
-voiceSel.addEventListener('change', async () => {
-  localStorage.setItem('vox:voice', voiceSel.value);
-  if (!isPlaying) return;
-  stopSignal = true;
-  if (audioSource) try { audioSource.stop(); } catch (_) {}
-  await sleep(120);
-  btnPlay.click();
-});
-
-// ── Voices modal ──────────────────────────────────────────────────────────────
-btnManage.addEventListener('click', () => dlg.showModal());
-btnCloseDlg.addEventListener('click', () => dlg.close());
-dlg.addEventListener('click', e => { if (e.target === dlg) dlg.close(); });
-
-voiceFileIn.addEventListener('change', () => {
-  const f = voiceFileIn.files[0];
-  voiceFileName.textContent = f ? f.name : '';
-  btnSaveVoice.disabled = !(f && voiceNameIn.value.trim());
-});
-voiceNameIn.addEventListener('input', () => {
-  btnSaveVoice.disabled = !(voiceFileIn.files[0] && voiceNameIn.value.trim());
-});
-
-btnSaveVoice.addEventListener('click', async () => {
-  const file = voiceFileIn.files[0];
-  const name = voiceNameIn.value.trim();
-  if (!file || !name) return;
-
-  btnSaveVoice.disabled = true;
-  voiceAddStat.textContent = 'Uploading and transcribing… (this may take 30–60 s on first use)';
-  voiceAddStat.className = '';
-
-  const form = new FormData();
-  form.append('file', file);
-  form.append('name', name);
-
-  try {
-    const res  = await fetch('/voice/add', { method: 'POST', body: form });
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
-
-    voiceAddStat.textContent = `✓ "${name}" saved. Select it from the voice dropdown.`;
-    voiceAddStat.className = 'status-ok';
-    voiceFileIn.value   = '';
-    voiceFileName.textContent = '';
-    voiceNameIn.value   = '';
-    await loadVoices();
-    // Auto-select the new voice
-    voiceSel.value = data.id;
-    localStorage.setItem('vox:voice', data.id);
-  } catch (e) {
-    voiceAddStat.textContent = 'Error: ' + e.message;
-    voiceAddStat.className = 'status-err';
-    btnSaveVoice.disabled = false;
-  }
-});
-
-// ── Text unit helpers (sentence-level for fast TTS response) ──────────────────
-
-// Splits a paragraph into sentences, protecting common abbreviations.
-function splitSentences(para) {
-  // Replace dots in abbreviations with placeholder so they don't split
-  let s = para.replace(
-    /\b(et\s+al|fig|figs|eq|eqs|ref|refs|sec|tab|vs|dr|prof|mr|mrs|ms|sr|jr|no|vol|pp|approx|dept|jan|feb|mar|apr|jun|jul|aug|sep|oct|nov|dec|i\.e|e\.g|etc|al)\./gi,
-    m => m.slice(0, -1) + '\uFFFD'
-  );
-  // Protect decimal numbers like 3.14 or p < 0.05
-  s = s.replace(/(\d)\.(\d)/g, '$1\uFFFE$2');
-
-  // Split on sentence-ending punctuation followed by whitespace + capital/quote/paren
-  const parts = s.split(/(?<=[.!?])\s+(?=[A-Z"'(\[])/);
-
-  return parts
-    .map(p => p.replace(/\uFFFD/g, '.').replace(/\uFFFE/g, '.').trim())
-    .filter(p => p.length > 4);
-}
-
-// Splits the full textarea text into sentence units with their char positions.
-function parseUnits(text) {
-  const result = [];
-  let searchFrom = 0;
-  for (const rawPara of text.split(/\n{2,}/)) {
-    const para = rawPara.trim();
-    if (!para) { searchFrom += rawPara.length + 2; continue; }
-    const paraStart = text.indexOf(para, searchFrom);
-    if (paraStart < 0) continue;
-    searchFrom = paraStart + para.length;
-
-    const sentences = splitSentences(para);
-    let offset = 0;
-    for (const sent of sentences) {
-      const idx = para.indexOf(sent, offset);
-      if (idx >= 0) {
-        result.push({ text: sent, start: paraStart + idx });
-        offset = idx + sent.length;
-      }
-    }
-  }
-  return result.length ? result : [{ text: text.trim(), start: 0 }];
-}
-
-function findStartUnit(units, cursorPos) {
-  let idx = 0;
-  for (let i = units.length - 1; i >= 0; i--) {
-    if (units[i].start <= cursorPos) { idx = i; break; }
-  }
-  return idx;
-}
-
-// ── Audio helpers ─────────────────────────────────────────────────────────────
-async function ensureCtx() {
-  if (!audioCtx || audioCtx.state === 'closed') audioCtx = new AudioContext();
-  if (audioCtx.state === 'suspended') await audioCtx.resume();
-}
-
-async function fetchTTS(text, voice) {
-  const res = await fetch('/tts', {
-    method:  'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body:    JSON.stringify({ text, voice, rate: '+0%' }),
-  });
-  if (!res.ok) throw new Error(`TTS failed (${res.status})`);
-  return res.json();
-}
-
-async function decodeAudio(b64) {
-  const raw = atob(b64), bytes = new Uint8Array(raw.length);
-  for (let i = 0; i < raw.length; i++) bytes[i] = raw.charCodeAt(i);
-  return audioCtx.decodeAudioData(bytes.buffer);
-}
-
-// ── Word / paragraph highlighting ─────────────────────────────────────────────
-function startHighlights(words, paraText, paraStart, audioStartTime, speedMult) {
-  if (rafId) cancelAnimationFrame(rafId);
-
-  if (words.length === 0) {
-    // Custom voice: highlight whole sentence
-    editor.focus();
-    editor.setSelectionRange(paraStart, paraStart + paraText.length);
-    scrollToChar(paraStart);
-    return;
-  }
-
-  // Word-by-word via RAF — offsets divided by speedMult since audio plays faster
-  const positions = [];
-  let sf = 0;
-  for (const w of words) {
-    const idx = paraText.indexOf(w.word, sf);
-    if (idx >= 0) {
-      positions.push({ start: paraStart + idx, end: paraStart + idx + w.word.length, offset: w.offset / speedMult });
-      sf = idx + 1;
-    }
-  }
-
-  let wi = 0;
-  function frame() {
-    if (!isPlaying || stopSignal) return;
-    const elapsed = audioCtx.currentTime - audioStartTime;
-    while (wi < positions.length && positions[wi].offset <= elapsed) {
-      const p = positions[wi];
-      editor.focus();
-      editor.setSelectionRange(p.start, p.end);
-      scrollToChar(p.start);
-      wi++;
-    }
-    if (wi < positions.length) rafId = requestAnimationFrame(frame);
-  }
-  rafId = requestAnimationFrame(frame);
-}
-
-let _scrollMirror = null;
-function scrollToChar(charPos) {
-  if (!_scrollMirror) {
-    _scrollMirror = document.createElement('div');
-    const cs = getComputedStyle(editor);
-    Object.assign(_scrollMirror.style, {
-      position: 'absolute', top: '0', left: '-9999px',
-      visibility: 'hidden', pointerEvents: 'none',
-      whiteSpace: 'pre-wrap', wordWrap: 'break-word', overflowWrap: 'break-word',
-      fontFamily: cs.fontFamily, fontSize: cs.fontSize, fontWeight: cs.fontWeight,
-      lineHeight: cs.lineHeight, letterSpacing: cs.letterSpacing,
-      paddingTop: cs.paddingTop, paddingRight: cs.paddingRight,
-      paddingBottom: cs.paddingBottom, paddingLeft: cs.paddingLeft,
-      boxSizing: 'border-box',
-    });
-    document.body.appendChild(_scrollMirror);
-  }
-  _scrollMirror.style.width = editor.clientWidth + 'px';
-  _scrollMirror.textContent = editor.value.substring(0, charPos);
-  editor.scrollTop = Math.max(0, _scrollMirror.scrollHeight - editor.clientHeight * 0.4);
-}
-
-// ── Playback loop ─────────────────────────────────────────────────────────────
-function activeVoiceName() {
-  const opt = voiceSel.selectedOptions[0];
-  return opt ? opt.text.replace('✦ ', '') : voiceSel.value;
-}
-
-async function playFrom(paras, startIdx) {
-  const myGen = ++playGen;
-  const stale = () => myGen !== playGen || stopSignal;
-
-  let currentFetch = fetchTTS(paras[startIdx].text, voiceSel.value);
-
-  for (let i = startIdx; i < paras.length; i++) {
-    if (stale()) break;
-
-    const voice    = voiceSel.value;
-    const isCustom = voice.startsWith('custom:');
-
-    setProgress(i / paras.length);
-    updateTtsPreview(paras[i].start);
-    setStatus(isCustom
-      ? `[${activeVoiceName()}]  Sentence ${i + 1}/${paras.length} — generating… (may take ~15 s)`
-      : `[${activeVoiceName()}]  Sentence ${i + 1}/${paras.length}`);
-
-    let data;
-    try { data = await currentFetch; }
-    catch (e) { if (!stale()) setStatus('Error: ' + e.message); break; }
-    if (stale()) break;
-
-    const buffer = await decodeAudio(data.audio);
-    if (stale()) break;
-
-    while (isPaused && !stale()) await sleep(80);
-    if (stale()) break;
-
-    await ensureCtx();
-    if (stale()) break;
-
-    const speedMult = getSpeedMult();
-
-    // Kick off next sentence fetch as soon as current starts playing so GPU/network
-    // generation overlaps with playback — reduces the gap between sentences.
-    currentFetch = (i + 1 < paras.length && !stale())
-      ? fetchTTS(paras[i + 1].text, voiceSel.value)
-      : null;
-
-    await new Promise(resolve => {
-      audioSource = audioCtx.createBufferSource();
-      audioSource.buffer = buffer;
-      audioSource.connect(audioCtx.destination);
-      audioSource.playbackRate.value = speedMult;
-      audioSource.onended = resolve;
-      startHighlights(data.words, paras[i].text, paras[i].start, audioCtx.currentTime, speedMult);
-      audioSource.start();
-    });
-  }
-
-  // Only the current generation should call cleanup — not a superseded instance
-  if (myGen === playGen) cleanup();
-}
-
-// ── Utilities ─────────────────────────────────────────────────────────────────
-const sleep = ms => new Promise(r => setTimeout(r, ms));
-function setStatus(msg) { statusEl.textContent = msg; }
-function setControls(on) {
-  btnPlay.disabled  = on;
-  btnPause.disabled = !on;
-  btnStop.disabled  = !on;
-}
-function cleanup() {
-  playGen++;  // invalidate any in-flight playFrom instance
-  isPlaying = isPaused = stopSignal = false;
-  if (rafId)       { cancelAnimationFrame(rafId); rafId = null; }
-  if (audioSource) { try { audioSource.stop(); } catch (_) {} audioSource = null; }
-  setControls(false);
-  btnPause.textContent = '⏸  Pause';
-  setProgress(0);
-  setStatus('Stopped');
-  clearTtsPreview();
-}
-
-// ── Button handlers ───────────────────────────────────────────────────────────
-btnPlay.addEventListener('click', async () => {
-  const text = editor.value;
-  if (!text.trim()) { setStatus('No text to read.'); return; }
-
-  // Stop any running instance — playGen increment inside playFrom will signal it stale
-  stopSignal = true;
-  if (audioSource) try { audioSource.stop(); } catch (_) {}
-  await sleep(50);   // let onended fire so the old AudioBufferSource is released
-
-  await ensureCtx();
-  const paras    = parseUnits(text);
-  const startIdx = findStartUnit(paras, editor.selectionStart);
-
-  stopSignal = false; isPlaying = true; isPaused = false;
-  setControls(true);
-  playFrom(paras, startIdx);
-});
-
-btnPause.addEventListener('click', async () => {
-  if (!isPlaying) return;
-  if (!isPaused) {
-    isPaused = true;
-    if (audioCtx) await audioCtx.suspend();
-    btnPause.textContent = '▶  Resume';
-    setStatus('Paused');
-  } else {
-    isPaused = false;
-    if (audioCtx) await audioCtx.resume();
-    btnPause.textContent = '⏸  Pause';
-    setStatus('Playing…');
-  }
-});
-
-btnStop.addEventListener('click', () => {
-  stopSignal = true;
-  if (audioSource) try { audioSource.stop(); } catch (_) {}
-  cleanup();
-});
-
-// ── Markdown → HTML ───────────────────────────────────────────────────────────
-function markdownToHtml(md) {
-  const lines = md.split('\n');
-  const out = [];
-  let listType = null;
-  let inCode = false, codeLang = '', codeLines = [];
-
-  const flush = () => { if (listType) { out.push(`</${listType}>`); listType = null; } };
-
-  const esc = t => t.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-  const inline = t => esc(t)
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    .replace(/__(.+?)__/g, '<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    .replace(/_(.+?)_/g, '<em>$1</em>')
-    .replace(/`(.+?)`/g, '<code>$1</code>')
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2">$1</a>');
-
-  for (const line of lines) {
-    // Fenced code block
-    const fence = line.match(/^```(\w*)/);
-    if (fence && !inCode) { flush(); inCode = true; codeLang = fence[1]; codeLines = []; continue; }
-    if (inCode) {
-      if (line.startsWith('```')) { out.push(`<pre><code>${esc(codeLines.join('\n'))}</code></pre>`); inCode = false; codeLines = []; }
-      else codeLines.push(line);
-      continue;
-    }
-
-    const hm = line.match(/^(#{1,6})\s+(.+)/);
-    if (hm) { flush(); out.push(`<h${hm[1].length}>${inline(hm[2])}</h${hm[1].length}>`); continue; }
-
-    if (/^[-*_]{3,}$/.test(line.trim())) { flush(); out.push('<hr>'); continue; }
-
-    const bqm = line.match(/^>\s*(.*)/);
-    if (bqm) { flush(); out.push(`<blockquote><p>${inline(bqm[1])}</p></blockquote>`); continue; }
-
-    const ulm = line.match(/^[*-]\s+(.+)/);
-    if (ulm) { if (listType !== 'ul') { flush(); out.push('<ul>'); listType = 'ul'; } out.push(`<li>${inline(ulm[1])}</li>`); continue; }
-
-    const olm = line.match(/^\d+\.\s+(.+)/);
-    if (olm) { if (listType !== 'ol') { flush(); out.push('<ol>'); listType = 'ol'; } out.push(`<li>${inline(olm[1])}</li>`); continue; }
-
-    if (line.trim() === '') { flush(); continue; }
-
-    flush();
-    out.push(`<p>${inline(line)}</p>`);
-  }
-  flush();
-  if (inCode) out.push(`<pre><code>${esc(codeLines.join('\n'))}</code></pre>`);
-  return out.join('\n');
-}
-
-const btnCopyWord = document.getElementById('btn-copy-word');
-btnCopyWord.addEventListener('click', async () => {
-  const text = editor.value;
-  if (!text.trim()) { setStatus('Nothing to copy.'); return; }
-  const body = markdownToHtml(text);
-  const html = `<!DOCTYPE html><html><body>${body}</body></html>`;
-  try {
-    await navigator.clipboard.write([
-      new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }) })
-    ]);
-    const orig = btnCopyWord.textContent;
-    btnCopyWord.textContent = 'Copied!';
-    setTimeout(() => { btnCopyWord.textContent = orig; }, 1500);
-  } catch (e) {
-    setStatus('Copy failed: ' + e.message);
-  }
-});
-
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && e.shiftKey && e.key === 'C') { e.preventDefault(); btnCopyWord.click(); }
-});
-
-// ── Preview toggle ────────────────────────────────────────────────────────────
-const btnPreview = document.getElementById('btn-preview');
-const previewEl  = document.getElementById('preview');
-let previewMode  = false;
-
-function setPreviewMode(on) {
-  previewMode = on;
-  btnPreview.classList.toggle('active', on);
-  btnPreview.textContent = on ? 'Edit' : 'Preview';
-  if (on) {
-    previewEl.innerHTML = markdownToHtml(editor.value);
-    editor.style.display = 'none';
-    previewEl.style.display = 'block';
-    buildPreviewMap();
-  } else {
-    clearTtsPreview();
-    previewEl.style.display = 'none';
-    editor.style.display = '';
-    editor.focus();
-  }
-}
-
-btnPreview.addEventListener('click', () => setPreviewMode(!previewMode));
-
-// ── Inline formatting shortcuts ───────────────────────────────────────────────
-function wrapSelection(before, after = before) {
-  if (previewMode) return;
-  const start = editor.selectionStart, end = editor.selectionEnd;
-  const sel = editor.value.slice(start, end);
-  editor.setRangeText(before + sel + after, start, end, sel ? 'select' : 'end');
-  if (!sel) editor.setSelectionRange(start + before.length, start + before.length);
-  editor.dispatchEvent(new Event('input'));
-  editor.focus();
-}
-
-function insertHeading(level) {
-  if (previewMode) return;
-  const pos = editor.selectionStart;
-  const lineStart = editor.value.lastIndexOf('\n', pos - 1) + 1;
-  const lineEnd = editor.value.indexOf('\n', pos);
-  const end = lineEnd === -1 ? editor.value.length : lineEnd;
-  const line = editor.value.slice(lineStart, end);
-  // Toggle: remove existing heading markers, then add new ones
-  const stripped = line.replace(/^#{1,6}\s*/, '');
-  const prefix = '#'.repeat(level) + ' ';
-  editor.setRangeText(prefix + stripped, lineStart, end, 'end');
-  editor.dispatchEvent(new Event('input'));
-  editor.focus();
-}
-
-// ── Smart list continuation (Enter) ──────────────────────────────────────────
-editor.addEventListener('keydown', e => {
-  if (e.key !== 'Enter' || e.shiftKey) return;
-  const pos = editor.selectionStart;
-  if (pos !== editor.selectionEnd) return; // has selection, let browser handle
-  const val = editor.value;
-  const lineStart = val.lastIndexOf('\n', pos - 1) + 1;
-  const line = val.slice(lineStart, pos);
-
-  const ulm = line.match(/^([*-])\s+/);
-  if (ulm) {
-    e.preventDefault();
-    if (line.trim() === ulm[1]) {
-      // Empty bullet — end list: replace the marker with blank line
-      editor.setRangeText('\n', lineStart, pos, 'end');
-    } else {
-      editor.setRangeText('\n' + ulm[0], pos, pos, 'end');
-    }
-    editor.dispatchEvent(new Event('input'));
-    return;
-  }
-
-  const olm = line.match(/^(\d+)\.\s+/);
-  if (olm) {
-    e.preventDefault();
-    if (line.trim() === olm[1] + '.') {
-      editor.setRangeText('\n', lineStart, pos, 'end');
-    } else {
-      editor.setRangeText('\n' + (parseInt(olm[1]) + 1) + '. ', pos, pos, 'end');
-    }
-    editor.dispatchEvent(new Event('input'));
-  }
-});
-
-// ── Update keyboard shortcuts ─────────────────────────────────────────────────
-document.addEventListener('keydown', e => {
-  if (e.ctrlKey && !e.shiftKey && !e.altKey) {
-    if (e.key === 'p') { e.preventDefault(); btnPreview.click(); }
-    if (e.key === 'b') { e.preventDefault(); wrapSelection('**'); }
-    if (e.key === 'i') { e.preventDefault(); wrapSelection('*'); }
-    if (e.key === '1') { e.preventDefault(); insertHeading(1); }
-    if (e.key === '2') { e.preventDefault(); insertHeading(2); }
-    if (e.key === '3') { e.preventDefault(); insertHeading(3); }
-    if (e.key === 'f') { e.preventDefault(); openFind(); }
-    if (e.key === 'h') { e.preventDefault(); openFind(); replaceInput.focus(); }
-  }
-  if (e.key === 'F11') { e.preventDefault(); setFocusMode(!focusMode); }
-});
-
-// ── Export .docx ──────────────────────────────────────────────────────────────
-document.getElementById('btn-export-docx').addEventListener('click', async () => {
-  const text = editor.value;
-  if (!text.trim()) { setStatus('Nothing to export.'); return; }
-  setStatus('Generating .docx…');
-  try {
-    const res = await fetch('/export/docx', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text, filename: currentFilename.replace(/\.md$/, '') }),
-    });
-    if (!res.ok) throw new Error(await res.text());
-    const blob = await res.blob();
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = currentFilename.replace(/\.md$/, '.docx');
-    a.click();
-    URL.revokeObjectURL(url);
-    setStatus('Exported.');
-  } catch (e) { setStatus('Export failed: ' + e.message); }
-});
-
-// ── Find & Replace ────────────────────────────────────────────────────────────
-const findBar     = document.getElementById('find-bar');
-const findInput   = document.getElementById('find-input');
-const replaceInput = document.getElementById('replace-input');
-const findCount   = document.getElementById('find-count');
-let findMatches = [], findIdx = 0;
-
-function openFind() {
-  if (previewMode) setPreviewMode(false);
-  findBar.hidden = false;
-  const sel = editor.value.slice(editor.selectionStart, editor.selectionEnd);
-  if (sel && !sel.includes('\n')) findInput.value = sel;
-  findInput.focus(); findInput.select();
-  doFind();
-}
-
-function closeFind() {
-  findBar.hidden = true;
-  findMatches = [];
-  findCount.textContent = '';
-  editor.focus();
-}
-
-function doFind() {
-  const q = findInput.value;
-  findMatches = []; findIdx = 0;
-  if (!q) { findCount.textContent = ''; return; }
-  const text = editor.value, tl = text.toLowerCase(), ql = q.toLowerCase();
-  let i = 0;
-  while (i <= tl.length - ql.length) {
-    const idx = tl.indexOf(ql, i);
-    if (idx === -1) break;
-    findMatches.push(idx);
-    i = idx + 1;
-  }
-  if (findMatches.length) { navigateFind(0, true); }
-  else { findCount.textContent = 'No results'; }
-}
-
-function navigateFind(delta, absolute = false) {
-  if (!findMatches.length) return;
-  findIdx = absolute ? 0 : (findIdx + delta + findMatches.length) % findMatches.length;
-  const start = findMatches[findIdx];
-  editor.setSelectionRange(start, start + findInput.value.length);
-  scrollToChar(start);
-  findCount.textContent = `${findIdx + 1} / ${findMatches.length}`;
-}
-
-function doReplace() {
-  if (!findMatches.length) return;
-  const start = findMatches[findIdx];
-  editor.setRangeText(replaceInput.value, start, start + findInput.value.length, 'end');
-  editor.dispatchEvent(new Event('input'));
-  doFind();
-}
-
-function doReplaceAll() {
-  const q = findInput.value;
-  if (!q) return;
-  const text = editor.value, tl = text.toLowerCase(), ql = q.toLowerCase();
-  const positions = [];
-  let i = 0;
-  while (i <= tl.length - ql.length) {
-    const idx = tl.indexOf(ql, i);
-    if (idx === -1) break;
-    positions.push(idx);
-    i = idx + 1;
-  }
-  if (!positions.length) { findCount.textContent = 'No results'; return; }
-  let result = '', last = 0;
-  for (const idx of positions) { result += text.slice(last, idx) + replaceInput.value; last = idx + q.length; }
-  result += text.slice(last);
-  editor.value = result;
-  editor.dispatchEvent(new Event('input'));
-  findCount.textContent = `Replaced ${positions.length}`;
-  findMatches = [];
-}
-
-findInput.addEventListener('input', doFind);
-findInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') { e.preventDefault(); navigateFind(e.shiftKey ? -1 : 1); }
-  if (e.key === 'Escape') closeFind();
-});
-replaceInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') { e.preventDefault(); doReplace(); }
-  if (e.key === 'Escape') closeFind();
-});
-document.getElementById('find-prev').addEventListener('click', () => navigateFind(-1));
-document.getElementById('find-next').addEventListener('click', () => navigateFind(1));
-document.getElementById('btn-replace').addEventListener('click', doReplace);
-document.getElementById('btn-replace-all').addEventListener('click', doReplaceAll);
-document.getElementById('find-close').addEventListener('click', closeFind);
-
-// ── Document Outline ──────────────────────────────────────────────────────────
-const btnOutline   = document.getElementById('btn-outline');
-const outlinePanel = document.getElementById('outline-panel');
-let outlineOpen = false;
-
-function renderOutline() {
-  outlinePanel.innerHTML = '';
-  const lines = editor.value.split('\n');
-  let charPos = 0, found = 0;
-  for (const line of lines) {
-    const hm = line.match(/^(#{1,3})\s+(.+)/);
-    if (hm) {
-      const btn = document.createElement('button');
-      btn.className = `outline-item outline-h${hm[1].length}`;
-      btn.textContent = hm[2];
-      const pos = charPos;
-      btn.addEventListener('click', () => {
-        if (previewMode) setPreviewMode(false);
-        editor.focus();
-        editor.setSelectionRange(pos, pos);
-        scrollToChar(pos);
-      });
-      outlinePanel.append(btn);
-      found++;
-    }
-    charPos += line.length + 1;
-  }
-  if (!found) outlinePanel.innerHTML = '<div id="outline-empty">No headings found.</div>';
-}
-
-function setOutlineOpen(on) {
-  outlineOpen = on;
-  btnOutline.classList.toggle('active', on);
-  outlinePanel.style.display = on ? 'block' : 'none';
-  if (on) renderOutline();
-}
-
-btnOutline.addEventListener('click', () => setOutlineOpen(!outlineOpen));
-
-// ── Typewriter mode ───────────────────────────────────────────────────────────
-const btnTypewriter = document.getElementById('btn-typewriter');
-let typewriterMode = false;
-
-function setTypewriterMode(on) {
-  typewriterMode = on;
-  btnTypewriter.classList.toggle('active', on);
-}
-btnTypewriter.addEventListener('click', () => setTypewriterMode(!typewriterMode));
-
-function typewriterScroll() {
-  if (!typewriterMode || previewMode) return;
-  const pos = editor.selectionStart;
-  if (!_scrollMirror) { scrollToChar(pos); return; }
-  _scrollMirror.style.width = editor.clientWidth + 'px';
-  _scrollMirror.textContent = editor.value.substring(0, pos);
-  editor.scrollTop = Math.max(0, _scrollMirror.scrollHeight - editor.clientHeight / 2);
-}
-editor.addEventListener('keyup', typewriterScroll);
-editor.addEventListener('click', typewriterScroll);
-
-// ── Focus mode ────────────────────────────────────────────────────────────────
-const btnFocus   = document.getElementById('btn-focus');
-const focusExit  = document.getElementById('focus-exit');
-let focusMode = false;
-
-function setFocusMode(on) {
-  focusMode = on;
-  document.body.classList.toggle('focus-mode', on);
-  btnFocus.classList.toggle('active', on);
-  btnFocus.textContent = on ? 'Unfocus' : 'Focus';
-}
-btnFocus.addEventListener('click', () => setFocusMode(!focusMode));
-focusExit.addEventListener('click', () => setFocusMode(false));
-
-// ── Auto-pair: wrap selection on *, _, ` ─────────────────────────────────────
-editor.addEventListener('keydown', e => {
-  if (previewMode) return;
-  const start = editor.selectionStart, end = editor.selectionEnd;
-  if (start === end) return;
-  const pairs = { '*': '**', '_': '_', '`': '`' };
-  if (pairs[e.key]) { e.preventDefault(); wrapSelection(pairs[e.key], pairs[e.key]); }
-});
-
-// ── Preview TTS: dim played paragraphs ────────────────────────────────────────
-let previewMap = [];
-
-function buildPreviewMap() {
-  const md = editor.value;
-  const els = previewEl.querySelectorAll('h1,h2,h3,h4,h5,h6,p,li');
-  previewMap = [];
-  let searchFrom = 0;
-  for (const el of els) {
-    const text = el.textContent.trim();
-    if (text.length < 3) continue;
-    const idx = md.indexOf(text.slice(0, 50), searchFrom);
-    if (idx >= 0) { previewMap.push({ start: idx, end: idx + text.length, el }); searchFrom = idx; }
-  }
-}
-
-function updateTtsPreview(charPos) {
-  if (!previewMode || !previewMap.length) return;
-  let found = false;
-  for (const { start, end, el } of previewMap) {
-    if (end <= charPos) {
-      el.classList.add('tts-played'); el.classList.remove('tts-current');
-    } else if (!found && start <= charPos + 5) {
-      el.classList.remove('tts-played'); el.classList.add('tts-current');
-      el.scrollIntoView({ block: 'center', behavior: 'smooth' });
-      found = true;
-    } else {
-      el.classList.remove('tts-played', 'tts-current');
-    }
-  }
-}
-
-function clearTtsPreview() {
-  for (const { el } of previewMap) el.classList.remove('tts-played', 'tts-current');
-}
-</script>
 </body>
 </html>
