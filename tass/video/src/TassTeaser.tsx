@@ -6,6 +6,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { TassLogo } from "./TassLogo";
 
 // ── Design tokens ────────────────────────────────────────────────────────────
 const BG = "#08111e";
@@ -126,20 +127,32 @@ const Scene2: React.FC<{ frame: number; fps: number }> = ({ frame, fps }) => {
         opacity: Math.min(wordmarkExit, 1),
       }}
     >
-      <p
+      {/* Logo + wordmark lockup */}
+      <div
         style={{
-          fontFamily: FONT,
-          fontSize: 160,
-          fontWeight: 800,
-          color: BODY,
-          margin: 0,
-          letterSpacing: "-0.03em",
-          lineHeight: 1,
+          display: "flex",
+          alignItems: "center",
+          gap: 40,
           opacity: wordmarkOpacity,
         }}
       >
-        TASS
-      </p>
+        <TassLogo size={180} />
+        <div style={{ display: "flex", flexDirection: "column", gap: 4 }}>
+          <p
+            style={{
+              fontFamily: FONT,
+              fontSize: 130,
+              fontWeight: 800,
+              color: BODY,
+              margin: 0,
+              letterSpacing: "-0.03em",
+              lineHeight: 1,
+            }}
+          >
+            TASS
+          </p>
+        </div>
+      </div>
       <p
         style={{
           fontFamily: FONT,
