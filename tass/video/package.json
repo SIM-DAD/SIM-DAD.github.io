@@ -1,0 +1,20 @@
+{
+  "name": "tass-teaser",
+  "version": "1.0.0",
+  "description": "TASS 15-second teaser video built with Remotion",
+  "scripts": {
+    "start": "remotion studio",
+    "render": "remotion render TassTeaser out/tass-teaser.mp4",
+    "build": "remotion render TassTeaser out/tass-teaser.mp4 --codec h264"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.237",
+    "remotion": "4.0.237",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/react": "18.2.0",
+    "typescript": "^5.4.0"
+  }
+}
