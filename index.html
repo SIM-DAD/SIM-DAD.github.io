@@ -3,757 +3,425 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SIM DAD LLC builds local-first AI software for researchers, academics, and domain experts. No cloud. No subscriptions. Products: Ibis, TASS, Lector.">
-  <title>SIM DAD LLC — Local-First AI Software</title>
-  <link rel="icon" type="image/svg+xml" href="images/logo.svg">
+  <title>SIM DAD LLC — Local-first AI software</title>
+  <meta name="description" content="SIM DAD LLC builds local-first AI software for researchers, academics, and domain experts. No cloud. No telemetry. No subscriptions where avoidable.">
+  <meta property="og:title" content="SIM DAD LLC — Local-first AI software">
+  <meta property="og:description" content="Software for people who do serious work.">
+  <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
 
   <style>
-    /* ═══════════════════════════════════════════════════════
-       DESIGN TOKENS — SIM DAD MAIN (DARK PARENT PALETTE)
-    ═══════════════════════════════════════════════════════ */
+    /* ─── TOKENS ─────────────────────────────────────────────────── */
     :root {
-      --dark:      #1E2A35;
-      --dark-2:    #253342;
-      --dark-3:    #2E3E4D;
-      --text:      #F0F4F7;
-      --text-dim:  rgba(240,244,247,.62);
-      --text-soft: rgba(240,244,247,.38);
-      --border:    rgba(255,255,255,.1);
-      --border-2:  rgba(255,255,255,.06);
+      --accent:    #1E3A4A;
+      --accent-h:  #162C3A;
+      --text:      #0F0F0F;
+      --muted:     #6B7280;
+      --bg:        #FFFFFF;
+      --surface:   #F7F7F8;
+      --border:    #E4E4E7;
+      --font:      'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --max-w:     1080px;
+      --radius:    8px;
 
       /* Product accent colors */
-      --ibis:      #2D6A8F;
-      --ibis-l:    #E6F2F9;
-      --tass:      #2E7D5E;
-      --tass-l:    #E3F3EC;
-      --lector:    #5C4B8A;
-      --lector-l:  #EDE9F8;
-
-      --font:      'Lora', Georgia, 'Times New Roman', serif;
-      --radius:    10px;
-      --radius-lg: 16px;
-      --max-w:     1200px;
-      --py:        5rem;
+      --ibis:    #2D6A8F;
+      --tass:    #2E7D5E;
+      --lector:  #5C4B8A;
     }
 
-    /* ─── RESET ──────────────────────────────────────────── */
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text:    #F4F4F5;
+        --muted:   #A1A1AA;
+        --bg:      #09090B;
+        --surface: #111113;
+        --border:  #27272A;
+      }
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font);
-      background: var(--dark);
+      background: var(--bg);
       color: var(--text);
-      line-height: 1.65;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
+    a { color: inherit; text-decoration: none; }
 
-    /* ─── LAYOUT ─────────────────────────────────────────── */
-    .container {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      padding: 0 2rem;
+    /* ─── LAYOUT ─────────────────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+    /* ─── NAV ────────────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: transparent; border-bottom: 1px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
     }
-
-    .section { padding: var(--py) 0; }
-
-    .section-raised {
-      padding: var(--py) 0;
-      background: var(--dark-2);
+    .nav.scrolled { background: var(--bg); border-color: var(--border); }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
     }
+    .nav-brand { font-size: 1rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.875rem; color: var(--muted); transition: color 0.15s; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
 
-    .section-deep {
-      padding: var(--py) 0;
-      background: var(--dark-3);
+    /* ─── BUTTONS ────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 0.6rem 1.3rem; border-radius: var(--radius);
+      font-family: var(--font); font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; border: 1.5px solid transparent; transition: all 0.15s; text-decoration: none;
     }
+    .btn-primary   { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .btn-primary:hover { background: var(--accent-h); border-color: var(--accent-h); }
+    .btn-ghost     { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+    .btn-lg { padding: 0.8rem 1.75rem; font-size: 1rem; }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    .hero { padding: 7rem 0 5rem; border-bottom: 1px solid var(--border); }
+    .hero-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+    .hero-eyebrow {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 6.5vw, 5.25rem); font-weight: 800;
+      line-height: 1.05; letter-spacing: -0.035em; max-width: 18ch; margin-bottom: 1.5rem;
+    }
+    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero-sub {
+      font-size: 1.125rem; color: var(--muted); max-width: 52ch;
+      line-height: 1.65; margin-bottom: 2.5rem; font-weight: 400;
+    }
+    .hero-products {
+      display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;
+    }
+    .product-btn {
+      display: inline-flex; align-items: center; padding: 0.6rem 1.25rem;
+      border-radius: var(--radius); font-family: var(--font); font-size: 0.875rem;
+      font-weight: 600; cursor: pointer; border: 1.5px solid transparent; transition: all 0.15s;
+      text-decoration: none;
+    }
+    .product-btn-ibis   { background: var(--ibis);   color: #fff; border-color: var(--ibis); }
+    .product-btn-ibis:hover   { background: #245A7B; border-color: #245A7B; }
+    .product-btn-tass   { background: var(--tass);   color: #fff; border-color: var(--tass); }
+    .product-btn-tass:hover   { background: #256B50; border-color: #256B50; }
+    .product-btn-lector { background: var(--lector); color: #fff; border-color: var(--lector); }
+    .product-btn-lector:hover { background: #4E3F7A; border-color: #4E3F7A; }
+
+    /* ─── SECTIONS ───────────────────────────────────────────────── */
+    .section       { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+    .section-alt   { padding: 6rem 0; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .section-dark  { padding: 6rem 0; background: var(--text); color: var(--bg); }
 
     .eyebrow {
-      display: block;
-      font-size: 0.74rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.13em;
-      color: var(--text-dim);
-      margin-bottom: 1rem;
+      display: block; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 1rem;
     }
-
-    /* ─── BUTTONS ────────────────────────────────────────── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      padding: 0.65rem 1.5rem;
-      border-radius: var(--radius);
-      font-family: var(--font);
-      font-size: 0.9rem;
-      font-weight: 600;
-      font-style: normal;
-      text-decoration: none;
-      cursor: pointer;
-      border: none;
-      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 1.25rem;
     }
+    .section-dark h2 { color: #fff; }
+    .section-sub { font-size: 1.0625rem; color: var(--muted); max-width: 58ch; line-height: 1.65; }
 
-    .btn-ibis   { background: var(--ibis);   color: #fff; }
-    .btn-tass   { background: var(--tass);   color: #fff; }
-    .btn-lector { background: var(--lector); color: #fff; }
-
-    .btn-ibis:hover   { background: #245A7B; transform: translateY(-1px); }
-    .btn-tass:hover   { background: #246B4F; transform: translateY(-1px); }
-    .btn-lector:hover { background: #4E3F7A; transform: translateY(-1px); }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text);
-      border: 1.5px solid var(--border);
-    }
-    .btn-outline:hover { border-color: rgba(255,255,255,.3); }
-
-    /* ─── STICKY HEADER ──────────────────────────────────── */
-    .site-header {
-      position: sticky;
-      top: 0;
-      z-index: 900;
-      height: 60px;
-      display: flex;
-      align-items: center;
-      padding: 0 2rem;
-      background: rgba(30,42,53,0.9);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    .header-inner {
-      max-width: var(--max-w);
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .header-brand {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-      text-decoration: none;
-    }
-
-    .header-brand img {
-      height: 28px;
-      width: 28px;
-      opacity: 0.9;
-      filter: brightness(0) invert(1);
-    }
-
-    .header-brand-name {
-      font-size: 1.05rem;
-      font-weight: 600;
-      font-style: normal;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .header-nav {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .header-nav a {
-      text-decoration: none;
-      color: var(--text-dim);
-      font-size: 0.88rem;
-      font-style: normal;
-      transition: color 0.2s;
-    }
-
-    .header-nav a:hover { color: var(--text); }
-
-    /* ─── HERO ───────────────────────────────────────────── */
-    .hero {
-      padding: 7rem 2rem 6rem;
-      text-align: center;
-    }
-
-    .hero-kicker {
-      display: inline-block;
-      background: rgba(255,255,255,.07);
-      color: var(--text-dim);
-      font-size: 0.76rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      padding: 0.38rem 1.1rem;
-      border-radius: 99px;
-      border: 1px solid var(--border);
-      margin-bottom: 2.5rem;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.6rem, 5.5vw, 4rem);
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: -0.025em;
-      line-height: 1.12;
-      max-width: 820px;
-      margin: 0 auto 1.75rem;
-      color: var(--text);
-    }
-
-    .hero-sub {
-      font-size: 1.12rem;
-      font-style: normal;
-      color: var(--text-dim);
-      max-width: 600px;
-      margin: 0 auto 3rem;
-      line-height: 1.75;
-    }
-
-    .hero-product-links {
-      display: flex;
-      gap: 0.85rem;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-
-    /* ─── ABOUT ──────────────────────────────────────────── */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 300px;
-      gap: 4rem;
-      align-items: start;
-    }
-
-    .about-body h2 {
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: -0.02em;
-      line-height: 1.15;
-      margin-bottom: 1.75rem;
-      color: var(--text);
-    }
-
-    .about-body p {
-      font-size: 1.02rem;
-      font-style: normal;
-      color: var(--text-dim);
-      line-height: 1.8;
-      margin-bottom: 1.25rem;
-    }
-
-    .about-body p:last-child { margin-bottom: 0; }
-
-    .about-body p a {
-      color: var(--text);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-    }
-
-    .sidebar-card {
-      background: var(--dark-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 1.75rem;
-    }
-
-    .sidebar-block { margin-bottom: 1.75rem; }
-    .sidebar-block:last-child { margin-bottom: 0; }
-
-    .sidebar-block h3 {
-      font-size: 0.76rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
-      margin-bottom: 0.75rem;
-    }
-
-    .sidebar-block a {
-      display: block;
-      font-size: 0.9rem;
-      font-style: normal;
-      color: var(--text-dim);
-      text-decoration: none;
-      margin-bottom: 0.4rem;
-      transition: color 0.2s;
-    }
-
-    .sidebar-block a:hover { color: var(--text); }
-
-    /* ─── PRODUCTS ───────────────────────────────────────── */
+    /* ─── PRODUCTS GRID ──────────────────────────────────────────── */
     .products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 1.5rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem;
     }
-
     .product-card {
-      background: var(--dark-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem;
+      position: relative; overflow: hidden; transition: border-color 0.15s;
     }
-
-    .product-card:hover {
-      border-color: rgba(255,255,255,.2);
-    }
-
-    .product-card.ibis-card:hover   { border-color: rgba(45,106,143,.5); box-shadow: 0 0 30px rgba(45,106,143,.1); }
-    .product-card.tass-card:hover   { border-color: rgba(46,125,94,.5);  box-shadow: 0 0 30px rgba(46,125,94,.1); }
-    .product-card.lector-card:hover { border-color: rgba(92,75,138,.5);  box-shadow: 0 0 30px rgba(92,75,138,.1); }
-    .product-card.cage-card:hover   { border-color: rgba(255,255,255,.2); }
-
-    .product-num {
-      font-size: 0.73rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
-      margin-bottom: 1rem;
-    }
-
-    .product-accent {
-      display: inline-block;
-      width: 32px;
-      height: 3px;
-      border-radius: 2px;
-      margin-bottom: 1rem;
-    }
-
-    .ibis-card   .product-accent { background: var(--ibis); }
-    .tass-card   .product-accent { background: var(--tass); }
-    .lector-card .product-accent { background: var(--lector); }
-    .cage-card   .product-accent { background: rgba(255,255,255,.25); }
-
-    .product-name {
-      font-size: 1.5rem;
-      font-weight: 700;
-      font-style: normal;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 0.3rem;
-    }
-
-    .product-tag {
-      font-size: 0.76rem;
-      font-style: normal;
-      color: var(--text-soft);
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-
-    .product-desc {
-      font-size: 0.92rem;
-      font-style: normal;
-      color: var(--text-dim);
-      line-height: 1.72;
-      flex: 1;
-      margin-bottom: 1.75rem;
-    }
-
-    .product-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.35rem;
-      font-size: 0.87rem;
-      font-weight: 600;
-      font-style: normal;
-      text-decoration: none;
-      transition: gap 0.2s, opacity 0.2s;
-    }
-
-    .ibis-card   .product-link { color: var(--ibis); }
-    .tass-card   .product-link { color: var(--tass); }
-    .lector-card .product-link { color: var(--lector); }
-    .cage-card   .product-link { color: var(--text-dim); }
-
-    .product-link:hover { gap: 0.55rem; }
-
-    /* ─── CAPABILITIES ───────────────────────────────────── */
-    .caps-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .cap-card {
-      background: var(--dark-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.75rem;
-    }
-
-    .cap-heading {
-      font-size: 0.82rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--text-dim);
-      margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .cap-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.45rem;
-    }
-
-    .cap-list li {
-      font-size: 0.87rem;
-      font-style: normal;
-      color: var(--text-dim);
-      padding-left: 1rem;
-      position: relative;
-    }
-
-    .cap-list li::before {
+    .product-card::before {
       content: '';
-      position: absolute;
-      left: 0;
-      top: 0.55em;
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.22);
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .product-card-ibis::before   { background: var(--ibis); }
+    .product-card-tass::before   { background: var(--tass); }
+    .product-card-lector::before { background: var(--lector); }
+    .product-card-cage::before   { background: var(--muted); }
+    .product-card:hover { border-color: var(--muted); }
+    .product-card-ibis:hover   { border-color: var(--ibis); }
+    .product-card-tass:hover   { border-color: var(--tass); }
+    .product-card-lector:hover { border-color: var(--lector); }
+    .product-num { font-size: 0.7rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
+    .product-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.25rem; }
+    .product-tag  { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
+    .product-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.5rem; }
+    .product-link {
+      font-size: 0.8125rem; font-weight: 600; color: var(--text); border-bottom: 1.5px solid var(--border); padding-bottom: 1px; transition: border-color 0.15s, color 0.15s;
+    }
+    .product-card-ibis   .product-link:hover { color: var(--ibis);   border-color: var(--ibis); }
+    .product-card-tass   .product-link:hover { color: var(--tass);   border-color: var(--tass); }
+    .product-card-lector .product-link:hover { color: var(--lector); border-color: var(--lector); }
+    .product-card-cage   .product-link:hover { color: var(--text);   border-color: var(--text); }
+
+    /* The Cage sits below the three main products */
+    .products-grid-full {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem;
+    }
+    .cage-row {
+      margin-top: 1.25rem;
+    }
+    .cage-row .product-card {
+      grid-column: span 1;
     }
 
-    /* ─── TRACK RECORD ───────────────────────────────────── */
+    /* ─── ABOUT GRID ─────────────────────────────────────────────── */
+    .about-grid {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .about-body p {
+      font-size: 0.9875rem; color: var(--muted); line-height: 1.75; margin-bottom: 1rem;
+    }
+    .about-body p a { color: var(--text); border-bottom: 1px solid var(--border); transition: border-color 0.15s; }
+    .about-body p a:hover { border-color: var(--text); }
+    .sidebar-card {
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .sidebar-block { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .sidebar-block:last-child { border-bottom: none; }
+    .sidebar-block h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.75rem; }
+    .sidebar-block a {
+      display: block; font-size: 0.8375rem; color: var(--muted); margin-bottom: 0.35rem;
+      transition: color 0.15s;
+    }
+    .sidebar-block a:hover { color: var(--text); }
+    .sidebar-block a:last-child { margin-bottom: 0; }
+
+    /* ─── TRACK RECORD ───────────────────────────────────────────── */
     .scale-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      margin-top: 3.5rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
     }
-
     .scale-card {
-      background: var(--dark-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
+      padding: 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
     }
-
+    .scale-card:nth-child(3n) { border-right: none; }
+    .scale-card:nth-last-child(-n+3) { border-bottom: none; }
     .scale-num {
-      font-size: 2.5rem;
-      font-weight: 700;
-      font-style: normal;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      color: var(--text);
-      margin-bottom: 0.4rem;
+      font-size: 2rem; font-weight: 800; color: var(--text);
+      letter-spacing: -0.04em; line-height: 1; margin-bottom: 0.4rem;
     }
+    .scale-num span { font-size: 1.25rem; }
+    .scale-label { font-size: 0.8rem; font-weight: 700; color: var(--muted); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.07em; }
+    .scale-desc { font-size: 0.8125rem; color: var(--muted); line-height: 1.65; }
 
-    .scale-num span {
-      font-size: 1.2rem;
-      font-weight: 600;
-      opacity: 0.6;
+    /* ─── CAPABILITIES ───────────────────────────────────────────── */
+    .caps-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+      margin-top: 3.5rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
     }
+    .cap-card { padding: 1.75rem; border-right: 1px solid var(--border); }
+    .cap-card:last-child { border-right: none; }
+    .cap-heading { font-size: 0.8125rem; font-weight: 700; margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.07em; color: var(--muted); }
+    .cap-list { list-style: none; }
+    .cap-list li { font-size: 0.8375rem; color: var(--muted); padding: 0.3rem 0; border-top: 1px solid var(--border); }
+    .cap-list li:first-child { border-top: none; }
 
-    .scale-label {
-      font-size: 0.8rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--text-soft);
-      margin-bottom: 0.75rem;
-    }
+    /* ─── TEAM ───────────────────────────────────────────────────── */
+    .team-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; margin-top: 3rem; }
+    .team-role { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+    .team-name { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 1rem; }
+    .team-bio  { font-size: 0.9375rem; color: var(--muted); line-height: 1.75; margin-bottom: 2rem; }
+    .team-links-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2rem; }
+    .team-links-pair .sidebar-card { border: none; }
+    .team-links-pair .sidebar-block { padding: 0; border: none; }
+    .team-links-pair .sidebar-block h3 { margin-bottom: 0.5rem; }
+    .team-links-pair .sidebar-block a { font-size: 0.8125rem; }
 
-    .scale-desc {
-      font-size: 0.87rem;
-      font-style: normal;
-      color: var(--text-dim);
-      line-height: 1.65;
-    }
+    .partnerships { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
+    .partner-card { padding: 1.25rem; border: 1px solid var(--border); border-radius: var(--radius); }
+    .partner-name { font-size: 0.8125rem; font-weight: 700; margin-bottom: 0.35rem; }
+    .partner-desc { font-size: 0.7875rem; color: var(--muted); line-height: 1.6; }
 
-    /* ─── TEAM ───────────────────────────────────────────── */
-    .team-grid {
-      display: grid;
-      grid-template-columns: 1fr 340px;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    .team-role {
-      font-size: 0.76rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
-      margin-bottom: 0.4rem;
-    }
-
-    .team-name {
-      font-size: 1.6rem;
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 1rem;
-    }
-
-    .team-bio {
-      font-size: 0.97rem;
-      font-style: normal;
-      color: var(--text-dim);
-      line-height: 1.78;
-      margin-bottom: 1.75rem;
-    }
-
-    .team-links-pair {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-      margin-bottom: 2rem;
-    }
-
-    .partnerships {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1.25rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .partner-card {
-      background: var(--dark-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.4rem;
-    }
-
-    .partner-name {
-      font-size: 0.87rem;
-      font-weight: 700;
-      font-style: normal;
-      color: var(--text);
-      margin-bottom: 0.45rem;
-    }
-
-    .partner-desc {
-      font-size: 0.82rem;
-      font-style: normal;
-      color: var(--text-dim);
-      line-height: 1.6;
-    }
-
-    .pubs-label {
-      font-size: 0.76rem;
-      font-weight: 700;
-      font-style: normal;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--text-soft);
-      margin-bottom: 1rem;
-    }
-
-    .pubs-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      margin-bottom: 0.75rem;
-    }
-
+    .pubs-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1rem; }
+    .pubs-list { list-style: none; margin-bottom: 1rem; }
     .pubs-list li {
-      display: flex;
-      gap: 1rem;
-      font-size: 0.86rem;
-      font-style: normal;
-      color: var(--text-dim);
-      line-height: 1.6;
+      display: grid; grid-template-columns: 2.5rem 1fr; gap: 0.75rem;
+      font-size: 0.8375rem; color: var(--muted); padding: 0.6rem 0;
+      border-top: 1px solid var(--border); line-height: 1.5;
     }
+    .pub-year { font-weight: 700; color: var(--text); font-size: 0.8rem; padding-top: 1px; }
+    .pub-venue { font-style: italic; }
+    .pubs-more { font-size: 0.8rem; color: var(--muted); }
+    .pubs-more a { color: var(--text); border-bottom: 1px solid var(--border); }
+    .pubs-more a:hover { border-color: var(--text); }
 
-    .pub-year {
-      flex-shrink: 0;
-      font-weight: 700;
-      color: var(--text-soft);
-      width: 36px;
-    }
-
-    .pub-venue {
-      font-style: italic;
-    }
-
-    .pubs-more {
-      font-size: 0.83rem;
-      font-style: normal;
-      color: var(--text-soft);
-    }
-
-    .pubs-more a {
-      color: var(--text-dim);
-      text-decoration: underline;
-      text-underline-offset: 2px;
-    }
-
-    /* Janet card */
-    .team-secondary {
-      background: var(--dark-3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: 2rem;
-      align-self: start;
-    }
-
-    .team-secondary .team-role   { margin-bottom: 0.35rem; }
-    .team-secondary .team-name   { font-size: 1.25rem; margin-bottom: 0.85rem; }
-    .team-secondary .team-bio    { font-size: 0.9rem; margin-bottom: 0; }
-
-    /* ─── SECTION HEADER ─────────────────────────────────── */
-    .section-header { margin-bottom: 3rem; }
-
-    .section-header h2 {
-      font-size: clamp(1.7rem, 2.8vw, 2.3rem);
-      font-weight: 700;
-      font-style: italic;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin-bottom: 0.5rem;
-    }
-
-    .section-header p {
-      font-size: 1rem;
-      font-style: normal;
-      color: var(--text-dim);
-      max-width: 600px;
-    }
-
-    /* ─── FOOTER ─────────────────────────────────────────── */
-    .site-footer {
-      background: #131D25;
-      padding: 3.5rem 2rem;
-      border-top: 1px solid var(--border);
-    }
-
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    .footer { padding: 3rem 0 2.5rem; border-top: 1px solid var(--border); }
     .footer-inner {
-      max-width: var(--max-w);
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1.5rem;
+      max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
     }
-
-    .footer-brand {
-      font-size: 1rem;
-      font-weight: 600;
-      font-style: normal;
-      color: var(--text);
-      letter-spacing: -0.01em;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 1.75rem;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      text-decoration: none;
-      color: var(--text-soft);
-      font-size: 0.85rem;
-      font-style: normal;
-      transition: color 0.2s;
-    }
-
+    .footer-brand { font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; }
+    .footer-links { display: flex; gap: 1.75rem; align-items: center; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8125rem; color: var(--muted); transition: color 0.15s; }
     .footer-links a:hover { color: var(--text); }
-
     .footer-copy {
-      max-width: var(--max-w);
-      margin: 1.5rem auto 0;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--border-2);
-      font-size: 0.74rem;
-      font-style: normal;
-      color: var(--text-soft);
-      text-align: center;
+      max-width: var(--max-w); margin: 1.5rem auto 0; padding: 1.5rem 2rem 0;
+      border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted);
     }
 
-    /* ─── RESPONSIVE ─────────────────────────────────────── */
-    @media (max-width: 900px) {
-      .about-grid  { grid-template-columns: 1fr; }
-      .team-grid   { grid-template-columns: 1fr; }
-      .team-links-pair { grid-template-columns: 1fr; }
-    }
+    /* ─── FOCUS ──────────────────────────────────────────────────── */
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
 
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .products-grid { grid-template-columns: 1fr 1fr; }
+      .caps-grid { grid-template-columns: 1fr 1fr; }
+      .cap-card:nth-child(2) { border-right: none; }
+      .cap-card:nth-child(3) { border-top: 1px solid var(--border); }
+      .scale-grid { grid-template-columns: 1fr 1fr; }
+      .scale-card:nth-child(2n) { border-right: none; }
+      .scale-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .scale-card:nth-last-child(-n+2) { border-bottom: none; }
+      .team-grid { grid-template-columns: 1fr; }
+      .about-grid { grid-template-columns: 1fr; }
+      .partnerships { grid-template-columns: 1fr 1fr; }
+      .team-links-pair { grid-template-columns: 1fr; gap: 1.5rem; }
+    }
     @media (max-width: 768px) {
-      :root { --py: 3.5rem; }
-      .hero { padding: 5rem 1.5rem 4rem; }
-      .hero h1 { font-size: 2.3rem; }
-      .container { padding: 0 1.25rem; }
-      .header-nav { display: none; }
+      .hero { padding: 5.5rem 0 4rem; }
+      .nav-links { display: none; }
+      .products-grid { grid-template-columns: 1fr; }
+      .caps-grid { grid-template-columns: 1fr; }
+      .cap-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .cap-card:last-child { border-bottom: none; }
+      .scale-grid { grid-template-columns: 1fr; }
+      .scale-card { border-right: none; }
+      .scale-card:nth-last-child(-n+3) { border-bottom: 1px solid var(--border); }
+      .scale-card:last-child { border-bottom: none; }
+      .section     { padding: 4.5rem 0; }
+      .section-alt { padding: 4.5rem 0; }
+      .section-dark { padding: 4.5rem 0; }
+      .partnerships { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.6rem; }
+      .hero-products .product-btn { width: 100%; justify-content: center; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════
-       HEADER
-  ══════════════════════════════════════════ -->
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="#" class="header-brand">
-        <img src="images/logo.svg" alt="">
-        <span class="header-brand-name">SIM DAD LLC</span>
-      </a>
-      <nav class="header-nav" aria-label="Site navigation">
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand">SIM DAD LLC</a>
+      <div class="nav-links">
         <a href="#about">About</a>
         <a href="#products">Products</a>
         <a href="#team">Team</a>
         <a href="mailto:ap@simdadllc.com">Contact</a>
-      </nav>
+      </div>
     </div>
-  </header>
+  </nav>
 
 
-  <!-- ══════════════════════════════════════════
-       HERO
-  ══════════════════════════════════════════ -->
+  <!-- HERO -->
   <section class="hero">
-    <span class="hero-kicker">Local-first AI software &mdash; founded June 2024</span>
-
-    <h1>Software for people<br>who do serious work.</h1>
-
-    <p class="hero-sub">
-      SIM DAD LLC builds local-first AI tools for researchers, academics, and domain experts.
-      All processing runs on your machine. No cloud. No telemetry. No subscriptions where avoidable.
-    </p>
-
-    <div class="hero-product-links">
-      <a href="https://useibis.app" class="btn btn-ibis">Ibis &rarr;</a>
-      <a href="https://usetass.app" class="btn btn-tass">TASS &rarr;</a>
-      <a href="https://uselector.app" class="btn btn-lector">Lector &rarr;</a>
+    <div class="hero-inner">
+      <span class="hero-eyebrow">Local-first AI software &mdash; founded June 2024</span>
+      <h1>Software for people who do <em>serious</em> work.</h1>
+      <p class="hero-sub">
+        SIM DAD LLC builds local-first AI tools for researchers, academics, and domain experts.
+        All processing runs on your machine. No cloud. No telemetry. No subscriptions where avoidable.
+      </p>
+      <div class="hero-products">
+        <a href="https://useibis.app" class="product-btn product-btn-ibis">Ibis &rarr;</a>
+        <a href="https://usetass.app" class="product-btn product-btn-tass">TASS &rarr;</a>
+        <a href="https://uselector.app" class="product-btn product-btn-lector">Lector &rarr;</a>
+      </div>
     </div>
   </section>
 
 
-  <!-- ══════════════════════════════════════════
-       ABOUT
-  ══════════════════════════════════════════ -->
-  <section class="section-raised" id="about">
+  <!-- PRODUCTS -->
+  <section class="section" id="products">
     <div class="container">
+      <span class="eyebrow">Our products</span>
+      <h2>Software &amp; Projects</h2>
+      <p class="section-sub">
+        Local-first. One-time pricing where possible. Built to the standard of tools we would use ourselves.
+      </p>
+
+      <div class="products-grid">
+
+        <div class="product-card product-card-ibis">
+          <div class="product-num">01</div>
+          <div class="product-name">Ibis</div>
+          <div class="product-tag">Local AI &middot; Windows Desktop &middot; v1.0 Complete &middot; Launching soon &mdash; $24</div>
+          <p class="product-desc">
+            Ibis watches a folder on your Windows PC and transcribes every audio file automatically
+            using on-device AI. Powered by Whisper large-v3-turbo. 99 languages. No cloud. No subscription.
+            One-time purchase. v1.0 is built and in pre-launch.
+          </p>
+          <a href="https://useibis.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+        </div>
+
+        <div class="product-card product-card-tass">
+          <div class="product-num">02</div>
+          <div class="product-name">TASS</div>
+          <div class="product-tag">Text Analysis &middot; Windows Desktop &middot; Launching May 2026 &mdash; $49/yr</div>
+          <p class="product-desc">
+            TASS is a native Windows desktop app for dictionary-based text analysis &mdash; no Python, R,
+            or command line required. Features group comparisons (t-test, ANOVA), publication-quality
+            visualizations, and APA citation blocks built in. Targets launch May 2026.
+          </p>
+          <a href="https://usetass.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+        </div>
+
+        <div class="product-card product-card-lector">
+          <div class="product-num">03</div>
+          <div class="product-name">Lector</div>
+          <div class="product-tag">Writing Tool &middot; Windows &amp; macOS &middot; Coming soon &mdash; $29</div>
+          <p class="product-desc">
+            Lector is a distraction-free writing environment with read-aloud built in. Write your draft,
+            then hear it read back word by word. Voice cloning via F5-TTS. Completely local &mdash;
+            no cloud processing, no account required.
+          </p>
+          <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+        </div>
+
+      </div>
+
+      <!-- The Cage -->
+      <div class="cage-row">
+        <div class="product-card product-card-cage" style="border-top: 3px solid var(--border);">
+          <div class="product-num">04</div>
+          <div class="product-name">The Cage</div>
+          <div class="product-tag">Next.js &middot; PostgreSQL &middot; Docker &middot; SSO &middot; Institutional Deployment</div>
+          <p class="product-desc" style="max-width:70ch;">
+            An equipment reservation and QR-based checkout system currently deployed at SIUE Mass Communications.
+            Dual-database architecture, Docker Compose, Microsoft Entra SSO, and Snipe-IT integration.
+            The institutional deployment serves as the reference implementation for a future multi-tenant SaaS product.
+          </p>
+          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="product-link">View on GitHub &rarr;</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ABOUT -->
+  <section class="section-alt" id="about">
+    <div class="container">
+      <span class="eyebrow">Who we are</span>
+      <h2>About SIM DAD LLC.</h2>
       <div class="about-grid">
         <div class="about-body">
-          <span class="eyebrow">Who we are</span>
-          <h2>About<br>SIM DAD LLC.</h2>
           <p>
             SIM DAD LLC builds local-first AI software tools for researchers, academics, and domain experts
             who need professional-grade capabilities without coding overhead, cloud dependencies, or
@@ -771,7 +439,6 @@
             hundreds of millions of records. We build the software we wished existed while doing that research.
           </p>
         </div>
-
         <div class="sidebar-card">
           <div class="sidebar-block">
             <h3>Contact</h3>
@@ -794,96 +461,52 @@
   </section>
 
 
-  <!-- ══════════════════════════════════════════
-       PRODUCTS
-  ══════════════════════════════════════════ -->
-  <section class="section" id="products">
+  <!-- TRACK RECORD -->
+  <section class="section" id="scale">
     <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Our products</span>
-        <h2>Software &amp; Projects</h2>
-        <p>Local-first. One-time pricing where possible. Built to the standard of tools we would use ourselves.</p>
-      </div>
-
-      <div class="products-grid">
-
-        <div class="product-card ibis-card">
-          <div class="product-num">01</div>
-          <div class="product-accent"></div>
-          <div class="product-name">Ibis</div>
-          <div class="product-tag">Local AI &middot; Windows Desktop &middot; v1.0 Complete &middot; Launching Soon &mdash; $24</div>
-          <p class="product-desc">
-            Ibis watches a folder on your Windows PC and transcribes every audio file automatically
-            using on-device AI. Powered by Whisper large-v3-turbo. 99 languages. No cloud. No subscription.
-            One-time purchase. v1.0 is built and in pre-launch.
-          </p>
-          <a href="https://useibis.app" target="_blank" rel="noopener" class="product-link">
-            Product site &rarr;
-          </a>
+      <span class="eyebrow">Track record</span>
+      <h2>Work at scale.</h2>
+      <div class="scale-grid">
+        <div class="scale-card">
+          <div class="scale-num">321<span>M+</span></div>
+          <div class="scale-label">Twitch Messages Collected</div>
+          <p class="scale-desc">Distributed Raspberry Pi + PostgreSQL pipeline logging 117,943 channels over one month. Source for dissertation and all subsequent Twitch publications.</p>
         </div>
-
-        <div class="product-card tass-card">
-          <div class="product-num">02</div>
-          <div class="product-accent"></div>
-          <div class="product-name">TASS</div>
-          <div class="product-tag">Text Analysis &middot; Windows Desktop &middot; Launching May 2026 &mdash; $49/yr</div>
-          <p class="product-desc">
-            TASS is a native Windows desktop app for dictionary-based text analysis &mdash; no Python, R,
-            or command line required. Features group comparisons (t-test, ANOVA), publication-quality
-            visualizations, and APA citation blocks built in. Ships with eight open-licensed dictionaries.
-            Built for social scientists, journalists, and domain experts.
-          </p>
-          <a href="https://usetass.app" target="_blank" rel="noopener" class="product-link">
-            Product site &rarr;
-          </a>
+        <div class="scale-card">
+          <div class="scale-num">2.8<span>M+</span></div>
+          <div class="scale-label">Tweets in Research Corpora</div>
+          <p class="scale-desc">1.43M VRChat tweets and 1.41M remote work tweets from 887,888 unique users &mdash; structured in PostgreSQL, analyzed via STM and NLP pipelines.</p>
         </div>
-
-        <div class="product-card lector-card">
-          <div class="product-num">03</div>
-          <div class="product-accent"></div>
-          <div class="product-name">Lector</div>
-          <div class="product-tag">Writing Tool &middot; Windows &amp; macOS &middot; Coming Soon &mdash; $29</div>
-          <p class="product-desc">
-            Lector is a distraction-free writing environment with read-aloud built in. Write your draft,
-            then hear it read back word by word. Voice cloning via F5-TTS lets you build a voice profile
-            from thirty seconds of audio. Completely local &mdash; no cloud processing, no account required.
-          </p>
-          <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">
-            Product site &rarr;
-          </a>
+        <div class="scale-card">
+          <div class="scale-num">5<span>M+</span></div>
+          <div class="scale-label">Avatar Records &mdash; Riot Games</div>
+          <p class="scale-desc">Formal data-access agreement with Riot Games to analyze proprietary League of Legends player data. Findings published in peer-reviewed journal.</p>
         </div>
-
-        <div class="product-card cage-card">
-          <div class="product-num">04</div>
-          <div class="product-accent"></div>
-          <div class="product-name">The Cage</div>
-          <div class="product-tag">Next.js &middot; PostgreSQL &middot; Docker &middot; SSO &middot; Institutional Deployment</div>
-          <p class="product-desc">
-            An equipment reservation and QR-based checkout system currently deployed at SIUE Mass
-            Communications. Dual-database architecture, Docker Compose, Microsoft Entra SSO, and
-            Snipe-IT integration. The institutional deployment serves as the reference implementation
-            for a future multi-tenant SaaS product.
-          </p>
-          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="product-link">
-            View on GitHub &rarr;
-          </a>
+        <div class="scale-card">
+          <div class="scale-num">$1.59<span>M</span></div>
+          <div class="scale-label">NSF FW-HTF-R &mdash; Co-PI</div>
+          <p class="scale-desc">Led project teams of 4&ndash;8 within a 30+ person cross-institutional consortium spanning MSU, SIUE, and 4 partner institutions. 8+ publications.</p>
         </div>
-
+        <div class="scale-card">
+          <div class="scale-num">2,448<span>+</span></div>
+          <div class="scale-label">Survey Respondents</div>
+          <p class="scale-desc">Large-scale behavioral surveys on virtual meeting platform adoption, Zoom fatigue, social interaction anxiety, and avatar use across multiple studies.</p>
+        </div>
+        <div class="scale-card">
+          <div class="scale-num">5</div>
+          <div class="scale-label">Linked Studies &mdash; NSF Program</div>
+          <p class="scale-desc">NLP/STM &rarr; large-scale survey &rarr; semi-structured interviews &rarr; controlled experiment &rarr; VR prototype user testing. Full mixed-methods pipeline.</p>
+        </div>
       </div>
     </div>
   </section>
 
 
-  <!-- ══════════════════════════════════════════
-       CAPABILITIES
-  ══════════════════════════════════════════ -->
-  <section class="section-deep" id="capabilities">
+  <!-- CAPABILITIES -->
+  <section class="section-alt" id="capabilities">
     <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">What we do</span>
-        <h2>Company Capabilities</h2>
-      </div>
-
+      <span class="eyebrow">What we do</span>
+      <h2>Company capabilities.</h2>
       <div class="caps-grid">
         <div class="cap-card">
           <div class="cap-heading">Research &amp; Analysis</div>
@@ -941,65 +564,13 @@
   </section>
 
 
-  <!-- ══════════════════════════════════════════
-       TRACK RECORD
-  ══════════════════════════════════════════ -->
-  <section class="section-raised" id="scale">
-    <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Track record</span>
-        <h2>Work at Scale</h2>
-      </div>
-
-      <div class="scale-grid">
-        <div class="scale-card">
-          <div class="scale-num">321<span>M+</span></div>
-          <div class="scale-label">Twitch Messages Collected</div>
-          <p class="scale-desc">Distributed Raspberry Pi + PostgreSQL pipeline logging 117,943 channels over one month. Source for dissertation and all subsequent Twitch publications.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">2.8<span>M+</span></div>
-          <div class="scale-label">Tweets in Research Corpora</div>
-          <p class="scale-desc">1.43M VRChat tweets and 1.41M remote work tweets from 887,888 unique users &mdash; structured in PostgreSQL, analyzed via STM and NLP pipelines.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">5<span>M+</span></div>
-          <div class="scale-label">Avatar Records &mdash; Riot Games</div>
-          <p class="scale-desc">Formal data-access agreement with Riot Games to analyze proprietary League of Legends player data. Findings published in peer-reviewed journal.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">$1.59<span>M</span></div>
-          <div class="scale-label">NSF FW-HTF-R &mdash; Co-PI</div>
-          <p class="scale-desc">Led project teams of 4&ndash;8 within a 30+ person cross-institutional consortium spanning MSU, SIUE, and 4 partner institutions. 8+ publications.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">2,448<span>+</span></div>
-          <div class="scale-label">Survey Respondents</div>
-          <p class="scale-desc">Large-scale behavioral surveys on virtual meeting platform adoption, Zoom fatigue, social interaction anxiety, and avatar use across multiple studies.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">5</div>
-          <div class="scale-label">Linked Studies &mdash; NSF Program</div>
-          <p class="scale-desc">NLP/STM &rarr; large-scale survey &rarr; semi-structured interviews &rarr; controlled experiment &rarr; VR prototype user testing. Full mixed-methods pipeline.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ══════════════════════════════════════════
-       TEAM
-  ══════════════════════════════════════════ -->
+  <!-- TEAM -->
   <section class="section" id="team">
     <div class="container">
-      <div class="section-header">
-        <span class="eyebrow">Our team</span>
-        <h2>Leadership</h2>
-      </div>
-
+      <span class="eyebrow">Our team</span>
+      <h2>Leadership.</h2>
       <div class="team-grid">
 
-        <!-- Alex P. Leith -->
         <div>
           <div class="team-role">Founder</div>
           <div class="team-name">Alex P. Leith</div>
@@ -1012,18 +583,22 @@
           </p>
 
           <div class="team-links-pair">
-            <div class="sidebar-block">
-              <h3>Links</h3>
-              <a href="mailto:aleith@siue.edu">aleith@siue.edu</a>
-              <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a>
-              <a href="https://github.com/apleith" target="_blank" rel="noopener">github.com/apleith</a>
-              <a href="https://orcid.org/0000-0003-1310-6763" target="_blank" rel="noopener">ORCID 0000-0003-1310-6763</a>
+            <div class="sidebar-card">
+              <div class="sidebar-block">
+                <h3>Links</h3>
+                <a href="mailto:aleith@siue.edu">aleith@siue.edu</a>
+                <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a>
+                <a href="https://github.com/apleith" target="_blank" rel="noopener">github.com/apleith</a>
+                <a href="https://orcid.org/0000-0003-1310-6763" target="_blank" rel="noopener">ORCID 0000-0003-1310-6763</a>
+              </div>
             </div>
-            <div class="sidebar-block">
-              <h3>Affiliations</h3>
-              <a href="https://sim-lab-siue.github.io" target="_blank" rel="noopener">SIM Lab @ SIUE</a>
-              <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
-              <a href="https://beyondmeet.space" target="_blank" rel="noopener">Beyond Meet Space</a>
+            <div class="sidebar-card">
+              <div class="sidebar-block">
+                <h3>Affiliations</h3>
+                <a href="https://sim-lab-siue.github.io" target="_blank" rel="noopener">SIM Lab @ SIUE</a>
+                <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
+                <a href="https://beyondmeet.space" target="_blank" rel="noopener">Beyond Meet Space</a>
+              </div>
             </div>
           </div>
 
@@ -1076,8 +651,7 @@
           <p class="pubs-more">Full list: <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a></p>
         </div>
 
-        <!-- Janet V. Leith -->
-        <div class="team-secondary">
+        <div>
           <div class="team-role">Chief Operating Officer</div>
           <div class="team-name">Janet V. Leith</div>
           <p class="team-bio">
@@ -1093,14 +667,10 @@
   </section>
 
 
-  <!-- ══════════════════════════════════════════
-       FOOTER
-  ══════════════════════════════════════════ -->
-  <footer class="site-footer">
+  <!-- FOOTER -->
+  <footer class="footer">
     <div class="footer-inner">
-      <div>
-        <div class="footer-brand">SIM DAD LLC</div>
-      </div>
+      <div class="footer-brand">SIM DAD LLC</div>
       <div class="footer-links">
         <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:ap@simdadllc.com">Contact</a>
@@ -1110,5 +680,12 @@
     <p class="footer-copy">&copy; 2026 SIM DAD LLC. All rights reserved.</p>
   </footer>
 
+
+  <script>
+    const nav = document.getElementById("nav");
+    window.addEventListener("scroll", () => {
+      nav.classList.toggle("scrolled", window.scrollY > 48);
+    }, { passive: true });
+  </script>
 </body>
 </html>
