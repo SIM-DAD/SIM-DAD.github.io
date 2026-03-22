@@ -3,60 +3,780 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SIM DAD LLC builds local-first AI software for researchers, academics, and domain experts. Products: Ibis (local transcription) and TASS (text analysis). No cloud. No subscriptions.">
-  <title>SIM DAD</title>
+  <meta name="description" content="SIM DAD LLC builds local-first AI software for researchers, academics, and domain experts. No cloud. No subscriptions. Products: Ibis, TASS, Lector.">
+  <title>SIM DAD LLC — Local-First AI Software</title>
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════════════
+       DESIGN TOKENS — SIM DAD MAIN (DARK PARENT PALETTE)
+    ═══════════════════════════════════════════════════════ */
+    :root {
+      --dark:      #1E2A35;
+      --dark-2:    #253342;
+      --dark-3:    #2E3E4D;
+      --text:      #F0F4F7;
+      --text-dim:  rgba(240,244,247,.62);
+      --text-soft: rgba(240,244,247,.38);
+      --border:    rgba(255,255,255,.1);
+      --border-2:  rgba(255,255,255,.06);
+
+      /* Product accent colors */
+      --ibis:      #2D6A8F;
+      --ibis-l:    #E6F2F9;
+      --tass:      #2E7D5E;
+      --tass-l:    #E3F3EC;
+      --lector:    #5C4B8A;
+      --lector-l:  #EDE9F8;
+
+      --font:      'Lora', Georgia, 'Times New Roman', serif;
+      --radius:    10px;
+      --radius-lg: 16px;
+      --max-w:     1200px;
+      --py:        5rem;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--dark);
+      color: var(--text);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── LAYOUT ─────────────────────────────────────────── */
+    .container {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .section { padding: var(--py) 0; }
+
+    .section-raised {
+      padding: var(--py) 0;
+      background: var(--dark-2);
+    }
+
+    .section-deep {
+      padding: var(--py) 0;
+      background: var(--dark-3);
+    }
+
+    .eyebrow {
+      display: block;
+      font-size: 0.74rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.13em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+    }
+
+    /* ─── BUTTONS ────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.65rem 1.5rem;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-style: normal;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.15s, opacity 0.2s;
+    }
+
+    .btn-ibis   { background: var(--ibis);   color: #fff; }
+    .btn-tass   { background: var(--tass);   color: #fff; }
+    .btn-lector { background: var(--lector); color: #fff; }
+
+    .btn-ibis:hover   { background: #245A7B; transform: translateY(-1px); }
+    .btn-tass:hover   { background: #246B4F; transform: translateY(-1px); }
+    .btn-lector:hover { background: #4E3F7A; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,.3); }
+
+    /* ─── STICKY HEADER ──────────────────────────────────── */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 2rem;
+      background: rgba(30,42,53,0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .header-inner {
+      max-width: var(--max-w);
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      text-decoration: none;
+    }
+
+    .header-brand img {
+      height: 28px;
+      width: 28px;
+      opacity: 0.9;
+      filter: brightness(0) invert(1);
+    }
+
+    .header-brand-name {
+      font-size: 1.05rem;
+      font-weight: 600;
+      font-style: normal;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .header-nav a {
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.88rem;
+      font-style: normal;
+      transition: color 0.2s;
+    }
+
+    .header-nav a:hover { color: var(--text); }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      padding: 7rem 2rem 6rem;
+      text-align: center;
+    }
+
+    .hero-kicker {
+      display: inline-block;
+      background: rgba(255,255,255,.07);
+      color: var(--text-dim);
+      font-size: 0.76rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.38rem 1.1rem;
+      border-radius: 99px;
+      border: 1px solid var(--border);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.6rem, 5.5vw, 4rem);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.025em;
+      line-height: 1.12;
+      max-width: 820px;
+      margin: 0 auto 1.75rem;
+      color: var(--text);
+    }
+
+    .hero-sub {
+      font-size: 1.12rem;
+      font-style: normal;
+      color: var(--text-dim);
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      line-height: 1.75;
+    }
+
+    .hero-product-links {
+      display: flex;
+      gap: 0.85rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-body h2 {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1.75rem;
+      color: var(--text);
+    }
+
+    .about-body p {
+      font-size: 1.02rem;
+      font-style: normal;
+      color: var(--text-dim);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    .about-body p a {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .sidebar-card {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+    }
+
+    .sidebar-block { margin-bottom: 1.75rem; }
+    .sidebar-block:last-child { margin-bottom: 0; }
+
+    .sidebar-block h3 {
+      font-size: 0.76rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .sidebar-block a {
+      display: block;
+      font-size: 0.9rem;
+      font-style: normal;
+      color: var(--text-dim);
+      text-decoration: none;
+      margin-bottom: 0.4rem;
+      transition: color 0.2s;
+    }
+
+    .sidebar-block a:hover { color: var(--text); }
+
+    /* ─── PRODUCTS ───────────────────────────────────────── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .product-card {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .product-card:hover {
+      border-color: rgba(255,255,255,.2);
+    }
+
+    .product-card.ibis-card:hover   { border-color: rgba(45,106,143,.5); box-shadow: 0 0 30px rgba(45,106,143,.1); }
+    .product-card.tass-card:hover   { border-color: rgba(46,125,94,.5);  box-shadow: 0 0 30px rgba(46,125,94,.1); }
+    .product-card.lector-card:hover { border-color: rgba(92,75,138,.5);  box-shadow: 0 0 30px rgba(92,75,138,.1); }
+    .product-card.cage-card:hover   { border-color: rgba(255,255,255,.2); }
+
+    .product-num {
+      font-size: 0.73rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+    }
+
+    .product-accent {
+      display: inline-block;
+      width: 32px;
+      height: 3px;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+
+    .ibis-card   .product-accent { background: var(--ibis); }
+    .tass-card   .product-accent { background: var(--tass); }
+    .lector-card .product-accent { background: var(--lector); }
+    .cage-card   .product-accent { background: rgba(255,255,255,.25); }
+
+    .product-name {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+
+    .product-tag {
+      font-size: 0.76rem;
+      font-style: normal;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    .product-desc {
+      font-size: 0.92rem;
+      font-style: normal;
+      color: var(--text-dim);
+      line-height: 1.72;
+      flex: 1;
+      margin-bottom: 1.75rem;
+    }
+
+    .product-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.87rem;
+      font-weight: 600;
+      font-style: normal;
+      text-decoration: none;
+      transition: gap 0.2s, opacity 0.2s;
+    }
+
+    .ibis-card   .product-link { color: var(--ibis); }
+    .tass-card   .product-link { color: var(--tass); }
+    .lector-card .product-link { color: var(--lector); }
+    .cage-card   .product-link { color: var(--text-dim); }
+
+    .product-link:hover { gap: 0.55rem; }
+
+    /* ─── CAPABILITIES ───────────────────────────────────── */
+    .caps-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .cap-card {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+
+    .cap-heading {
+      font-size: 0.82rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-dim);
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cap-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+    }
+
+    .cap-list li {
+      font-size: 0.87rem;
+      font-style: normal;
+      color: var(--text-dim);
+      padding-left: 1rem;
+      position: relative;
+    }
+
+    .cap-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.22);
+    }
+
+    /* ─── TRACK RECORD ───────────────────────────────────── */
+    .scale-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .scale-card {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+    }
+
+    .scale-num {
+      font-size: 2.5rem;
+      font-weight: 700;
+      font-style: normal;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+
+    .scale-num span {
+      font-size: 1.2rem;
+      font-weight: 600;
+      opacity: 0.6;
+    }
+
+    .scale-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--text-soft);
+      margin-bottom: 0.75rem;
+    }
+
+    .scale-desc {
+      font-size: 0.87rem;
+      font-style: normal;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ─── TEAM ───────────────────────────────────────────── */
+    .team-grid {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .team-role {
+      font-size: 0.76rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-bottom: 0.4rem;
+    }
+
+    .team-name {
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+
+    .team-bio {
+      font-size: 0.97rem;
+      font-style: normal;
+      color: var(--text-dim);
+      line-height: 1.78;
+      margin-bottom: 1.75rem;
+    }
+
+    .team-links-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .partnerships {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .partner-card {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.4rem;
+    }
+
+    .partner-name {
+      font-size: 0.87rem;
+      font-weight: 700;
+      font-style: normal;
+      color: var(--text);
+      margin-bottom: 0.45rem;
+    }
+
+    .partner-desc {
+      font-size: 0.82rem;
+      font-style: normal;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .pubs-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      font-style: normal;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+    }
+
+    .pubs-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .pubs-list li {
+      display: flex;
+      gap: 1rem;
+      font-size: 0.86rem;
+      font-style: normal;
+      color: var(--text-dim);
+      line-height: 1.6;
+    }
+
+    .pub-year {
+      flex-shrink: 0;
+      font-weight: 700;
+      color: var(--text-soft);
+      width: 36px;
+    }
+
+    .pub-venue {
+      font-style: italic;
+    }
+
+    .pubs-more {
+      font-size: 0.83rem;
+      font-style: normal;
+      color: var(--text-soft);
+    }
+
+    .pubs-more a {
+      color: var(--text-dim);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* Janet card */
+    .team-secondary {
+      background: var(--dark-3);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      align-self: start;
+    }
+
+    .team-secondary .team-role   { margin-bottom: 0.35rem; }
+    .team-secondary .team-name   { font-size: 1.25rem; margin-bottom: 0.85rem; }
+    .team-secondary .team-bio    { font-size: 0.9rem; margin-bottom: 0; }
+
+    /* ─── SECTION HEADER ─────────────────────────────────── */
+    .section-header { margin-bottom: 3rem; }
+
+    .section-header h2 {
+      font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+      font-weight: 700;
+      font-style: italic;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-header p {
+      font-size: 1rem;
+      font-style: normal;
+      color: var(--text-dim);
+      max-width: 600px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    .site-footer {
+      background: #131D25;
+      padding: 3.5rem 2rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .footer-brand {
+      font-size: 1rem;
+      font-weight: 600;
+      font-style: normal;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.75rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: var(--text-soft);
+      font-size: 0.85rem;
+      font-style: normal;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    .footer-copy {
+      max-width: var(--max-w);
+      margin: 1.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-2);
+      font-size: 0.74rem;
+      font-style: normal;
+      color: var(--text-soft);
+      text-align: center;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-grid  { grid-template-columns: 1fr; }
+      .team-grid   { grid-template-columns: 1fr; }
+      .team-links-pair { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      :root { --py: 3.5rem; }
+      .hero { padding: 5rem 1.5rem 4rem; }
+      .hero h1 { font-size: 2.3rem; }
+      .container { padding: 0 1.25rem; }
+      .header-nav { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- ─── HEADER ────────────────────────────────────────── -->
-  <header>
+  <!-- ══════════════════════════════════════════
+       HEADER
+  ══════════════════════════════════════════ -->
+  <header class="site-header">
     <div class="header-inner">
-      <div class="header-name">
-        <img src="images/logo.svg" alt="SIM DAD" class="header-logo">
-        SIM DAD
-      </div>
-      <div class="header-right">
-        <p class="header-tagline">Local-first AI software for researchers, academics, and domain experts. Built on research rigor. Runs entirely on your machine.</p>
-        <div class="header-pills">
-          <span class="pill pill-red">Local-First AI Software</span>
-          <span class="pill">Research &middot; Analysis &middot; NLP</span>
-          <span class="pill">Software Development</span>
-          <span class="pill">Founded June 2024</span>
-        </div>
-      </div>
+      <a href="#" class="header-brand">
+        <img src="images/logo.svg" alt="">
+        <span class="header-brand-name">SIM DAD LLC</span>
+      </a>
+      <nav class="header-nav" aria-label="Site navigation">
+        <a href="#about">About</a>
+        <a href="#products">Products</a>
+        <a href="#team">Team</a>
+        <a href="mailto:ap@simdadllc.com">Contact</a>
+      </nav>
     </div>
   </header>
 
-  <!-- ─── NAV ──────────────────────────────────────────── -->
-  <nav>
-    <div class="nav-inner">
-      <a href="#summary">About</a>
-      <a href="#competencies">Capabilities</a>
-      <a href="#scale">At Scale</a>
-      <a href="#projects">Projects</a>
-      <a href="#team">Team</a>
+
+  <!-- ══════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════ -->
+  <section class="hero">
+    <span class="hero-kicker">Local-first AI software &mdash; founded June 2024</span>
+
+    <h1>Software for people<br>who do serious work.</h1>
+
+    <p class="hero-sub">
+      SIM DAD LLC builds local-first AI tools for researchers, academics, and domain experts.
+      All processing runs on your machine. No cloud. No telemetry. No subscriptions where avoidable.
+    </p>
+
+    <div class="hero-product-links">
+      <a href="https://useibis.app" class="btn btn-ibis">Ibis &rarr;</a>
+      <a href="https://usetass.app" class="btn btn-tass">TASS &rarr;</a>
+      <a href="https://uselector.app" class="btn btn-lector">Lector &rarr;</a>
     </div>
-  </nav>
+  </section>
 
-  <!-- ─── MAIN ──────────────────────────────────────────── -->
-  <main>
 
-    <!-- ABOUT -->
-    <section id="summary">
-      <p class="section-label">Who We Are</p>
-      <h2>About<br>SIM DAD LLC.</h2>
-      <div class="summary-grid">
-        <div class="summary-body">
-          <p>SIM DAD LLC builds local-first AI software tools for researchers, academics, and domain experts who need professional-grade capabilities without coding overhead, cloud dependencies, or subscription fees. Our products run entirely on your machine &mdash; no data leaves your device, ever.</p>
-          <p>Our flagship products are <a href="ibis/">Ibis</a> &mdash; local AI transcription for Windows, available now &mdash; and <a href="tass/">TASS</a>, a no-code text analysis desktop app targeting launch in May 2026. Both are grounded in a decade of applied research practice and built to the standard of tools we would use ourselves.</p>
-          <p>The research track record behind our software includes a $1.59M NSF-funded program, formal data-access agreements with Riot Games and VRChat, and large-scale NLP pipelines across millions of records. We consult selectively on applied data problems when the fit is right.</p>
+  <!-- ══════════════════════════════════════════
+       ABOUT
+  ══════════════════════════════════════════ -->
+  <section class="section-raised" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-body">
+          <span class="eyebrow">Who we are</span>
+          <h2>About<br>SIM DAD LLC.</h2>
+          <p>
+            SIM DAD LLC builds local-first AI software tools for researchers, academics, and domain experts
+            who need professional-grade capabilities without coding overhead, cloud dependencies, or
+            subscription fees. Our products run entirely on your machine &mdash; no data leaves your device, ever.
+          </p>
+          <p>
+            Our products are <a href="https://useibis.app">Ibis</a> &mdash; local AI transcription for Windows &mdash;
+            <a href="https://usetass.app">TASS</a>, a no-code text analysis desktop app targeting launch in May 2026,
+            and <a href="https://uselector.app">Lector</a>, a distraction-free writing environment with read-aloud
+            and voice cloning built in.
+          </p>
+          <p>
+            The research track record behind our software includes a $1.59M NSF-funded program, formal
+            data-access agreements with Riot Games and VRChat, and large-scale NLP pipelines across
+            hundreds of millions of records. We build the software we wished existed while doing that research.
+          </p>
         </div>
-        <div class="summary-sidebar">
+
+        <div class="sidebar-card">
           <div class="sidebar-block">
             <h3>Contact</h3>
             <a href="mailto:ap@simdadllc.com">ap@simdadllc.com</a>
+            <a href="mailto:hello@simdadllc.com">hello@simdadllc.com</a>
             <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">github.com/SIM-DAD</a>
           </div>
           <div class="sidebar-block">
@@ -64,18 +784,110 @@
             <a href="#team">Alex P. Leith &mdash; Founder</a>
             <a href="#team">Janet V. Leith &mdash; COO</a>
           </div>
+          <div class="sidebar-block">
+            <h3>Founded</h3>
+            <a href="#">June 2024</a>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CAPABILITIES -->
-    <section id="competencies">
-      <p class="section-label">What We Do</p>
-      <h2>Company Capabilities</h2>
-      <div class="competencies-grid">
-        <div class="comp-card">
-          <div class="comp-heading">Research &amp; Analysis</div>
-          <ul class="comp-list">
+
+  <!-- ══════════════════════════════════════════
+       PRODUCTS
+  ══════════════════════════════════════════ -->
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Our products</span>
+        <h2>Software &amp; Projects</h2>
+        <p>Local-first. One-time pricing where possible. Built to the standard of tools we would use ourselves.</p>
+      </div>
+
+      <div class="products-grid">
+
+        <div class="product-card ibis-card">
+          <div class="product-num">01</div>
+          <div class="product-accent"></div>
+          <div class="product-name">Ibis</div>
+          <div class="product-tag">Local AI &middot; Windows Desktop &middot; v1.0 Complete &middot; Launching Soon &mdash; $24</div>
+          <p class="product-desc">
+            Ibis watches a folder on your Windows PC and transcribes every audio file automatically
+            using on-device AI. Powered by Whisper large-v3-turbo. 99 languages. No cloud. No subscription.
+            One-time purchase. v1.0 is built and in pre-launch.
+          </p>
+          <a href="https://useibis.app" target="_blank" rel="noopener" class="product-link">
+            Product site &rarr;
+          </a>
+        </div>
+
+        <div class="product-card tass-card">
+          <div class="product-num">02</div>
+          <div class="product-accent"></div>
+          <div class="product-name">TASS</div>
+          <div class="product-tag">Text Analysis &middot; Windows Desktop &middot; Launching May 2026 &mdash; $49/yr</div>
+          <p class="product-desc">
+            TASS is a native Windows desktop app for dictionary-based text analysis &mdash; no Python, R,
+            or command line required. Features group comparisons (t-test, ANOVA), publication-quality
+            visualizations, and APA citation blocks built in. Ships with eight open-licensed dictionaries.
+            Built for social scientists, journalists, and domain experts.
+          </p>
+          <a href="https://usetass.app" target="_blank" rel="noopener" class="product-link">
+            Product site &rarr;
+          </a>
+        </div>
+
+        <div class="product-card lector-card">
+          <div class="product-num">03</div>
+          <div class="product-accent"></div>
+          <div class="product-name">Lector</div>
+          <div class="product-tag">Writing Tool &middot; Windows &amp; macOS &middot; Coming Soon &mdash; $29</div>
+          <p class="product-desc">
+            Lector is a distraction-free writing environment with read-aloud built in. Write your draft,
+            then hear it read back word by word. Voice cloning via F5-TTS lets you build a voice profile
+            from thirty seconds of audio. Completely local &mdash; no cloud processing, no account required.
+          </p>
+          <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">
+            Product site &rarr;
+          </a>
+        </div>
+
+        <div class="product-card cage-card">
+          <div class="product-num">04</div>
+          <div class="product-accent"></div>
+          <div class="product-name">The Cage</div>
+          <div class="product-tag">Next.js &middot; PostgreSQL &middot; Docker &middot; SSO &middot; Institutional Deployment</div>
+          <p class="product-desc">
+            An equipment reservation and QR-based checkout system currently deployed at SIUE Mass
+            Communications. Dual-database architecture, Docker Compose, Microsoft Entra SSO, and
+            Snipe-IT integration. The institutional deployment serves as the reference implementation
+            for a future multi-tenant SaaS product.
+          </p>
+          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="product-link">
+            View on GitHub &rarr;
+          </a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════════════════════════
+       CAPABILITIES
+  ══════════════════════════════════════════ -->
+  <section class="section-deep" id="capabilities">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">What we do</span>
+        <h2>Company Capabilities</h2>
+      </div>
+
+      <div class="caps-grid">
+        <div class="cap-card">
+          <div class="cap-heading">Research &amp; Analysis</div>
+          <ul class="cap-list">
             <li>Mixed-methods design</li>
             <li>Survey research (N=2,448+)</li>
             <li>Experimental design</li>
@@ -86,9 +898,9 @@
             <li>Time series analysis</li>
           </ul>
         </div>
-        <div class="comp-card">
-          <div class="comp-heading">Data Engineering</div>
-          <ul class="comp-list">
+        <div class="cap-card">
+          <div class="cap-heading">Data Engineering</div>
+          <ul class="cap-list">
             <li>R / RStudio</li>
             <li>Python</li>
             <li>SQL (PostgreSQL, MySQL)</li>
@@ -99,22 +911,22 @@
             <li>R package development</li>
           </ul>
         </div>
-        <div class="comp-card">
-          <div class="comp-heading">Software Development</div>
-          <ul class="comp-list">
+        <div class="cap-card">
+          <div class="cap-heading">Software Development</div>
+          <ul class="cap-list">
             <li>Git / GitHub</li>
             <li>Docker &amp; Docker Compose</li>
             <li>Next.js &amp; SvelteKit</li>
+            <li>FastAPI / Python backends</li>
             <li>Prisma ORM</li>
             <li>REST API design</li>
-            <li>ggplot2 &amp; Shiny</li>
-            <li>Tableau</li>
+            <li>PyInstaller packaging</li>
             <li>LLM / AI integration</li>
           </ul>
         </div>
-        <div class="comp-card">
-          <div class="comp-heading">Project Delivery</div>
-          <ul class="comp-list">
+        <div class="cap-card">
+          <div class="cap-heading">Project Delivery</div>
+          <ul class="cap-list">
             <li>Research program direction</li>
             <li>Cross-institutional PM</li>
             <li>Large consortium management</li>
@@ -125,98 +937,79 @@
           </ul>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- AT SCALE -->
-    <section id="scale">
-      <p class="section-label">Track Record</p>
-      <h2>Work at Scale</h2>
+
+  <!-- ══════════════════════════════════════════
+       TRACK RECORD
+  ══════════════════════════════════════════ -->
+  <section class="section-raised" id="scale">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Track record</span>
+        <h2>Work at Scale</h2>
+      </div>
+
       <div class="scale-grid">
         <div class="scale-card">
-          <div class="scale-number">321<span>M+</span></div>
+          <div class="scale-num">321<span>M+</span></div>
           <div class="scale-label">Twitch Messages Collected</div>
           <p class="scale-desc">Distributed Raspberry Pi + PostgreSQL pipeline logging 117,943 channels over one month. Source for dissertation and all subsequent Twitch publications.</p>
         </div>
         <div class="scale-card">
-          <div class="scale-number">2.8<span>M+</span></div>
+          <div class="scale-num">2.8<span>M+</span></div>
           <div class="scale-label">Tweets in Research Corpora</div>
           <p class="scale-desc">1.43M VRChat tweets and 1.41M remote work tweets from 887,888 unique users &mdash; structured in PostgreSQL, analyzed via STM and NLP pipelines.</p>
         </div>
         <div class="scale-card">
-          <div class="scale-number">5<span>M+</span></div>
+          <div class="scale-num">5<span>M+</span></div>
           <div class="scale-label">Avatar Records &mdash; Riot Games</div>
           <p class="scale-desc">Formal data-access agreement with Riot Games to analyze proprietary League of Legends player data. Findings published in peer-reviewed journal.</p>
         </div>
         <div class="scale-card">
-          <div class="scale-number">$1.59<span>M</span></div>
+          <div class="scale-num">$1.59<span>M</span></div>
           <div class="scale-label">NSF FW-HTF-R &mdash; Co-PI</div>
           <p class="scale-desc">Led project teams of 4&ndash;8 within a 30+ person cross-institutional consortium spanning MSU, SIUE, and 4 partner institutions. 8+ publications.</p>
         </div>
         <div class="scale-card">
-          <div class="scale-number">2,448<span>+</span></div>
+          <div class="scale-num">2,448<span>+</span></div>
           <div class="scale-label">Survey Respondents</div>
           <p class="scale-desc">Large-scale behavioral surveys on virtual meeting platform adoption, Zoom fatigue, social interaction anxiety, and avatar use across multiple studies.</p>
         </div>
         <div class="scale-card">
-          <div class="scale-number">5</div>
+          <div class="scale-num">5</div>
           <div class="scale-label">Linked Studies &mdash; NSF Program</div>
           <p class="scale-desc">NLP/STM &rarr; large-scale survey &rarr; semi-structured interviews &rarr; controlled experiment &rarr; VR prototype user testing. Full mixed-methods pipeline.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- PROJECTS -->
-    <section id="projects">
-      <p class="section-label">Our Products</p>
-      <h2>Software &amp; Projects</h2>
-      <div class="projects-grid">
 
-        <div class="project-card">
-          <div class="project-number">01</div>
-          <div class="project-name">Ibis</div>
-          <div class="project-tag">Local AI &middot; Windows Desktop &middot; v1.0 Complete &middot; Launching Soon &mdash; $24</div>
-          <p class="project-desc">Ibis watches a folder on your Windows PC and transcribes every audio file automatically using on-device AI. Powered by Whisper large-v3-turbo. 99 languages. No cloud. No subscription. One-time purchase. v1.0 is built and in pre-launch.</p>
-          <a href="https://useibis.app" target="_blank" rel="noopener" class="project-link">Product site &rarr;</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-number">02</div>
-          <div class="project-name">TASS</div>
-          <div class="project-tag">Text Analysis &middot; Windows Desktop &middot; Launching May 2026 &mdash; $49/yr</div>
-          <p class="project-desc">TASS is a native Windows desktop app for dictionary-based text analysis &mdash; no Python, R, or command line required. Features group comparisons (t-test, ANOVA), publication-quality visualizations, and APA citation blocks built in. Ships with eight open-licensed dictionaries. Built for social scientists, journalists, and domain experts.</p>
-          <a href="https://usetass.app" target="_blank" rel="noopener" class="project-link">Product site &rarr;</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-number">03</div>
-          <div class="project-name">The Cage</div>
-          <div class="project-tag">Next.js &middot; PostgreSQL &middot; Docker &middot; SSO &middot; Institutional Deployment</div>
-          <p class="project-desc">An equipment reservation and QR-based checkout system currently being deployed at SIUE Mass Communications. Dual-database architecture, Docker Compose, Microsoft Entra SSO, and Snipe-IT integration. The institutional version informs a future multi-tenant SaaS product for higher education and media production programs.</p>
-          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
-        </div>
-
-        <div class="project-card">
-          <div class="project-number">04</div>
-          <div class="project-name">Lector</div>
-          <div class="project-tag">Markdown &middot; TTS &middot; Voice Cloning &middot; FastAPI &middot; Pre-Commercial</div>
-          <p class="project-desc">A local web app combining a distraction-free Markdown editor with sentence-level text-to-speech playback and custom voice cloning via F5-TTS. GPU-accelerated on the local machine. Currently in-house; a commercial release path is under evaluation.</p>
-          <a href="https://uselector.app" target="_blank" rel="noopener" class="project-link">Product site &rarr;</a>
-        </div>
-
+  <!-- ══════════════════════════════════════════
+       TEAM
+  ══════════════════════════════════════════ -->
+  <section class="section" id="team">
+    <div class="container">
+      <div class="section-header">
+        <span class="eyebrow">Our team</span>
+        <h2>Leadership</h2>
       </div>
-    </section>
 
-    <!-- TEAM -->
-    <section id="team">
-      <p class="section-label">Our Team</p>
-      <h2>Leadership</h2>
       <div class="team-grid">
 
-        <!-- Alex P. Leith — Founder -->
-        <div class="team-primary">
+        <!-- Alex P. Leith -->
+        <div>
           <div class="team-role">Founder</div>
           <div class="team-name">Alex P. Leith</div>
-          <p class="team-bio">Mixed-methods researcher and data scientist with 10+ years of experience designing studies, analyzing large-scale behavioral datasets, and building the software to support both. NSF Co-PI on a $1.59M award with formal research partnerships at Riot Games and VRChat. Domain expertise in social VR/XR, virtual meetings, parasocial media, and human-computer interaction.</p>
+          <p class="team-bio">
+            Mixed-methods researcher and data scientist with 10+ years of experience designing studies,
+            analyzing large-scale behavioral datasets, and building the software to support both.
+            NSF Co-PI on a $1.59M award with formal research partnerships at Riot Games and VRChat.
+            Domain expertise in social VR/XR, virtual meetings, parasocial media, and human-computer interaction.
+            Associate Professor of Mass Communications, SIUE.
+          </p>
 
           <div class="team-links-pair">
             <div class="sidebar-block">
@@ -249,7 +1042,7 @@
             </div>
           </div>
 
-          <p class="selected-pubs-label">Selected Publications</p>
+          <p class="pubs-label">Selected Publications</p>
           <ul class="pubs-list">
             <li>
               <span class="pub-year">2025</span>
@@ -283,28 +1076,38 @@
           <p class="pubs-more">Full list: <a href="https://apleith.github.io" target="_blank" rel="noopener">apleith.github.io</a></p>
         </div>
 
-        <!-- Janet V. Leith — COO -->
+        <!-- Janet V. Leith -->
         <div class="team-secondary">
           <div class="team-role">Chief Operating Officer</div>
           <div class="team-name">Janet V. Leith</div>
-          <p class="team-bio">Janet brings a background in business and management alongside extensive professional experience as a paraprofessional. As COO, she serves as the company&rsquo;s C-level project manager &mdash; overseeing daily operations, coordinating cross-functional workstreams, and ensuring project goals are met on time and to standard.</p>
+          <p class="team-bio">
+            Janet brings a background in business and management alongside extensive professional experience
+            as a paraprofessional. As COO, she serves as the company&rsquo;s C-level project manager &mdash;
+            overseeing daily operations, coordinating cross-functional workstreams, and ensuring project
+            goals are met on time and to standard.
+          </p>
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>
 
-  </main>
 
-  <!-- ─── FOOTER ────────────────────────────────────────── -->
-  <footer>
+  <!-- ══════════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════════ -->
+  <footer class="site-footer">
     <div class="footer-inner">
-      <span>&copy; 2026 SIM-DAD LLC</span>
+      <div>
+        <div class="footer-brand">SIM DAD LLC</div>
+      </div>
       <div class="footer-links">
         <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:ap@simdadllc.com">Contact</a>
         <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
       </div>
     </div>
+    <p class="footer-copy">&copy; 2026 SIM DAD LLC. All rights reserved.</p>
   </footer>
 
 </body>
