@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="SIM DAD — Novel, bespoke solutions for data analysis and design challenges. Research-informed, engineering-ready consulting. Founded June 2024.">
+  <meta name="description" content="SIM DAD LLC builds local-first AI software for researchers, academics, and domain experts. Products: Ibis (local transcription) and TASS (text analysis). No cloud. No subscriptions.">
   <title>SIM DAD</title>
   <link rel="icon" type="image/svg+xml" href="images/logo.svg">
   <link rel="stylesheet" href="css/main.css">
@@ -18,10 +18,10 @@
         SIM DAD
       </div>
       <div class="header-right">
-        <p class="header-tagline">Novel, bespoke solutions for data analysis and design challenges. Research-informed, engineering-ready, and built to your specific problem.</p>
+        <p class="header-tagline">Local-first AI software for researchers, academics, and domain experts. Built on research rigor. Runs entirely on your machine.</p>
         <div class="header-pills">
-          <span class="pill pill-red">Data Consulting</span>
-          <span class="pill">Research &middot; Analysis &middot; Design</span>
+          <span class="pill pill-red">Local-First AI Software</span>
+          <span class="pill">Research &middot; Analysis &middot; NLP</span>
           <span class="pill">Software Development</span>
           <span class="pill">Founded June 2024</span>
         </div>
@@ -46,12 +46,12 @@
     <!-- ABOUT -->
     <section id="summary">
       <p class="section-label">Who We Are</p>
-      <h2>About<br>SIM DAD.</h2>
+      <h2>About<br>SIM DAD LLC.</h2>
       <div class="summary-grid">
         <div class="summary-body">
-          <p>SIM DAD delivers novel, bespoke solutions to data analysis and design challenges. We work with organizations to understand their specific needs &mdash; then build the research programs, analytical pipelines, and production tools to meet them.</p>
-          <p>Our work spans the full stack: from study design and IRB-governed data collection through NLP pipelines, statistical modeling, and production software deployment. We bring research rigor to applied problems and engineering discipline to research challenges.</p>
-          <p>Our capabilities are grounded in a track record that includes a $1.59M NSF-funded research program, formal data-access agreements with Riot Games and VRChat, large-scale behavioral datasets, and open-source software tools in active deployment.</p>
+          <p>SIM DAD LLC builds local-first AI software tools for researchers, academics, and domain experts who need professional-grade capabilities without coding overhead, cloud dependencies, or subscription fees. Our products run entirely on your machine &mdash; no data leaves your device, ever.</p>
+          <p>Our flagship products are <a href="ibis/">Ibis</a> &mdash; local AI transcription for Windows, available now &mdash; and <a href="tass/">TASS</a>, a no-code text analysis desktop app targeting launch in May 2026. Both are grounded in a decade of applied research practice and built to the standard of tools we would use ourselves.</p>
+          <p>The research track record behind our software includes a $1.59M NSF-funded program, formal data-access agreements with Riot Games and VRChat, and large-scale NLP pipelines across millions of records. We consult selectively on applied data problems when the fit is right.</p>
         </div>
         <div class="summary-sidebar">
           <div class="sidebar-block">
@@ -167,33 +167,40 @@
 
     <!-- PROJECTS -->
     <section id="projects">
-      <p class="section-label">Our Work</p>
-      <h2>Projects</h2>
+      <p class="section-label">Our Products</p>
+      <h2>Software &amp; Projects</h2>
       <div class="projects-grid">
 
         <div class="project-card">
           <div class="project-number">01</div>
-          <div class="project-name">TASS</div>
-          <div class="project-tag">Text Analysis &middot; Desktop App &middot; Windows &middot; In Development</div>
-          <p class="project-desc">A planned native Windows desktop application designed to make professional-grade text analysis accessible without Python, R, or a command line. Concept targets dictionary-based scoring, ML classification, group statistical comparisons, and publication-quality visualizations in a minimal GUI &mdash; built for domain experts who need results, not toolchain overhead.</p>
-          <a href="https://sim-dad.github.io/tass/" target="_blank" rel="noopener" class="project-link">Visit Project Site &rarr;</a>
-          <a href="https://github.com/SIM-DAD/TASS" target="_blank" rel="noopener" class="project-link" style="margin-top: 10px;">View on GitHub &rarr;</a>
+          <div class="project-name">Ibis</div>
+          <div class="project-tag">Local AI &middot; Windows Desktop &middot; v1.0 Complete &middot; Launching Soon &mdash; $24</div>
+          <p class="project-desc">Ibis watches a folder on your Windows PC and transcribes every audio file automatically using on-device AI. Powered by Whisper large-v3-turbo. 99 languages. No cloud. No subscription. One-time purchase. v1.0 is built and in pre-launch.</p>
+          <a href="https://useibis.app" target="_blank" rel="noopener" class="project-link">Product site &rarr;</a>
         </div>
 
         <div class="project-card">
           <div class="project-number">02</div>
-          <div class="project-name">The Cage</div>
-          <div class="project-tag">Next.js &middot; PostgreSQL &middot; MySQL &middot; Docker &middot; SSO &middot; Launching Soon</div>
-          <p class="project-desc">A web application for equipment reservation and QR-based checkout currently in final pre-launch testing. Dual-database architecture (PostgreSQL + MySQL via Prisma ORM), Docker Compose orchestration, REST API, Microsoft Entra SSO, and Snipe-IT asset management integration.</p>
-          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          <div class="project-name">TASS</div>
+          <div class="project-tag">Text Analysis &middot; Windows Desktop &middot; Launching May 2026 &mdash; $49/yr</div>
+          <p class="project-desc">TASS is a native Windows desktop app for dictionary-based text analysis &mdash; no Python, R, or command line required. Features group comparisons (t-test, ANOVA), publication-quality visualizations, and APA citation blocks built in. Ships with eight open-licensed dictionaries. Built for social scientists, journalists, and domain experts.</p>
+          <a href="https://usetass.app" target="_blank" rel="noopener" class="project-link">Product site &rarr;</a>
         </div>
 
         <div class="project-card">
           <div class="project-number">03</div>
-          <div class="project-name">Open WebUI Launcher</div>
-          <div class="project-tag">Docker &middot; Ollama &middot; Local LLMs &middot; Desktop &middot; Available Now</div>
-          <p class="project-desc">A desktop launcher for running Open WebUI locally via Docker + Ollama. Handles hardware detection, model selection, and safe configuration defaults &mdash; designed to make local LLM deployment accessible to non-technical users, with classroom-safe defaults for instructor-guided use.</p>
-          <a href="https://github.com/SIM-DAD/open-webui-launcher" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+          <div class="project-name">The Cage</div>
+          <div class="project-tag">Next.js &middot; PostgreSQL &middot; Docker &middot; SSO &middot; Institutional Deployment</div>
+          <p class="project-desc">An equipment reservation and QR-based checkout system currently being deployed at SIUE Mass Communications. Dual-database architecture, Docker Compose, Microsoft Entra SSO, and Snipe-IT integration. The institutional version informs a future multi-tenant SaaS product for higher education and media production programs.</p>
+          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="project-link">View on GitHub &rarr;</a>
+        </div>
+
+        <div class="project-card">
+          <div class="project-number">04</div>
+          <div class="project-name">Lector</div>
+          <div class="project-tag">Markdown &middot; TTS &middot; Voice Cloning &middot; FastAPI &middot; Pre-Commercial</div>
+          <p class="project-desc">A local web app combining a distraction-free Markdown editor with sentence-level text-to-speech playback and custom voice cloning via F5-TTS. GPU-accelerated on the local machine. Currently in-house; a commercial release path is under evaluation.</p>
+          <a href="https://uselector.app" target="_blank" rel="noopener" class="project-link">Product site &rarr;</a>
         </div>
 
       </div>
