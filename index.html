@@ -115,7 +115,10 @@
     /* ─── SECTIONS ───────────────────────────────────────────────── */
     .section       { padding: 6rem 0; border-bottom: 1px solid var(--border); }
     .section-alt   { padding: 6rem 0; background: var(--surface); border-bottom: 1px solid var(--border); }
-    .section-dark  { padding: 6rem 0; background: var(--text); color: var(--bg); }
+    .section-dark  { padding: 6rem 0; background: #0F0F0F; color: #FFFFFF; }
+    @media (prefers-color-scheme: dark) {
+      .section-dark { background: #1C1C1E; }
+    }
 
     .eyebrow {
       display: block; font-size: 0.72rem; font-weight: 700;
@@ -624,7 +627,7 @@
         <div class="product-card product-card-lector">
           <div class="product-num">03</div>
           <div class="product-name">Lector</div>
-          <div class="product-tag">Writing Tool &middot; Windows &amp; macOS &middot; Coming soon &mdash; $29</div>
+          <div class="product-tag">Writing Tool &middot; Windows &middot; Coming soon &mdash; $29</div>
           <p class="product-desc">
             Lector is a distraction-free writing environment with read-aloud built in. Write your draft,
             then hear it read back word by word. Voice cloning via F5-TTS. Completely local &mdash;
