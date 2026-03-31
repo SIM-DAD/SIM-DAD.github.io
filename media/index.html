@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Kit — SIM DAD LLC</title>
+  <meta name="description" content="Brand assets, logos, product descriptions, and press materials for SIM DAD LLC and its products: Ibis, TASS, and Lector.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────────── */
+    :root {
+      --accent:    #1E3A4A;
+      --accent-h:  #162C3A;
+      --text:      #0F0F0F;
+      --muted:     #6B7280;
+      --bg:        #FFFFFF;
+      --surface:   #F7F7F8;
+      --border:    #E4E4E7;
+      --font:      'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --max-w:     1080px;
+      --radius:    8px;
+
+      --ibis:    #2D6A8F;
+      --tass:    #2E7D5E;
+      --lector:  #5C4B8A;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text:    #F4F4F5;
+        --muted:   #A1A1AA;
+        --bg:      #09090B;
+        --surface: #111113;
+        --border:  #27272A;
+      }
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────────── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
+
+    /* ─── NAV ────────────────────────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: transparent; border-bottom: 1px solid transparent;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .nav.scrolled { background: var(--bg); border-color: var(--border); }
+    .nav-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+      height: 60px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-brand { font-size: 1rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .nav-links { display: flex; gap: 2rem; align-items: center; }
+    .nav-links a { font-size: 0.875rem; color: var(--muted); transition: color 0.15s; font-weight: 500; }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ─── HERO ───────────────────────────────────────────────────── */
+    .hero { padding: 7rem 0 5rem; border-bottom: 1px solid var(--border); }
+    .hero-eyebrow {
+      display: inline-block; font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-size: clamp(3rem, 6.5vw, 5.25rem); font-weight: 800;
+      line-height: 1.05; letter-spacing: -0.035em; max-width: 18ch; margin-bottom: 1.5rem;
+    }
+    .hero-sub {
+      font-size: 1.125rem; color: var(--muted); max-width: 58ch;
+      line-height: 1.65; margin-bottom: 2.5rem; font-weight: 400;
+    }
+
+    /* ─── SECTIONS ───────────────────────────────────────────────── */
+    .section       { padding: 6rem 0; border-bottom: 1px solid var(--border); }
+    .section-alt   { padding: 6rem 0; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .section-dark  { padding: 6rem 0; background: #0F0F0F; color: #FFFFFF; }
+    @media (prefers-color-scheme: dark) {
+      .section-dark { background: #1C1C1E; }
+    }
+    .eyebrow {
+      display: block; font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--accent); margin-bottom: 1rem;
+    }
+    .section-dark .eyebrow { color: rgba(255,255,255,0.45); }
+    h2 {
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem); font-weight: 800;
+      line-height: 1.15; letter-spacing: -0.025em; margin-bottom: 1.25rem;
+    }
+    .section-dark h2 { color: #fff; }
+    .section-sub { font-size: 1.0625rem; color: var(--muted); max-width: 58ch; line-height: 1.65; }
+    .section-dark .section-sub { color: rgba(255,255,255,0.5); }
+
+    /* ─── BRAND GUIDELINES IMAGE ─────────────────────────────────── */
+    .brand-img {
+      width: 100%; border-radius: var(--radius); border: 1px solid var(--border);
+      margin-top: 3rem;
+    }
+
+    /* ─── COLOR PALETTE ──────────────────────────────────────────── */
+    .palette-grid {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      margin-top: 3rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .swatch {
+      padding: 2.5rem 1.25rem 1.25rem; border-right: 1px solid var(--border);
+      position: relative;
+    }
+    .swatch:last-child { border-right: none; }
+    .swatch-color {
+      width: 100%; height: 56px; border-radius: 6px; margin-bottom: 1rem;
+      border: 1px solid rgba(0,0,0,0.06);
+    }
+    .swatch-name { font-size: 0.8125rem; font-weight: 700; margin-bottom: 0.2rem; }
+    .swatch-hex  { font-size: 0.75rem; color: var(--muted); font-family: monospace; }
+    .swatch-use  { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; line-height: 1.5; }
+
+    /* ─── TYPOGRAPHY SPEC ────────────────────────────────────────── */
+    .type-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin-top: 3rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .type-cell {
+      padding: 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .type-cell:nth-child(2n) { border-right: none; }
+    .type-cell:nth-last-child(-n+2) { border-bottom: none; }
+    .type-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.75rem; }
+    .type-sample-xl { font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 0.5rem; }
+    .type-sample-lg { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; margin-bottom: 0.5rem; }
+    .type-sample-body { font-size: 0.9875rem; color: var(--muted); line-height: 1.75; }
+    .type-sample-sm { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+    .type-spec { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-family: monospace; }
+
+    /* ─── PRODUCT CARDS ──────────────────────────────────────────── */
+    .product-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3rem;
+    }
+    .pcard {
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+      position: relative;
+    }
+    .pcard::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .pcard-ibis::before   { background: var(--ibis); }
+    .pcard-tass::before   { background: var(--tass); }
+    .pcard-lector::before { background: var(--lector); }
+    .pcard-body { padding: 2rem; }
+    .pcard-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.25rem; }
+    .pcard-tag  { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
+    .pcard-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.65; margin-bottom: 1.25rem; }
+    .pcard-meta { font-size: 0.75rem; color: var(--muted); line-height: 1.65; }
+    .pcard-meta strong { color: var(--text); font-weight: 600; }
+    .pcard-img {
+      width: 100%; display: block; border-top: 1px solid var(--border);
+    }
+
+    /* ─── BOILERPLATE ────────────────────────────────────────────── */
+    .boiler-grid {
+      display: grid; grid-template-columns: 2fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem;
+    }
+    .boiler-text { font-size: 0.9875rem; color: var(--muted); line-height: 1.75; }
+    .boiler-text p { margin-bottom: 1rem; }
+    .boiler-sidebar {
+      border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .boiler-block { padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--border); }
+    .boiler-block:last-child { border-bottom: none; }
+    .boiler-block h3 { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+    .boiler-block p, .boiler-block a { font-size: 0.8375rem; color: var(--muted); display: block; line-height: 1.6; }
+    .boiler-block a { transition: color 0.15s; margin-bottom: 0.25rem; }
+    .boiler-block a:hover { color: var(--text); }
+
+    /* ─── DOWNLOAD GRID ──────────────────────────────────────────── */
+    .dl-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+      margin-top: 3rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .dl-card {
+      padding: 2rem; border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.75rem;
+    }
+    .dl-card:last-child { border-right: none; }
+    .dl-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); }
+    .dl-preview {
+      background: var(--surface); border: 1px solid var(--border); border-radius: 6px;
+      padding: 1.5rem; display: flex; align-items: center; justify-content: center; min-height: 80px;
+    }
+    .dl-preview img { max-height: 48px; max-width: 100%; }
+    .dl-preview.dark-bg {
+      background: #0F0F0F;
+    }
+    .dl-files { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .dl-link {
+      font-size: 0.75rem; font-weight: 600; color: var(--accent);
+      border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: border-color 0.15s;
+    }
+    .dl-link:hover { border-color: var(--accent); }
+
+    /* ─── USAGE RULES ────────────────────────────────────────────── */
+    .rules-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin-top: 3rem; border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;
+    }
+    .rule-cell {
+      padding: 2rem; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .rule-cell:nth-child(2n) { border-right: none; }
+    .rule-cell:nth-last-child(-n+2) { border-bottom: none; }
+    .rule-do { color: #2E7D5E; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .rule-dont { color: #C13030; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+    .rule-text { font-size: 0.8375rem; color: var(--muted); line-height: 1.65; }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────── */
+    .footer { padding: 3rem 0 2.5rem; border-top: 1px solid var(--border); }
+    .footer-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem;
+    }
+    .footer-brand { font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; }
+    .footer-links { display: flex; gap: 1.75rem; align-items: center; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.8125rem; color: var(--muted); transition: color 0.15s; }
+    .footer-links a:hover { color: var(--text); }
+    .footer-copy {
+      max-width: var(--max-w); margin: 1.5rem auto 0; padding: 1.5rem 2rem 0;
+      border-top: 1px solid var(--border); font-size: 0.75rem; color: var(--muted);
+    }
+
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 3px; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────── */
+    @media (max-width: 960px) {
+      .palette-grid { grid-template-columns: repeat(3, 1fr); }
+      .swatch:nth-child(3) { border-right: none; }
+      .swatch:nth-child(4), .swatch:nth-child(5) { border-top: 1px solid var(--border); }
+      .product-grid { grid-template-columns: 1fr; }
+      .type-grid { grid-template-columns: 1fr; }
+      .type-cell { border-right: none; }
+      .type-cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .type-cell:last-child { border-bottom: none; }
+      .boiler-grid { grid-template-columns: 1fr; }
+      .dl-grid { grid-template-columns: 1fr; }
+      .dl-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .dl-card:last-child { border-bottom: none; }
+      .rules-grid { grid-template-columns: 1fr; }
+      .rule-cell { border-right: none; }
+      .rule-cell:nth-last-child(-n+2) { border-bottom: 1px solid var(--border); }
+      .rule-cell:last-child { border-bottom: none; }
+    }
+    @media (max-width: 768px) {
+      .hero { padding: 5.5rem 0 4rem; }
+      .nav-links { display: none; }
+      .section, .section-alt, .section-dark { padding: 4.5rem 0; }
+      .palette-grid { grid-template-columns: 1fr 1fr; }
+      .swatch:nth-child(2n) { border-right: none; }
+      .swatch:nth-child(3) { border-right: 1px solid var(--border); }
+    }
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 2.6rem; }
+      .palette-grid { grid-template-columns: 1fr; }
+      .swatch { border-right: none; border-bottom: 1px solid var(--border); }
+      .swatch:last-child { border-bottom: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-brand">SIM DAD LLC</a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="mailto:hello@simdadllc.com">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <span class="hero-eyebrow">Media kit &middot; Brand assets &middot; Press materials</span>
+      <h1>Brand and media resources.</h1>
+      <p class="hero-sub">
+        Logos, colors, typography, product descriptions, and boilerplate copy for press, partnerships,
+        and editorial use. Everything you need to represent SIM DAD LLC and its products accurately.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- BRAND IDENTITY -->
+  <section class="section-alt">
+    <div class="container">
+      <span class="eyebrow">Brand identity</span>
+      <h2>Visual guidelines.</h2>
+      <p class="section-sub">
+        The SIM DAD brand system is built on Plus Jakarta Sans at 800 weight, a teal-slate primary accent,
+        and product-specific color coding. The full identity guidelines are below.
+      </p>
+      <img src="assets/brand-guidelines.png" alt="SIM DAD LLC brand identity guidelines showing logo lockups, color palette, typography, and application contexts" class="brand-img" loading="lazy">
+    </div>
+  </section>
+
+
+  <!-- COLOR PALETTE -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Color palette</span>
+      <h2>Brand and product colors.</h2>
+      <p class="section-sub">
+        One company accent, three product accents, and a shared neutral system. Product colors are used
+        only in their respective contexts &mdash; never mixed across products.
+      </p>
+      <div class="palette-grid">
+        <div class="swatch">
+          <div class="swatch-color" style="background: #1E3A4A;"></div>
+          <div class="swatch-name">SIM DAD Slate</div>
+          <div class="swatch-hex">#1E3A4A</div>
+          <div class="swatch-use">Company accent. CTAs, nav highlights, heading emphasis on simdadllc.com.</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #2D6A8F;"></div>
+          <div class="swatch-name">Ibis Blue</div>
+          <div class="swatch-hex">#2D6A8F</div>
+          <div class="swatch-use">Ibis product accent. useibis.app only.</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #2E7D5E;"></div>
+          <div class="swatch-name">TASS Green</div>
+          <div class="swatch-hex">#2E7D5E</div>
+          <div class="swatch-use">TASS product accent. usetass.app only.</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #5C4B8A;"></div>
+          <div class="swatch-name">Lector Violet</div>
+          <div class="swatch-hex">#5C4B8A</div>
+          <div class="swatch-use">Lector product accent. uselector.app only.</div>
+        </div>
+        <div class="swatch">
+          <div class="swatch-color" style="background: #0F0F0F;"></div>
+          <div class="swatch-name">Primary Text</div>
+          <div class="swatch-hex">#0F0F0F</div>
+          <div class="swatch-use">Headings and body text. Inverts to #F4F4F5 in dark mode.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TYPOGRAPHY -->
+  <section class="section-alt">
+    <div class="container">
+      <span class="eyebrow">Typography</span>
+      <h2>Plus Jakarta Sans.</h2>
+      <p class="section-sub">
+        A single typeface across all four sites, differentiated by weight and size.
+        800 for headlines, 400&ndash;600 for body and interface elements.
+      </p>
+      <div class="type-grid">
+        <div class="type-cell">
+          <div class="type-label">Heading 1</div>
+          <div class="type-sample-xl">Research at scale.</div>
+          <div class="type-spec">clamp(3rem, 6.5vw, 5.25rem) / 800 / -0.035em</div>
+        </div>
+        <div class="type-cell">
+          <div class="type-label">Heading 2</div>
+          <div class="type-sample-lg">Work at scale.</div>
+          <div class="type-spec">clamp(1.75rem, 3.5vw, 2.5rem) / 800 / -0.025em</div>
+        </div>
+        <div class="type-cell">
+          <div class="type-label">Body</div>
+          <div class="type-sample-body">SIM DAD LLC is a research and consulting practice specializing in social and interactive media, human-computer interaction, and large-scale behavioral data analysis.</div>
+          <div class="type-spec">0.9875rem / 400 / line-height 1.75</div>
+        </div>
+        <div class="type-cell">
+          <div class="type-label">Eyebrow</div>
+          <div class="type-sample-sm">Track record &middot; Data analysis</div>
+          <div class="type-spec">0.72rem / 700 / uppercase / 0.12em tracking</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- LOGO DOWNLOADS -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Logo downloads</span>
+      <h2>Marks and wordmarks.</h2>
+      <p class="section-sub">
+        SVG is the preferred format for digital use. PNG exports are available for contexts that
+        require raster images. Always maintain clear space equal to the height of the "D" in DAD
+        around all sides of the mark.
+      </p>
+      <div class="dl-grid">
+        <div class="dl-card">
+          <div class="dl-label">Primary wordmark</div>
+          <div class="dl-preview">
+            <img src="../images/wordmark-black.svg" alt="SIM DAD LLC wordmark — black">
+          </div>
+          <div class="dl-files">
+            <a href="../images/wordmark-black.svg" download class="dl-link">SVG (black)</a>
+            <a href="../images/wordmark-teal.svg" download class="dl-link">SVG (teal)</a>
+            <a href="../images/wordmark-offwhite.svg" download class="dl-link">SVG (white)</a>
+          </div>
+        </div>
+        <div class="dl-card">
+          <div class="dl-label">Wordmark &mdash; reversed</div>
+          <div class="dl-preview dark-bg">
+            <img src="../images/wordmark-offwhite.svg" alt="SIM DAD LLC wordmark — white on dark">
+          </div>
+          <div class="dl-files">
+            <a href="../images/wordmark-offwhite.svg" download class="dl-link">SVG (white)</a>
+            <a href="../images/offwhite-on-teal-wordmark.png" download class="dl-link">PNG (teal bg)</a>
+          </div>
+        </div>
+        <div class="dl-card">
+          <div class="dl-label">SD Matrix monogram</div>
+          <div class="dl-preview">
+            <img src="../images/logo-black.svg" alt="SD Matrix monogram — black">
+          </div>
+          <div class="dl-files">
+            <a href="../images/logo-black.svg" download class="dl-link">SVG (black)</a>
+            <a href="../images/logo-teal.svg" download class="dl-link">SVG (teal)</a>
+            <a href="../images/logo-offwhite.svg" download class="dl-link">SVG (white)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- USAGE RULES -->
+  <section class="section-alt">
+    <div class="container">
+      <span class="eyebrow">Usage guidelines</span>
+      <h2>Do and don't.</h2>
+      <div class="rules-grid">
+        <div class="rule-cell">
+          <div class="rule-do">Do</div>
+          <div class="rule-text">Use the wordmark on white, off-white, or dark backgrounds with sufficient contrast.</div>
+        </div>
+        <div class="rule-cell">
+          <div class="rule-dont">Don't</div>
+          <div class="rule-text">Place the logo on busy photographs or patterned backgrounds without a solid container.</div>
+        </div>
+        <div class="rule-cell">
+          <div class="rule-do">Do</div>
+          <div class="rule-text">Maintain the original proportions. Scale uniformly. Minimum width: 120px digital, 1" print.</div>
+        </div>
+        <div class="rule-cell">
+          <div class="rule-dont">Don't</div>
+          <div class="rule-text">Stretch, rotate, add effects, change colors beyond the provided variants, or crop any part of the mark.</div>
+        </div>
+        <div class="rule-cell">
+          <div class="rule-do">Do</div>
+          <div class="rule-text">Write "SIM DAD" (two words, no dashes) in copy. Use "SIM-DAD" only in file paths, URLs, and repo names.</div>
+        </div>
+        <div class="rule-cell">
+          <div class="rule-dont">Don't</div>
+          <div class="rule-text">Write "Sim Dad," "SIMDAD," "Sim-Dad," or "SimDad." The name is always uppercase: SIM DAD.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- PRODUCTS -->
+  <section class="section-dark">
+    <div class="container">
+      <span class="eyebrow">Products</span>
+      <h2 style="color:#fff;">The product portfolio.</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.5);">
+        Three commercial desktop applications, each built from our own research needs. All run
+        entirely on the user's machine &mdash; no cloud, no telemetry, no subscriptions.
+      </p>
+      <div class="product-grid" style="margin-top:3rem;">
+        <div class="pcard pcard-ibis">
+          <div class="pcard-body">
+            <div class="pcard-name">Ibis</div>
+            <div class="pcard-tag">Automatic transcription &middot; useibis.app</div>
+            <div class="pcard-desc">
+              Watches a folder and auto-transcribes audio files using local Whisper models.
+              No cloud, no API keys. Supports USB recorders and removable devices.
+            </div>
+            <div class="pcard-meta">
+              <strong>Pricing:</strong> Personal $24 / Pro $49 (one-time)<br>
+              <strong>Platforms:</strong> Windows, macOS (coming soon)
+            </div>
+          </div>
+        </div>
+        <div class="pcard pcard-tass">
+          <div class="pcard-body">
+            <div class="pcard-name">TASS</div>
+            <div class="pcard-tag">Text Analysis Support Software &middot; usetass.app</div>
+            <div class="pcard-desc">
+              Dictionary-based text scoring with group comparisons, statistical tests,
+              and publication-ready exports. Built for social scientists and journalists.
+            </div>
+            <div class="pcard-meta">
+              <strong>Pricing:</strong> Individual $49.99 / Team 5 $199.99 (one-time)<br>
+              <strong>Platforms:</strong> Windows, macOS (coming soon)
+            </div>
+          </div>
+        </div>
+        <div class="pcard pcard-lector">
+          <div class="pcard-body">
+            <div class="pcard-name">Lector</div>
+            <div class="pcard-tag">Manuscript editor with read-aloud &middot; uselector.app</div>
+            <div class="pcard-desc">
+              Distraction-free Markdown editor with word-by-word TTS and voice cloning.
+              12 built-in voices (Kokoro) plus custom voice cloning (Qwen3-TTS).
+            </div>
+            <div class="pcard-meta">
+              <strong>Pricing:</strong> $29 one-time, up to 3 devices<br>
+              <strong>Platforms:</strong> Windows, macOS (coming soon)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- BOILERPLATE -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Boilerplate</span>
+      <h2>About SIM DAD LLC.</h2>
+      <div class="boiler-grid">
+        <div class="boiler-text">
+          <p>
+            <strong>Short (1 sentence):</strong> SIM DAD LLC is a research and consulting practice
+            specializing in social and interactive media, large-scale behavioral data analysis, and
+            commercial desktop software.
+          </p>
+          <p>
+            <strong>Medium (2 sentences):</strong> SIM DAD LLC is a research and consulting practice
+            led by Alex P. Leith, Associate Professor at SIUE, specializing in social and interactive
+            media, human-computer interaction, and large-scale behavioral data analysis.
+            The company also develops commercial desktop applications &mdash; Ibis, TASS, and
+            Lector &mdash; built from its own research needs and available for purchase.
+          </p>
+          <p>
+            <strong>Full:</strong> SIM DAD &mdash; Social and Interactive Media Data Analysis and
+            Design &mdash; is a research and consulting practice that combines academic rigor with
+            applied delivery. Led by Alex P. Leith, the practice designs studies, runs data pipelines
+            across hundreds of millions of records, and produces findings that hold up to peer review.
+            Its software portfolio grew directly from research needs: Ibis for automatic transcription,
+            TASS for dictionary-based text analysis, and Lector for manuscript editing with voice
+            cloning. All three products run entirely on the user's machine with no cloud dependency.
+          </p>
+        </div>
+        <div class="boiler-sidebar">
+          <div class="boiler-block">
+            <h3>Founded</h3>
+            <p>2024</p>
+          </div>
+          <div class="boiler-block">
+            <h3>Location</h3>
+            <p>Edwardsville, Illinois</p>
+          </div>
+          <div class="boiler-block">
+            <h3>Leadership</h3>
+            <p>Alex P. Leith &mdash; Founder</p>
+            <p>Janet V. Leith &mdash; COO</p>
+          </div>
+          <div class="boiler-block">
+            <h3>Contact</h3>
+            <a href="mailto:hello@simdadllc.com">hello@simdadllc.com</a>
+            <a href="https://simdadllc.com">simdadllc.com</a>
+          </div>
+          <div class="boiler-block">
+            <h3>Product sites</h3>
+            <a href="https://useibis.app">useibis.app</a>
+            <a href="https://usetass.app">usetass.app</a>
+            <a href="https://uselector.app">uselector.app</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <span class="footer-brand">SIM DAD LLC</span>
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="mailto:hello@simdadllc.com">Contact</a>
+      </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 SIM DAD LLC. All rights reserved.</p>
+  </footer>
+
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+</body>
+</html>
