@@ -69,7 +69,8 @@
       max-width: var(--max-w); margin: 0 auto; padding: 0 2rem;
       height: 60px; display: flex; align-items: center; justify-content: space-between;
     }
-    .nav-brand { font-size: 1rem; font-weight: 800; color: var(--text); letter-spacing: -0.02em; }
+    .nav-brand { display: flex; align-items: center; }
+    .nav-wordmark { height: 36px; width: auto; display: block; }
     .nav-links { display: flex; gap: 2rem; align-items: center; }
     .nav-links a { font-size: 0.875rem; color: var(--muted); transition: color 0.15s; font-weight: 500; }
     .nav-links a:hover { color: var(--text); }
@@ -342,7 +343,7 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-brand">SIM DAD LLC</a>
+      <a href="#" class="nav-brand"><img src="images/wordmark-teal.svg" alt="SIM DAD LLC" class="nav-wordmark"></a>
       <div class="nav-links">
         <a href="#about">About</a>
         <a href="#scale">Track Record</a>
