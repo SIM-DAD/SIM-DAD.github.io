@@ -31,6 +31,7 @@
       --ibis:    #2D6A8F;
       --tass:    #2E7D5E;
       --lector:  #5C4B8A;
+      --orator:  #B45309;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -218,7 +219,7 @@
 
     /* ─── PRODUCTS GRID ──────────────────────────────────────────── */
     .products-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3.5rem;
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; margin-top: 3.5rem;
     }
     .product-card {
       border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem;
@@ -231,11 +232,13 @@
     .product-card-ibis::before   { background: var(--ibis); }
     .product-card-tass::before   { background: var(--tass); }
     .product-card-lector::before { background: var(--lector); }
+    .product-card-orator::before { background: var(--orator); }
     .product-card-cage::before   { background: var(--muted); }
     .product-card:hover { border-color: var(--muted); }
     .product-card-ibis:hover   { border-color: var(--ibis); }
     .product-card-tass:hover   { border-color: var(--tass); }
     .product-card-lector:hover { border-color: var(--lector); }
+    .product-card-orator:hover { border-color: var(--orator); }
     .product-num { font-size: 0.7rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.75rem; }
     .product-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.25rem; }
     .product-tag  { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
@@ -246,6 +249,7 @@
     .product-card-ibis   .product-link:hover { color: var(--ibis);   border-color: var(--ibis); }
     .product-card-tass   .product-link:hover { color: var(--tass);   border-color: var(--tass); }
     .product-card-lector .product-link:hover { color: var(--lector); border-color: var(--lector); }
+    .product-card-orator .product-link:hover { color: var(--orator); border-color: var(--orator); }
     .product-card-cage   .product-link:hover { color: var(--text);   border-color: var(--text); }
 
     /* The Cage sits below the three main products */
@@ -637,6 +641,18 @@
             no cloud processing, no account required.
           </p>
           <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+        </div>
+
+        <div class="product-card product-card-orator">
+          <div class="product-num">04</div>
+          <div class="product-name">Orator</div>
+          <div class="product-tag">Video Pipeline &middot; Windows &middot; Coming soon &mdash; $79</div>
+          <p class="product-desc">
+            Orator turns markdown documents into narrated, camera-ready videos using local
+            voice cloning. One command: parse, narrate, render slides, compose MP4. Your voice
+            and your content never leave your machine. No cloud APIs, no subscription.
+          </p>
+          <a href="https://useorator.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
         </div>
 
       </div>
