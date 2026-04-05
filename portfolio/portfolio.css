@@ -1,0 +1,348 @@
+/* ─── PORTFOLIO SHARED STYLES ─────────────────────────────── */
+/* Matches SIM DAD LLC main site design system               */
+
+:root {
+  --accent:    #1E3A4A;
+  --accent-h:  #162C3A;
+  --tass:      #2E7D5E;
+  --tass-light:#e8f5ef;
+  --tass-dark: #1a5c3f;
+  --text:      #0F0F0F;
+  --muted:     #6B7280;
+  --bg:        #FFFFFF;
+  --surface:   #F7F7F8;
+  --border:    #E4E4E7;
+  --font:      'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --max-w:     820px;
+  --radius:    8px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text:    #F4F4F5;
+    --muted:   #A1A1AA;
+    --bg:      #09090B;
+    --surface: #111113;
+    --border:  #27272A;
+    --tass-light: #0d2818;
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--tass); text-decoration: none; }
+a:hover { color: var(--tass-dark); }
+
+/* ─── LAYOUT ─────────────────────────────────────────────── */
+.portfolio-container {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 2rem 4rem;
+}
+
+/* ─── PORTFOLIO NAV BAR ──────────────────────────────────── */
+.portfolio-nav {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--bg);
+  border-bottom: 3px solid var(--tass);
+  padding: 0 2rem;
+}
+.portfolio-nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.portfolio-nav-brand {
+  font-weight: 800;
+  font-size: 0.875rem;
+  color: var(--accent);
+  letter-spacing: -0.02em;
+}
+.portfolio-nav-brand span {
+  color: var(--tass);
+}
+.portfolio-nav-links {
+  display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;
+}
+.portfolio-nav-links a {
+  font-size: 0.75rem;
+  color: var(--muted);
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius);
+  transition: all 0.15s;
+  font-weight: 500;
+}
+.portfolio-nav-links a:hover,
+.portfolio-nav-links a.active {
+  color: var(--tass);
+  background: var(--tass-light);
+}
+
+/* ─── PAGE HEADER ────────────────────────────────────────── */
+.page-header {
+  padding: 3rem 0 2rem;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 2.5rem;
+}
+.page-eyebrow {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--tass);
+  margin-bottom: 0.75rem;
+}
+.page-header h1 {
+  font-size: clamp(2rem, 4.5vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: var(--accent);
+  margin-bottom: 0.75rem;
+}
+.page-header .subtitle {
+  font-size: 1.0625rem;
+  color: var(--muted);
+  max-width: 55ch;
+  line-height: 1.6;
+}
+
+/* ─── CONTENT ────────────────────────────────────────────── */
+h2 {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--tass-dark);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--tass);
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+/* ─── CALLOUT BOX ────────────────────────────────────────── */
+.callout {
+  border-left: 4px solid var(--tass);
+  background: var(--tass-light);
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 1.5rem 0;
+}
+.callout p { margin: 0; }
+.callout strong { color: var(--tass-dark); }
+
+/* ─── MEMO FORMAT ────────────────────────────────────────── */
+.memo-header {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+.memo-header p {
+  margin: 0.2rem 0;
+  line-height: 1.5;
+}
+.memo-header strong {
+  display: inline-block;
+  width: 4.5rem;
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ─── TABLES ─────────────────────────────────────────────── */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.875rem;
+}
+thead {
+  background: var(--accent);
+  color: #fff;
+}
+th {
+  padding: 0.65rem 0.875rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+td {
+  padding: 0.6rem 0.875rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tbody tr:nth-child(even) {
+  background: var(--surface);
+}
+
+/* ─── AIDA LABELS ────────────────────────────────────────── */
+.aida-label {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #fff;
+  background: var(--tass);
+  padding: 0.15rem 0.5rem;
+  border-radius: 3px;
+  margin-bottom: 0.5rem;
+}
+
+/* ─── SCRIPT FORMAT (two-column) ─────────────────────────── */
+.script-table {
+  font-size: 0.85rem;
+}
+.script-table td:first-child {
+  width: 4rem;
+  font-weight: 700;
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+.script-table td:nth-child(2) {
+  width: 40%;
+  color: var(--muted);
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+/* ─── BLOCKQUOTE ─────────────────────────────────────────── */
+blockquote {
+  border-left: 3px solid var(--tass);
+  padding: 0.5rem 1.25rem;
+  margin: 1.25rem 0;
+  color: var(--muted);
+  font-style: italic;
+}
+blockquote p { margin: 0; color: var(--muted); }
+
+/* ─── RELEASE HEADER ─────────────────────────────────────── */
+.release-header {
+  text-align: center;
+  padding: 2rem 0;
+  border: 2px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 2rem;
+}
+.release-header .release-type {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--tass);
+}
+.release-header .release-date {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+/* ─── TAG/PILL ───────────────────────────────────────────── */
+.tag {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  margin-right: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+.tag-green {
+  background: var(--tass-light);
+  border-color: var(--tass);
+  color: var(--tass-dark);
+}
+
+/* ─── FOOTER ─────────────────────────────────────────────── */
+.portfolio-footer {
+  margin-top: 4rem;
+  padding: 2rem 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+.portfolio-footer p {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.portfolio-footer a {
+  color: var(--tass);
+  font-weight: 600;
+}
+
+/* ─── SELF-CRITIQUE BOX ──────────────────────────────────── */
+.self-critique {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  margin-top: 2rem;
+}
+.self-critique h3 {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+/* ─── TEACHING NOTE ──────────────────────────────────────── */
+.teaching-note {
+  background: #fffbeb;
+  border: 1px solid #f59e0b;
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
+.teaching-note strong {
+  color: #92400e;
+}
+@media (prefers-color-scheme: dark) {
+  .teaching-note {
+    background: #1c1409;
+    border-color: #92400e;
+  }
+  .teaching-note strong { color: #f59e0b; }
+}
+
+/* ─── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .portfolio-nav-links { display: none; }
+  .portfolio-container { padding: 0 1.25rem 3rem; }
+  .page-header { padding: 2rem 0 1.5rem; }
+  table { font-size: 0.8rem; }
+  th, td { padding: 0.5rem; }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internal Memorandum — SIM DAD LLC Portfolio</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="../images/logo-teal.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portfolio.css">
+</head>
+<body>
+
+  <nav class="portfolio-nav">
+    <div class="portfolio-nav-inner">
+      <a href="index.html" class="portfolio-nav-brand">SIM DAD <span>Portfolio</span></a>
+      <div class="portfolio-nav-links">
+        <a href="index.html">Overview</a>
+        <a href="backgrounder.html">Lab 1</a>
+        <a href="persona.html">Lab 2</a>
+        <a href="social-calendar.html">Lab 3</a>
+        <a href="strategy.html">Lab 4</a>
+        <a href="news-release.html">Lab 5</a>
+        <a href="ad-copy.html">Lab 6</a>
+        <a href="radio-script.html">Lab 6P</a>
+        <a href="blog-post.html">Lab 7</a>
+        <a href="video-scripts.html">Lab 7P</a>
+        <a href="internal-memo.html" class="active">Lab 8</a>
+        <a href="media-pitch.html">Lab 9</a>
+        <a href="evaluation.html">Lab 10</a>
+        <a href="case-study.html">Talk</a>
+        <a href="resume.html">Resume</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="portfolio-container">
+    <div class="page-header">
+      <div class="page-eyebrow">Lab 8 — Step 4: Writing (Corporate Voice)</div>
+      <h1>Internal Memorandum</h1>
+      <p class="subtitle">Payment platform migration communicated to internal team.</p>
+    </div>
+
+    <p><strong>TO:</strong> SIM DAD LLC Product Team</p>
+<p><strong>FROM:</strong> Alex Leith, PhD, Founder</p>
+<p><strong>DATE:</strong> March 31, 2026</p>
+<p><strong>RE:</strong> Payment Platform Change — Migration from Lemon Squeezy to Gumroad</p>
+<hr>
+<p>I am writing to inform you that our payment processing provider, Lemon Squeezy, has rejected our seller application. Effective immediately, we are migrating all product distribution and license management to Gumroad. This memo explains what happened, what changes, what does not change and what each of you needs to do.</p>
+<h2>What Happened</h2>
+<p>We submitted our seller verification to Lemon Squeezy on March 18, 2026. On March 27, Lemon Squeezy notified us that our application was denied without providing specific reasoning beyond a reference to their acceptable use policy. We appealed the decision on March 28 and received a final rejection on March 30. We do not believe any of our products violate their stated policies, but the decision is not reversible.</p>
+<p>This is frustrating. We had already integrated Lemon Squeezy&#x27;s license API into both Ibis and TASS, and our launch timeline assumed that integration was complete. I want to be direct about the impact: this costs us approximately one week of engineering time to rewire, and it means rewriting the license validation code in both applications.</p>
+<h2>What Changes</h2>
+<p><strong>Payment processing:</strong> All product sales will now be handled through Gumroad, which serves as merchant of record for sales tax collection and remittance worldwide. Gumroad charges a flat 10% fee per transaction. Lemon Squeezy&#x27;s fee structure was comparable.</p>
+<p><strong>License management:</strong> The Gumroad License API replaces Lemon Squeezy&#x27;s license system. The key-based validation model is functionally identical — customers receive a license key at purchase, the app validates it against Gumroad&#x27;s API and caches the result for offline use. The 30-day offline grace period is unchanged.</p>
+<p><strong>Product URLs:</strong> Gumroad uses direct product URLs rather than a custom storefront. Our website calls-to-action will link directly to Gumroad product pages. The user experience is comparable.</p>
+<h2>What Does NOT Change</h2>
+<p><strong>Pricing:</strong> All product pricing remains the same. Ibis Personal ($24), Ibis Pro ($49), Lector ($29 one-time) and TASS subscription tiers ($79-$699/year) are unchanged.</p>
+<p><strong>Product features:</strong> No features are added or removed as a result of this migration. The products themselves are unaffected.</p>
+<p><strong>Launch timeline:</strong> TASS remains on track for May 31, 2026. The license code rewrite is scoped at 3-4 days and does not affect the application&#x27;s core functionality.</p>
+<h2>Next Steps</h2>
+<p>The license module rewrite is already in progress. I expect it to be complete by April 3. Once the new Gumroad integration passes our test suite, I will update the build pipeline and confirm that the installer and update mechanisms work correctly.</p>
+<p>If you have questions about how this affects your work, please reach out to me directly. I would rather address concerns now than discover them during launch week.</p>
+<hr>
+<h2>Self-Critique</h2>
+<p>I chose to lead with the news directly — the provider rejected us and we are migrating — rather than opening with context about payment processing in general. The assignment rubric penalizes burying bad news, and in practice, internal audiences lose trust when a memo spends three paragraphs on background before revealing the actual change.</p>
+<p>The &quot;What Does NOT Change&quot; section is a deliberate rhetorical choice. When an organization announces a disruption, employees immediately catastrophize: Does this affect my work? Is the timeline slipping? Are prices going up? By explicitly naming what is unaffected, the memo preempts rumors and reduces the emotional weight of the change.</p>
+<p>The tone aims for transparency without panic. Phrases like &quot;I want to be direct about the impact&quot; and &quot;this is frustrating&quot; acknowledge the disruption honestly. The closing paragraph (&quot;I would rather address concerns now&quot;) signals openness without being defensive. I avoided passive voice throughout to maintain an authoritative, accountable tone — this is a memo from the person responsible, not a policy document from an unnamed committee.</p>
+<p><em>Teaching note: This memo is written as if SIM DAD LLC has a small product team (3-5 people), which reflects the company&#x27;s realistic near-term trajectory. In its current state, SIM DAD is a sole proprietorship. The small-team framing is used to satisfy the assignment&#x27;s requirement for an internal audience while maintaining factual accuracy about the underlying scenario — the Lemon Squeezy rejection and Gumroad migration are real events that occurred in March 2026.</em></p>
+
+    <div class="portfolio-footer">
+      <p>SIM DAD LLC — <a href="https://simdadllc.com">simdadllc.com</a> — ap@simdadllc.com</p>
+      <p>MC 422 Strategic Media Writing — Spring 2026 — SIUE</p>
+    </div>
+  </div>
+
+</body>
+</html>
