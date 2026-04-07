@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIM DAD LLC — Research Consulting &amp; Data Analysis</title>
+  <title>SIM DAD LLC — Communication Consulting &amp; Research</title>
   <link rel="icon" type="image/svg+xml" href="images/logo-teal.svg">
-  <meta name="description" content="SIM DAD LLC is a research and consulting practice specializing in social and interactive media, large-scale behavioral data analysis, and applied HCI research. Led by Alex P. Leith, Associate Professor at SIUE.">
-  <meta property="og:title" content="SIM DAD LLC — Research Consulting &amp; Data Analysis">
-  <meta property="og:description" content="Applied research expertise, available for engagement. Research consulting, data analysis, speaking, and grant partnerships.">
+  <meta name="description" content="SIM DAD LLC is a communication consulting practice offering external communication audits, research consulting, and data analysis. Led by Dr. Alex P. Leith, Associate Professor at SIUE.">
+  <meta property="og:title" content="SIM DAD LLC — Communication Consulting &amp; Research">
+  <meta property="og:description" content="Communication audits, research consulting, data analysis, and grant partnerships. We help organizations communicate more effectively with their audiences.">
   <meta property="og:type" content="website">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -306,7 +306,7 @@
 
     /* ─── RESPONSIVE ─────────────────────────────────────────────── */
     @media (max-width: 960px) {
-      .products-grid { grid-template-columns: 1fr 1fr; }
+      .products-grid { grid-template-columns: 1fr 1fr !important; }
       .caps-grid { grid-template-columns: 1fr 1fr; }
       .cap-card:nth-child(2) { border-right: none; }
       .cap-card:nth-child(3) { border-top: 1px solid var(--border); }
@@ -322,8 +322,7 @@
     @media (max-width: 768px) {
       .hero { padding: 5.5rem 0 4rem; }
       .nav-links { display: none; }
-      .products-grid { grid-template-columns: 1fr; }
-      .caps-grid { grid-template-columns: 1fr; }
+      .products-grid { grid-template-columns: 1fr !important; }
       .cap-card { border-right: none; border-bottom: 1px solid var(--border); }
       .cap-card:last-child { border-bottom: none; }
       .scale-grid { grid-template-columns: 1fr; }
@@ -349,13 +348,13 @@
     <div class="nav-inner">
       <a href="#" class="nav-brand"><img src="images/wordmark-teal.svg" alt="SIM DAD LLC" class="nav-wordmark"></a>
       <div class="nav-links">
+        <a href="#services">Services</a>
         <a href="#about">About</a>
-        <a href="#scale">Track Record</a>
-        <a href="#capabilities">Capabilities</a>
-        <a href="#products">Products</a>
+        <a href="#scale">Credentials</a>
+        <a href="#products">Software</a>
         <a href="#team">Team</a>
         <a href="/media/">Media Kit</a>
-        <a href="#work" class="nav-cta">Work With Us</a>
+        <a href="#work" class="nav-cta">Get in Touch</a>
       </div>
     </div>
   </nav>
@@ -364,16 +363,67 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <span class="hero-eyebrow">Research consulting &middot; Data analysis &middot; Social &amp; interactive media</span>
-      <h1>Research and consulting for people doing <em>serious</em> work.</h1>
+      <span class="hero-eyebrow">Communication consulting &middot; Research &middot; Data analysis</span>
+      <h1>Make sure your message <em>lands</em>.</h1>
       <p class="hero-sub">
-        SIM DAD &mdash; Social and Interactive Media Data Analysis and Design &mdash; is a research and
-        consulting practice led by Alex P. Leith, Associate Professor at SIUE. We design research,
-        analyze large-scale behavioral data, and build the software tools that come out of that work.
+        SIM DAD LLC is a communication consulting practice led by Dr. Alex P. Leith, Associate Professor
+        at SIUE. We help organizations audit and strengthen their external communications &mdash; websites,
+        press materials, social media, reports &mdash; using the same research methods behind 23 peer-reviewed
+        publications. Whether you need a one-time audit or ongoing advisory, we meet you where you are.
       </p>
       <div class="hero-actions">
-        <a href="#work" class="btn btn-primary btn-lg">Work with us &rarr;</a>
-        <a href="#products" class="btn btn-ghost btn-lg">View products</a>
+        <a href="#work" class="btn btn-primary btn-lg">Get in touch &rarr;</a>
+        <a href="#services" class="btn btn-ghost btn-lg">What we do</a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SERVICES -->
+  <section class="section-dark" id="services">
+    <div class="container">
+      <span class="eyebrow">What we do</span>
+      <h2>Consulting services.</h2>
+      <p class="section-sub">
+        We help organizations communicate more effectively with their audiences. Our work is grounded
+        in research methods and data analysis, but the deliverables are practical &mdash; clear findings,
+        specific recommendations, and actionable next steps.
+      </p>
+
+      <div class="consult-grid">
+        <div class="consult-card">
+          <div class="consult-card-title">Communication Audits</div>
+          <p class="consult-card-desc">
+            We review your external-facing communications &mdash; website copy, press releases, social media,
+            reports, email campaigns &mdash; and deliver a structured assessment of what is working, what is not,
+            and what to change. Grounded in communication research, not guesswork. Suitable for businesses,
+            nonprofits, and institutions of any size.
+          </p>
+        </div>
+        <div class="consult-card">
+          <div class="consult-card-title">Research Consulting</div>
+          <p class="consult-card-desc">
+            Study design, data collection and analysis, survey research, and publication-ready findings.
+            We work with academic teams, nonprofits, media organizations, and companies who need
+            rigorous methods without building an in-house research team.
+          </p>
+        </div>
+        <div class="consult-card">
+          <div class="consult-card-title">Grant Partnerships</div>
+          <p class="consult-card-desc">
+            Available as Co-PI or senior collaborator on federal and foundation grants, particularly
+            NSF programs in HCI, communication, and future-of-work. Established track record:
+            $1.59M awarded, multi-institution consortium managed.
+          </p>
+        </div>
+        <div class="consult-card">
+          <div class="consult-card-title">Speaking &amp; Workshops</div>
+          <p class="consult-card-desc">
+            Conference presentations, organizational workshops, and training sessions on social media
+            strategy, communication research methods, and applied data analysis. Tailored to your
+            audience &mdash; from executive briefings to hands-on team workshops.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -387,23 +437,20 @@
       <div class="about-grid">
         <div class="about-body">
           <p>
-            SIM DAD LLC is a research and consulting practice specializing in social and interactive media,
-            human-computer interaction, and large-scale behavioral data analysis. We work with organizations,
-            research teams, and program officers who need rigorous methods and the scale to match &mdash;
-            from study design through publication-ready findings.
+            SIM DAD &mdash; Social and Interactive Media Data Analysis and Design &mdash; is a consulting
+            practice that brings academic research rigor to real-world communication challenges. We started
+            as a research operation, and that foundation shows up in everything we do: structured methods,
+            evidence-based recommendations, and findings that hold up under scrutiny.
           </p>
           <p>
-            Our approach combines academic research rigor with applied delivery. We design studies, run
-            pipelines across hundreds of millions of records, and produce findings that hold up to peer
-            review. We have managed cross-institutional research programs, built formal data-access
-            partnerships with major technology companies, and led grant-funded work from proposal through
-            publication.
+            Our background is in large-scale data analysis and peer-reviewed research, but our consulting
+            work scales to fit the client. A local business looking to sharpen its public-facing messaging
+            gets the same methodological care as a multi-institution research program. The difference is scope,
+            not rigor.
           </p>
           <p>
-            The software portfolio &mdash; <a href="https://useibis.app">Ibis</a>,
-            <a href="https://usetass.app">TASS</a>, and <a href="https://uselector.app">Lector</a> &mdash;
-            grew directly from our own research needs. These are tools we built for ourselves, now
-            available commercially. See <a href="#products">Products</a> below.
+            We also build <a href="#products">software tools</a> that grew out of our research work &mdash;
+            each available on its own site.
           </p>
         </div>
         <div class="sidebar-card">
@@ -411,13 +458,12 @@
             <h3>Contact</h3>
             <a href="mailto:hello@simdadllc.com">hello@simdadllc.com</a>
             <a href="mailto:ap@simdadllc.com">ap@simdadllc.com</a>
-            <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">github.com/SIM-DAD</a>
           </div>
           <div class="sidebar-block">
-            <h3>Domain Expertise</h3>
-            <p>Social VR &amp; XR research</p>
-            <p style="margin-top:0.35rem;">Parasocial media &amp; streaming</p>
-            <p style="margin-top:0.35rem;">Human-computer interaction</p>
+            <h3>Expertise</h3>
+            <p>External communication strategy</p>
+            <p style="margin-top:0.35rem;">Social &amp; digital media analysis</p>
+            <p style="margin-top:0.35rem;">Research design &amp; data analysis</p>
             <p style="margin-top:0.35rem;">NLP &amp; computational text analysis</p>
           </div>
           <div class="sidebar-block">
@@ -431,11 +477,11 @@
   </section>
 
 
-  <!-- TRACK RECORD -->
+  <!-- CREDENTIALS -->
   <section class="section" id="scale">
     <div class="container">
-      <span class="eyebrow">Track record</span>
-      <h2>Work at scale.</h2>
+      <span class="eyebrow">Credentials</span>
+      <h2>Built on research.</h2>
       <div class="scale-grid">
         <div class="scale-card">
           <div class="scale-num">321<span>M+</span></div>
@@ -478,54 +524,20 @@
   </section>
 
 
-  <!-- WORK WITH US -->
+  <!-- GET IN TOUCH -->
   <section class="section-dark" id="work">
     <div class="container">
-      <span class="eyebrow">Engagement</span>
-      <h2>Work with us.</h2>
+      <span class="eyebrow">Get started</span>
+      <h2>Let&rsquo;s talk.</h2>
       <p class="section-sub">
-        We are available for consulting, speaking, and grant collaborations in our areas of expertise.
-        If you have a research problem, a data challenge, or a grant to write, we should talk.
+        Tell us what you are working on. Whether it is a communication audit for your business,
+        a research collaboration, or a grant partnership &mdash; we respond to every inquiry.
       </p>
 
-      <div class="consult-grid">
-        <div class="consult-card">
-          <div class="consult-card-title">Research Consulting</div>
-          <p class="consult-card-desc">
-            Study design, large-scale data collection, NLP and computational text analysis, mixed-methods
-            research, survey research, and publication-ready analysis. We work with academic teams,
-            nonprofits, media organizations, and technology companies.
-          </p>
-        </div>
-        <div class="consult-card">
-          <div class="consult-card-title">Grant Partnerships</div>
-          <p class="consult-card-desc">
-            Available as Co-PI or senior collaborator on federal and foundation grants, particularly
-            NSF programs in HCI, communication, and future-of-work. Bring an established track record:
-            $1.59M awarded, 30+ person consortium managed, 8+ publications from a single program.
-          </p>
-        </div>
-        <div class="consult-card">
-          <div class="consult-card-title">Speaking</div>
-          <p class="consult-card-desc">
-            Academic conferences, organizational workshops, and interdisciplinary venues on social VR
-            and XR, parasocial media and creator economies, Zoom fatigue and remote work, and
-            computational methods for communication research.
-          </p>
-        </div>
-        <div class="consult-card">
-          <div class="consult-card-title">Software Licensing</div>
-          <p class="consult-card-desc">
-            Commercial and institutional access to Ibis (local AI transcription), TASS (no-code text
-            analysis), and Lector (voice-enabled writing environment). Volume and site licensing
-            available for research labs, newsrooms, and academic departments.
-          </p>
-        </div>
-      </div>
-
-      <div class="consult-contact">
+      <div class="consult-contact" style="margin-top:2.5rem; padding-top:0; border-top:none;">
         <p class="consult-contact-text">
-          Tell us what you are working on. We respond to all serious inquiries.
+          Email is the best way to reach us. Describe what you need and we will get back to you
+          with next steps, a scope estimate, and pricing.
         </p>
         <a href="mailto:hello@simdadllc.com" class="btn btn-ghost-white btn-lg">hello@simdadllc.com &rarr;</a>
       </div>
@@ -533,145 +545,42 @@
   </section>
 
 
-  <!-- CAPABILITIES -->
-  <section class="section-alt" id="capabilities">
-    <div class="container">
-      <span class="eyebrow">What we do</span>
-      <h2>Company capabilities.</h2>
-      <div class="caps-grid">
-        <div class="cap-card">
-          <div class="cap-heading">Research &amp; Analysis</div>
-          <ul class="cap-list">
-            <li>Mixed-methods design</li>
-            <li>Survey research (N=2,448+)</li>
-            <li>Experimental design</li>
-            <li>Causal inference</li>
-            <li>Structural topic modeling</li>
-            <li>Meta-analysis</li>
-            <li>NLP &amp; sentiment analysis</li>
-            <li>Time series analysis</li>
-          </ul>
-        </div>
-        <div class="cap-card">
-          <div class="cap-heading">Data Engineering</div>
-          <ul class="cap-list">
-            <li>R / RStudio</li>
-            <li>Python</li>
-            <li>SQL (PostgreSQL, MySQL)</li>
-            <li>Window functions &amp; CTEs</li>
-            <li>pandas &middot; numpy</li>
-            <li>scikit-learn</li>
-            <li>NLTK / spaCy / HuggingFace</li>
-            <li>R package development</li>
-          </ul>
-        </div>
-        <div class="cap-card">
-          <div class="cap-heading">Software Development</div>
-          <ul class="cap-list">
-            <li>Git / GitHub</li>
-            <li>Docker &amp; Docker Compose</li>
-            <li>Next.js &amp; SvelteKit</li>
-            <li>FastAPI / Python backends</li>
-            <li>Prisma ORM</li>
-            <li>REST API design</li>
-            <li>PyInstaller packaging</li>
-            <li>LLM / AI integration</li>
-          </ul>
-        </div>
-        <div class="cap-card">
-          <div class="cap-heading">Project Delivery</div>
-          <ul class="cap-list">
-            <li>Research program direction</li>
-            <li>Cross-institutional PM</li>
-            <li>Large consortium management</li>
-            <li>Grant writing &amp; management</li>
-            <li>IRB &amp; data governance</li>
-            <li>Open-source development</li>
-            <li>Stakeholder reporting</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- PRODUCTS -->
+  <!-- SOFTWARE -->
   <section class="section" id="products">
     <div class="container">
-      <span class="eyebrow">Software portfolio</span>
-      <h2>Software &amp; Projects</h2>
+      <span class="eyebrow">Software</span>
+      <h2>Tools we build.</h2>
       <p class="section-sub">
-        These tools were built to solve real research problems. They are now available commercially.
-        Local-first. One-time pricing where possible. Built to the standard of tools we would use ourselves.
+        We also build software that grew out of our research work. Each product has its own site
+        with full details, demos, and pricing.
       </p>
 
-      <div class="products-grid">
+      <div class="products-grid" style="grid-template-columns: repeat(4, 1fr);">
 
         <div class="product-card product-card-ibis">
-          <div class="product-num">01</div>
           <div class="product-name">Ibis</div>
-          <div class="product-tag">Local AI &middot; Windows Desktop &middot; v1.0 Complete &middot; Launching soon &mdash; $24</div>
-          <p class="product-desc">
-            Ibis watches a folder on your Windows PC and transcribes every audio file automatically
-            using on-device AI. Powered by Whisper large-v3-turbo. 99 languages. No cloud. No subscription.
-            One-time purchase. v1.0 is built and in pre-launch.
-          </p>
-          <a href="https://useibis.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+          <div class="product-tag">Local AI transcription</div>
+          <a href="https://useibis.app" target="_blank" rel="noopener" class="product-link">useibis.app &rarr;</a>
         </div>
 
         <div class="product-card product-card-tass">
-          <div class="product-num">02</div>
           <div class="product-name">TASS</div>
-          <div class="product-tag">Text Analysis &middot; Windows Desktop &middot; Launching May 2026 &mdash; $49/yr</div>
-          <p class="product-desc">
-            TASS is a native Windows desktop app for dictionary-based text analysis &mdash; no Python, R,
-            or command line required. Features group comparisons (t-test, ANOVA), publication-quality
-            visualizations, and APA citation blocks built in. Targets launch May 2026.
-          </p>
-          <a href="https://usetass.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+          <div class="product-tag">No-code text analysis</div>
+          <a href="https://usetass.app" target="_blank" rel="noopener" class="product-link">usetass.app &rarr;</a>
         </div>
 
         <div class="product-card product-card-lector">
-          <div class="product-num">03</div>
           <div class="product-name">Lector</div>
-          <div class="product-tag">Writing Tool &middot; Windows &middot; Coming soon &mdash; $29</div>
-          <p class="product-desc">
-            Lector is a distraction-free writing environment with read-aloud built in. Write your draft,
-            then hear it read back word by word. Voice cloning via F5-TTS. Completely local &mdash;
-            no cloud processing, no account required.
-          </p>
-          <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+          <div class="product-tag">Voice-enabled writing</div>
+          <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">uselector.app &rarr;</a>
         </div>
 
         <div class="product-card product-card-orator">
-          <div class="product-num">04</div>
           <div class="product-name">Orator</div>
-          <div class="product-tag">Video Pipeline &middot; Windows &middot; Coming soon &mdash; $79</div>
-          <p class="product-desc">
-            Orator turns markdown documents into narrated, camera-ready videos using local
-            voice cloning. One command: parse, narrate, render slides, compose MP4. Your voice
-            and your content never leave your machine. No cloud APIs, no subscription.
-          </p>
-          <a href="https://useorator.app" target="_blank" rel="noopener" class="product-link">Product site &rarr;</a>
+          <div class="product-tag">Markdown to narrated video</div>
+          <a href="https://useorator.app" target="_blank" rel="noopener" class="product-link">useorator.app &rarr;</a>
         </div>
 
-      </div>
-
-      <!-- The Cage -->
-      <div class="cage-row">
-        <div class="product-card product-card-cage" style="border-top: 3px solid var(--border);">
-          <div class="product-num">Consulting Deliverable</div>
-          <div class="product-name">The Cage</div>
-          <div class="product-tag">Next.js &middot; PostgreSQL &middot; Docker &middot; SSO &middot; Institutional Deployment</div>
-          <p class="product-desc" style="max-width:70ch;">
-            An equipment reservation and QR-based checkout system deployed at SIUE Mass Communications.
-            Dual-database architecture, Docker Compose, Microsoft Entra SSO, and Snipe-IT integration.
-            This is a consulting and institutional deployment project &mdash; a real problem taken from
-            requirements through production. It demonstrates what applied software consulting looks like
-            in an institutional context. Not currently available as a commercial product.
-          </p>
-          <a href="https://github.com/SIM-DAD/the-cage" target="_blank" rel="noopener" class="product-link">View on GitHub &rarr;</a>
-        </div>
       </div>
 
     </div>
@@ -772,11 +681,11 @@
     <div class="footer-inner">
       <div class="footer-brand">SIM DAD LLC</div>
       <div class="footer-links">
-        <a href="#work">Work With Us</a>
+        <a href="#services">Services</a>
+        <a href="#work">Get in Touch</a>
         <a href="/media/">Media Kit</a>
         <a href="https://github.com/SIM-DAD" target="_blank" rel="noopener">GitHub</a>
         <a href="mailto:hello@simdadllc.com">Contact</a>
-        <a href="https://meaningfulxr.org" target="_blank" rel="noopener">Meaningful XR</a>
       </div>
     </div>
     <p class="footer-copy">&copy; 2026 SIM DAD LLC. All rights reserved.</p>
