@@ -1,90 +1,92 @@
-# SIM-DAD LLC
+# SIM DAD LLC
 
-**Independent software, research, and applied data science — [Alex P. Leith](https://apleith.github.io)**
+**Local-first software for serious work.**
 
-→ [sim-dad.github.io](https://sim-dad.github.io)
-
----
-
-## About
-
-SIM-DAD LLC is the independent practice of **Alex P. Leith** — a mixed-methods researcher and data scientist with 10+ years of experience designing studies, analyzing large-scale behavioral datasets, and building the software infrastructure to support both.
-
-Core expertise spans social VR/XR, virtual meetings, human-computer interaction, and media psychology. Technical work covers the full stack: R/Python for data collection and analysis, NLP/ML pipelines, SQL database architecture, and production web applications. NSF-funded as Co-PI ($1.59M). Formal research partnerships with Riot Games and VRChat. Published in *Computers in Human Behavior Reports*, *Communication Monographs*, *IEEE Transactions on Games*, and *PLOS One*.
-
-For academic work, teaching, and lab research: [SIM Lab @ SIUE](https://sim-lab-siue.github.io)
+→ [simdadllc.com](https://simdadllc.com)
 
 ---
 
-## Projects
+## What we make
 
-### TASS — Text Analysis Support Software
+We ship desktop applications that do their work on the user&rsquo;s machine. No cloud round-trips, no account required, no telemetry. The category we serve is people whose source material has reasons to stay where it was authored: researchers under IRB, journalists with confidential sources, attorneys with privileged correspondence, writers under embargo.
 
-A native Windows desktop application that makes professional-grade text analysis accessible without Python, R, or a command line. Combines dictionary-based scoring, machine learning classification, group statistical comparisons, and publication-quality visualizations in a clean GUI — built for social scientists, journalists, and domain experts who need results, not toolchain overhead.
-
-→ [github.com/SIM-DAD/TASS](https://github.com/SIM-DAD/TASS)
-→ [Full README](https://raw.githubusercontent.com/SIM-DAD/TASS/refs/heads/main/README.md)
+Each product is single-purchase, perpetual license, runs offline after install. Substantiation papers backing the accuracy and encryption claims are public on Zenodo before each release.
 
 ---
 
-### The Cage — MassComm Checkout
+## Products
 
-A production web application for equipment reservation and QR-based checkout. Built with Next.js, PostgreSQL + MySQL (Prisma ORM), Docker Compose, a REST API, and Microsoft Entra SSO. Dual-database architecture handles asset management integration with Snipe-IT. Deployed and running in production.
+### Ibis &mdash; Local Whisper transcription
 
-→ [github.com/SIM-DAD/the-cage](https://github.com/SIM-DAD/the-cage)
-→ [Full README](https://raw.githubusercontent.com/SIM-DAD/the-cage/refs/heads/main/README.md)
+Audio-to-text on Windows using OpenAI&rsquo;s Whisper large-v3-turbo. Word-error rate of 1.94% on LibriSpeech test-clean and 3.87% on test-other; methodology and per-split breakdown in the substantiation paper. Encrypted-at-rest library via age v1 + Windows Credential Manager.
+
+→ [useibis.app](https://useibis.app) &middot; [Buy on Gumroad](https://simdadllc.gumroad.com/l/ibis)
+
+### Lector &mdash; Distraction-free read-aloud editor
+
+Markdown editor with word-by-word highlighting via Kokoro (12 built-in voices) and F5-TTS for voice cloning. Encrypted document library at rest. Launches May 11, 2026.
+
+→ [uselector.app](https://uselector.app)
+
+### TASS &mdash; Text Analysis Support Software
+
+Native Windows desktop NLP application: dictionary-based scoring (LIWC-style + Warriner VAD + Empath + custom), group statistical comparisons, and publication-ready visualizations. Built for social scientists and journalists who need results without a Python toolchain.
+
+→ [usetass.app](https://usetass.app)
+
+### Orator &mdash; Document-to-narrated-video
+
+Local pipeline that turns a .qmd or .md file into a narrated MP4 with voice-cloned TTS via F5-TTS. Single-purchase, GPU recommended. Phase 0 internal use; commercial release late 2026.
+
+→ [useorator.app](https://useorator.app)
+
+### Resero &mdash; Free age decrypter
+
+A small GUI for the [age encryption format](https://age-encryption.org). MIT-licensed core, no paid tier. Recovery tool for SIM DAD product libraries and any other age v1 file. Ships after Lector v1.
+
+→ [useresero.app](https://useresero.app)
+
+### simdad-crypto &mdash; Open-source encryption module
+
+Cross-product Python module wrapping `pyrage` (age v1) and the OS-native keystore (DPAPI on Windows, Keychain on macOS, Secret Service on Linux). Four-function API: `encrypt_file`, `decrypt_file`, `store_key`, `retrieve_key`. MIT-licensed. The same module is the encryption layer in Ibis, Lector, TASS, and Orator.
+
+→ [github.com/SIM-DAD/simdad-crypto](https://github.com/SIM-DAD/simdad-crypto)
 
 ---
 
-### Open WebUI Launcher
+## Substantiation
 
-A desktop launcher for running Open WebUI locally via Docker + Ollama. Handles hardware detection, model selection, and safe configuration defaults — designed to make local LLM deployment accessible to non-technical users.
+Marketing claims about accuracy, encryption, or methodology are backed by public technical reports on Zenodo. We publish before we promote.
 
-→ [github.com/SIM-DAD/open-webui-launcher](https://github.com/SIM-DAD/open-webui-launcher)
-→ [Full README](https://raw.githubusercontent.com/SIM-DAD/open-webui-launcher/refs/heads/main/README.md)
-
----
-
-## Selected Work at Scale
-
-| Area | Scope |
-|------|-------|
-| NSF Research Program (Co-PI) | $1,599,851 — 5 linked studies, 30+ researchers across 6 institutions, 8+ publications |
-| VRChat Tweet Corpus | 1,434,367 original English-language tweets — PostgreSQL pipeline, STM analysis |
-| Remote Work Tweet Corpus | 1,409,966 tweets from 887,888 unique users (2020 + 2021) |
-| Twitch Chat Dataset | 321,189,309 messages — 117,943 channels, distributed Raspberry Pi + PostgreSQL collection |
-| Survey Research | N=2,448+ across multiple large-scale behavioral studies |
-| Riot Games (League of Legends) | Formal data access — 5M+ avatar gender choices; findings published in peer-reviewed journal |
+| Paper | DOI |
+|---|---|
+| Ibis v1.0 &mdash; local-first transcription with at-rest encryption | [10.5281/zenodo.19931717](https://doi.org/10.5281/zenodo.19931717) |
+| Lector v1.0 &mdash; local-first document editing with at-rest encryption | [10.5281/zenodo.19963302](https://doi.org/10.5281/zenodo.19963302) |
 
 ---
 
-## Core Competencies
+## License posture
 
-**Research & Analysis** — Mixed-methods design · Survey research · Experimental design & causal inference · Structural topic modeling (STM) · Meta-analysis · NLP & sentiment analysis · Time series
-
-**Technical** — R / RStudio · Python (pandas, numpy, scikit-learn, NLTK / spaCy / HuggingFace) · SQL (PostgreSQL, MySQL; CTEs, window functions) · Git/GitHub · Docker · Next.js · SvelteKit · Shiny · Tableau · ggplot2 · R package development · LLM/AI tools
-
-**Leadership** — Research program direction · Cross-institutional project management · Grant writing & management · Open-source development
+Application binaries are commercial. The encryption module (`simdad-crypto`), the standalone decrypter (Resero), and the substantiation papers are open: MIT for code, CC BY 4.0 for papers. The user holds the keys and can recover their data without us.
 
 ---
 
-## Résumé
+## Founder
 
-| Document | Description |
-|----------|-------------|
-| [Industry Résumé](PDFs/Resume.md) | Professional summary, competencies, experience, selected publications, grants, open-source projects |
-| [Academic CV](PDFs/CV.md) | Full academic record — publications, grants, courses, committees, proceedings |
+SIM DAD LLC is the independent practice of Alex P. Leith. For academic publications, teaching materials, and lab research, see [apleith.com](https://apleith.com).
 
 ---
 
 ## Contact
 
-- **Email:** [aleith@siue.edu](mailto:aleith@siue.edu)
-- **GitHub:** [github.com/apleith](https://github.com/apleith)
-- **Personal site:** [apleith.github.io](https://apleith.github.io)
-- **ORCID:** [0000-0003-1310-6763](https://orcid.org/0000-0003-1310-6763)
-- **Meaningful XR:** [meaningfulxr.org](https://meaningfulxr.org)
+| | |
+|---|---|
+| Site | [simdadllc.com](https://simdadllc.com) |
+| General | [hello@simdadllc.com](mailto:hello@simdadllc.com) |
+| Press &middot; partnerships | [ap@simdadllc.com](mailto:ap@simdadllc.com) |
+| Customer support | [support@simdadllc.com](mailto:support@simdadllc.com) |
+| GitHub | [github.com/SIM-DAD](https://github.com/SIM-DAD) |
 
 ---
 
-*SIM-DAD LLC · 2026*
+*SIM DAD LLC &middot; Illinois, USA &middot; 2026*
