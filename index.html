@@ -9,9 +9,13 @@
   <meta property="og:title" content="SIM DAD LLC — Communication Consulting &amp; Research">
   <meta property="og:description" content="Communication audits, research consulting, data analysis, and grant partnerships. We help organizations communicate more effectively with their audiences.">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://simdadllc.com/images/social-share.png">
+  <meta property="og:url" content="https://simdadllc.com">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://simdadllc.com/images/social-share.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&display=swap" rel="stylesheet">
 
   <style>
     /* ─── TOKENS ─────────────────────────────────────────────────── */
@@ -24,6 +28,7 @@
       --surface:   #F7F7F8;
       --border:    #E4E4E7;
       --font:      'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Bricolage Grotesque', 'Plus Jakarta Sans', -apple-system, sans-serif;
       --max-w:     1080px;
       --radius:    8px;
 
@@ -41,6 +46,8 @@
         --bg:      #09090B;
         --surface: #111113;
         --border:  #27272A;
+        --accent:  #7BA1B8;
+        --accent-h: #95B8CC;
       }
     }
 
@@ -49,12 +56,32 @@
     html { scroll-behavior: smooth; }
     body {
       font-family: var(--font);
-      background: var(--bg);
       color: var(--text);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
+      background-color: var(--bg);
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='280' height='280'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.035 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+      background-repeat: repeat;
     }
     a { color: inherit; text-decoration: none; }
+
+    /* ─── PAGE-LOAD REVEAL ───────────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-eyebrow, .hero h1, .hero-sub, .hero-actions {
+      animation: fadeUp 0.8s cubic-bezier(0.2, 0.65, 0.3, 1) backwards;
+    }
+    .hero-eyebrow { animation-delay: 0.10s; }
+    .hero h1     { animation-delay: 0.25s; }
+    .hero-sub    { animation-delay: 0.50s; }
+    .hero-actions{ animation-delay: 0.68s; }
+    @media (prefers-reduced-motion: reduce) {
+      .hero-eyebrow, .hero h1, .hero-sub, .hero-actions {
+        animation: none;
+      }
+    }
 
     /* ─── LAYOUT ─────────────────────────────────────────────────── */
     .container { max-width: var(--max-w); margin: 0 auto; padding: 0 2rem; }
@@ -103,10 +130,15 @@
       text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 1.5rem;
     }
     .hero h1 {
-      font-size: clamp(3rem, 6.5vw, 5.25rem); font-weight: 800;
-      line-height: 1.05; letter-spacing: -0.035em; max-width: 18ch; margin-bottom: 1.5rem;
+      font-family: var(--font-display);
+      font-size: clamp(2.6rem, 5.5vw, 4.4rem);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.025em;
+      max-width: 22ch;
+      margin-bottom: 1.5rem;
     }
-    .hero h1 em { font-style: normal; color: var(--accent); }
+    .hero h1 em { font-style: italic; color: var(--accent); font-weight: 500; }
     .hero-sub {
       font-size: 1.125rem; color: var(--muted); max-width: 52ch;
       line-height: 1.65; margin-bottom: 2.5rem; font-weight: 400;
@@ -286,6 +318,196 @@
     .pubs-more a { color: var(--text); border-bottom: 1px solid var(--border); }
     .pubs-more a:hover { border-color: var(--text); }
 
+    /* ═══ MANUSCRIPT LAYOUT — consulting-white-paper register ═══ */
+    .manuscript {
+      max-width: 720px; margin: 0 auto; padding: 0 2rem;
+      font-family: var(--font-display); color: var(--text);
+    }
+    .manuscript p {
+      font-size: 1.1875rem; line-height: 1.7; margin: 0 0 1.4rem; color: var(--text);
+    }
+    .manuscript em { font-style: italic; }
+    .manuscript strong { font-weight: 600; color: var(--accent); font-style: italic; }
+    .manuscript a { color: var(--accent); border-bottom: 1px solid var(--border); transition: border-color 0.15s; }
+    .manuscript a:hover { border-color: var(--accent); }
+
+    .issue-marker {
+      max-width: 720px; margin: 4rem auto 3rem; padding: 0 2rem;
+      display: flex; align-items: center; gap: 1.25rem;
+      font-family: var(--font); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted);
+    }
+    .issue-marker::before, .issue-marker::after {
+      content: ""; flex: 1; height: 1px; background: var(--border);
+    }
+
+    .opening {
+      max-width: 800px; margin: 0 auto 3.5rem; padding: 0 2rem; text-align: center;
+    }
+    .opening h1 {
+      font-family: var(--font-display); font-size: clamp(3.2rem, 8vw, 6.4rem);
+      font-weight: 600; line-height: 1.0; letter-spacing: -0.03em; margin: 0; color: var(--text);
+    }
+    .opening h1 em { font-style: italic; font-weight: 500; color: var(--accent); }
+    .opening .byline {
+      font-family: var(--font); font-size: 0.78rem; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--muted); margin-top: 2rem;
+    }
+
+    .lede { font-size: 1.3125rem !important; line-height: 1.55 !important; margin-bottom: 2rem !important; }
+    .lede::first-letter {
+      font-family: var(--font-display);
+      float: left; font-size: 5.4em; line-height: 0.85;
+      padding: 0.05em 0.12em 0 0;
+      font-weight: 600; color: var(--accent);
+    }
+    .lede-opener { font-variant: small-caps; letter-spacing: 0.05em; font-weight: 500; }
+
+    /* parent: § markers */
+    .section-marker {
+      max-width: 720px; margin: 4.5rem auto 1.5rem; padding: 0 2rem;
+    }
+    .section-marker .numeral {
+      font-family: var(--font-display); font-size: 0.9rem; font-weight: 600;
+      color: var(--accent); letter-spacing: 0.08em;
+      display: block; margin-bottom: 0.5rem;
+    }
+    .section-marker .heading {
+      font-family: var(--font-display); font-size: 1.875rem; font-weight: 600;
+      letter-spacing: -0.015em; line-height: 1.15; color: var(--text);
+      border-bottom: 1px solid var(--border); padding-bottom: 0.75rem;
+    }
+    .section-marker .heading em { font-style: italic; color: var(--accent); font-weight: 500; }
+
+    .pull-quote {
+      max-width: 720px; margin: 3.5rem auto; padding: 2rem 2rem 2rem 3.5rem;
+      font-family: var(--font-display); font-size: clamp(1.5rem, 3.2vw, 2.1rem);
+      font-style: italic; font-weight: 500; line-height: 1.3; letter-spacing: -0.015em;
+      color: var(--accent); border-left: 3px solid var(--accent); position: relative;
+    }
+    .pull-quote::before {
+      content: "“"; position: absolute; left: 1.2rem; top: 0.5rem;
+      font-size: 4rem; color: var(--accent); opacity: 0.35; line-height: 1;
+      font-family: var(--font-display);
+    }
+
+    .ornament {
+      max-width: 720px; margin: 3.5rem auto 1.5rem; padding: 0 2rem; text-align: center;
+      font-family: var(--font-display); font-size: 1.5rem; color: var(--accent); opacity: 0.5;
+    }
+    .signature {
+      max-width: 720px; margin: 0 auto 5rem; padding: 0 2rem;
+      font-family: var(--font); font-size: 0.78rem;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-align: center;
+    }
+    .signature-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: inline-block; vertical-align: middle; margin-right: 0.85rem;
+      border: 1px solid var(--border); object-fit: cover;
+    }
+
+    .colophon { max-width: 720px; margin: 6rem auto 4rem; padding: 3rem 2rem 0; border-top: 1px solid var(--border); }
+    .colophon-row {
+      display: flex; align-items: baseline; justify-content: space-between;
+      flex-wrap: wrap; gap: 1.5rem; margin-bottom: 1rem;
+    }
+    .colophon-label {
+      font-family: var(--font); font-size: 0.72rem; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .colophon p {
+      font-family: var(--font); font-size: 0.875rem; color: var(--muted);
+      line-height: 1.7; margin-bottom: 0.5rem;
+    }
+
+    @media (max-width: 720px) {
+      .opening h1 { font-size: clamp(2.6rem, 12vw, 4rem); }
+      .lede::first-letter { font-size: 4em; }
+      .pull-quote { padding: 1.5rem 1.5rem 1.5rem 2.5rem; }
+      .pull-quote::before { left: 0.8rem; top: 0.4rem; font-size: 3rem; }
+    }
+
+    /* ─── PRACTICE LIST (consulting-firm Services) ─────────────────── */
+    .practice-list {
+      list-style: none; margin-top: 3rem; padding: 0;
+      border-top: 1px solid rgba(255,255,255,0.12);
+    }
+    .practice-item {
+      display: grid; grid-template-columns: 4rem 1fr; gap: 2rem;
+      padding: 2.25rem 0; border-bottom: 1px solid rgba(255,255,255,0.12);
+    }
+    .practice-num {
+      font-family: var(--font-display); font-size: 0.85rem; font-weight: 500;
+      color: rgba(255,255,255,0.4); letter-spacing: 0.05em; padding-top: 0.45rem;
+    }
+    .practice-name {
+      font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
+      color: #fff; margin-bottom: 0.6rem; letter-spacing: -0.015em;
+    }
+    .practice-name em {
+      font-style: italic; color: var(--accent); font-weight: 500;
+    }
+    .practice-body p {
+      font-size: 0.9375rem; color: rgba(255,255,255,0.7);
+      line-height: 1.75; max-width: 64ch;
+    }
+
+    /* ─── NARRATIVE (consulting-firm Credentials) ─────────────────── */
+    .narrative-body {
+      margin-top: 3rem; max-width: 68ch;
+    }
+    .narrative-body .lead {
+      font-size: 1.1875rem; color: var(--text);
+      line-height: 1.75; margin-bottom: 1.75rem;
+    }
+    .narrative-body p {
+      font-size: 1.0625rem; color: var(--muted);
+      line-height: 1.75; margin-bottom: 1.5rem;
+    }
+    .narrative-body strong {
+      color: var(--accent); font-weight: 600;
+    }
+    .narrative-body .narrative-foot {
+      font-size: 0.9875rem; color: var(--accent); font-style: italic;
+      border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: 0.5rem;
+    }
+
+    /* ─── TOOLS LIST (consulting-firm Software bibliography) ───────── */
+    .tools-list {
+      list-style: none; margin-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .tool-item {
+      display: grid; grid-template-columns: 8rem 1fr auto; gap: 1.5rem;
+      padding: 1.25rem 0; border-bottom: 1px solid var(--border); align-items: baseline;
+    }
+    .tool-name {
+      font-family: var(--font-display); font-size: 1.125rem; font-weight: 600;
+      letter-spacing: -0.015em; color: var(--text);
+    }
+    .tool-tag {
+      font-size: 0.9375rem; color: var(--muted); line-height: 1.5;
+    }
+    .tool-link {
+      font-size: 0.8125rem; color: var(--accent); font-weight: 500;
+      border-bottom: 1px solid var(--border); transition: border-color 0.15s;
+      white-space: nowrap;
+    }
+    .tool-link:hover { border-color: var(--accent); }
+
+    /* Section H2 italic accent — for hero-style emphasis on consulting site */
+    h2 em {
+      font-family: var(--font-display); font-style: italic;
+      color: var(--accent); font-weight: 500;
+    }
+    .section-dark h2 em { color: rgba(255,255,255,0.85); }
+
+    @media (max-width: 768px) {
+      .practice-item { grid-template-columns: 1fr; gap: 0.5rem; }
+      .practice-num { padding-top: 0; }
+      .tool-item { grid-template-columns: 1fr; gap: 0.4rem; }
+    }
+
     /* ─── FOOTER ─────────────────────────────────────────────────── */
     .footer { padding: 3rem 0 2.5rem; border-top: 1px solid var(--border); }
     .footer-inner {
@@ -346,7 +568,12 @@
   <!-- NAV -->
   <nav class="nav" id="nav">
     <div class="nav-inner">
-      <a href="#" class="nav-brand"><img src="images/wordmark-teal.svg" alt="SIM DAD LLC" class="nav-wordmark"></a>
+      <a href="#" class="nav-brand">
+        <picture>
+          <source srcset="images/wordmark-7BA1B8.svg" media="(prefers-color-scheme: dark)">
+          <img src="images/wordmark-1E3A4A.svg" alt="SIM DAD LLC" class="nav-wordmark">
+        </picture>
+      </a>
       <div class="nav-links">
         <a href="#services">Services</a>
         <a href="#about">About</a>
@@ -360,80 +587,98 @@
   </nav>
 
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <span class="hero-eyebrow">Communication consulting &middot; Research &middot; Data analysis</span>
-      <h1>Make sure your message <em>lands</em>.</h1>
-      <p class="hero-sub">
-        SIM DAD LLC is a communication consulting practice led by Dr. Alex P. Leith, Associate Professor
-        at SIUE. We help organizations audit and strengthen their external communications &mdash; websites,
-        press materials, social media, reports &mdash; using the same research methods behind 24 peer-reviewed
-        publications. Whether you need a one-time audit or ongoing advisory, we meet you where you are.
-      </p>
-      <div class="hero-actions">
-        <a href="#work" class="btn btn-primary btn-lg">Get in touch &rarr;</a>
-        <a href="#services" class="btn btn-ghost btn-lg">What we do</a>
-      </div>
-    </div>
-  </section>
+  <!-- ISSUE MARKER -->
+  <div class="issue-marker">SIM DAD LLC &middot; A practice statement &middot; May 2026</div>
 
 
-  <!-- SERVICES -->
+  <!-- OPENING -->
+  <header class="opening">
+    <h1>Make sure your<br>message <em>lands</em>.</h1>
+    <div class="byline">A communication consulting practice &middot; Edwardsville, IL</div>
+  </header>
+
+
+  <!-- LEDE -->
+  <article class="manuscript">
+    <p class="lede"><span class="lede-opener">SIM DAD LLC is a</span> communication consulting practice led by Dr. Alex P. Leith, Associate Professor at SIUE. We help organizations audit and strengthen their external communications, including websites, press materials, social media, and reports, using the same research methods behind <strong>24 peer-reviewed publications</strong>. Whether you need a one-time audit or ongoing advisory, we meet you where you are.</p>
+
+    <p>SIM DAD stands for <em>Social and Interactive Media Data Analysis and Design</em>. We started as a research operation, and that foundation shows up in everything we do: structured methods, evidence-based recommendations, and findings that hold up under scrutiny. The work scales to fit the client. A local business sharpening its public-facing messaging gets the same methodological care as a multi-institution research program. The difference is scope, not rigor.</p>
+  </article>
+
+
+  <!-- PULL QUOTE -->
+  <blockquote class="pull-quote">A local business sharpening its messaging gets the same methodological care as a multi-institution research program.</blockquote>
+
+
+  <!-- SECTION I — SERVICES -->
+  <div class="section-marker">
+    <span class="numeral">§ I</span>
+    <div class="heading">Four <em>practice areas</em>.</div>
+  </div>
+
+
+  <!-- SERVICES (existing structure preserved) -->
   <section class="section-dark" id="services">
     <div class="container">
-      <span class="eyebrow">What we do</span>
-      <h2>Consulting services.</h2>
       <p class="section-sub">
-        We help organizations communicate more effectively with their audiences. Our work is grounded
-        in research methods and data analysis, but the deliverables are practical &mdash; clear findings,
-        specific recommendations, and actionable next steps.
+        The work scales to fit the client. Every engagement starts with a conversation about
+        what you actually need, and ends with deliverables you can act on.
       </p>
 
-      <div class="consult-grid">
-        <div class="consult-card">
-          <div class="consult-card-title">Communication Audits</div>
-          <p class="consult-card-desc">
-            We review your external-facing communications &mdash; website copy, press releases, social media,
-            reports, email campaigns &mdash; and deliver a structured assessment of what is working, what is not,
-            and what to change. Grounded in communication research, not guesswork. Suitable for businesses,
-            nonprofits, and institutions of any size.
-          </p>
-        </div>
-        <div class="consult-card">
-          <div class="consult-card-title">Research Consulting</div>
-          <p class="consult-card-desc">
-            Study design, data collection and analysis, survey research, and publication-ready findings.
-            We work with academic teams, nonprofits, media organizations, and companies who need
-            rigorous methods without building an in-house research team.
-          </p>
-        </div>
-        <div class="consult-card">
-          <div class="consult-card-title">Grant Partnerships</div>
-          <p class="consult-card-desc">
-            Available as Co-PI or senior collaborator on federal and foundation grants, particularly
-            NSF programs in HCI, communication, and future-of-work. Established track record:
-            $1.59M awarded, multi-institution consortium managed.
-          </p>
-        </div>
-        <div class="consult-card">
-          <div class="consult-card-title">Speaking &amp; Workshops</div>
-          <p class="consult-card-desc">
-            Conference presentations, organizational workshops, and training sessions on social media
-            strategy, communication research methods, and applied data analysis. Tailored to your
-            audience &mdash; from executive briefings to hands-on team workshops.
-          </p>
-        </div>
-      </div>
+      <ol class="practice-list">
+        <li class="practice-item">
+          <div class="practice-num">01</div>
+          <div class="practice-body">
+            <h3 class="practice-name"><em>Communication audits.</em></h3>
+            <p>We review your external-facing communications, including website copy, press releases, social media,
+              reports, and email campaigns, and deliver a structured assessment of what is working,
+              what is not, and what to change. Grounded in communication research, not guesswork.
+              Suitable for businesses, nonprofits, and institutions of any size.</p>
+          </div>
+        </li>
+        <li class="practice-item">
+          <div class="practice-num">02</div>
+          <div class="practice-body">
+            <h3 class="practice-name"><em>Research consulting.</em></h3>
+            <p>Study design, data collection and analysis, survey research, and publication-ready
+              findings. We work with academic teams, nonprofits, media organizations, and companies
+              who need rigorous methods without building an in-house research team.</p>
+          </div>
+        </li>
+        <li class="practice-item">
+          <div class="practice-num">03</div>
+          <div class="practice-body">
+            <h3 class="practice-name"><em>Grant partnerships.</em></h3>
+            <p>Available as Co-PI or senior collaborator on federal and foundation grants,
+              particularly NSF programs in HCI, communication, and future-of-work. Established
+              track record: $1.59M awarded, multi-institution consortium managed across MSU, SIUE,
+              and four partner institutions.</p>
+          </div>
+        </li>
+        <li class="practice-item">
+          <div class="practice-num">04</div>
+          <div class="practice-body">
+            <h3 class="practice-name"><em>Speaking &amp; workshops.</em></h3>
+            <p>Conference presentations, organizational workshops, and training sessions on
+              social media strategy, communication research methods, and applied data analysis.
+              Tailored to your audience: from executive briefings to hands-on team workshops.</p>
+          </div>
+        </li>
+      </ol>
     </div>
   </section>
 
 
-  <!-- ABOUT -->
+  <!-- SECTION II — ABOUT -->
+  <div class="section-marker">
+    <span class="numeral">§ II</span>
+    <div class="heading">About <em>SIM DAD LLC</em>.</div>
+  </div>
+
+
+  <!-- ABOUT (existing structure preserved) -->
   <section class="section-alt" id="about">
     <div class="container">
-      <span class="eyebrow">Who we are</span>
-      <h2>About SIM DAD LLC.</h2>
       <div class="about-grid">
         <div class="about-body">
           <p>
@@ -477,121 +722,125 @@
   </section>
 
 
-  <!-- CREDENTIALS -->
+  <!-- SECTION III — CREDENTIALS -->
+  <div class="section-marker">
+    <span class="numeral">§ III</span>
+    <div class="heading"><em>Built</em> on research.</div>
+  </div>
+
+
+  <!-- CREDENTIALS (existing structure preserved) -->
   <section class="section" id="scale">
     <div class="container">
-      <span class="eyebrow">Credentials</span>
-      <h2>Built on research.</h2>
-      <div class="scale-grid">
-        <div class="scale-card">
-          <div class="scale-num">321<span>M+</span></div>
-          <div class="scale-label">Twitch Messages Collected</div>
-          <p class="scale-desc">Distributed Raspberry Pi + PostgreSQL pipeline logging 117,943 channels over one month. Source for dissertation and all subsequent Twitch publications.</p>
-          <p class="scale-gloss">Demonstrates pipeline-scale data engineering: distributed collection, structured storage, and analysis across a dataset most academic labs cannot build.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">2.8<span>M+</span></div>
-          <div class="scale-label">Tweets in Research Corpora</div>
-          <p class="scale-desc">1.43M VRChat tweets and 1.41M remote work tweets from 887,888 unique users &mdash; structured in PostgreSQL, analyzed via STM and NLP pipelines.</p>
-          <p class="scale-gloss">End-to-end NLP pipelines from raw collection through structural topic modeling, at the scale needed for generalizable findings.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">5<span>M+</span></div>
-          <div class="scale-label">Avatar Records &mdash; Riot Games</div>
-          <p class="scale-desc">Formal data-access agreement with Riot Games to analyze proprietary League of Legends player data. Findings published in peer-reviewed journal.</p>
-          <p class="scale-gloss">Demonstrates institutional trust, IRB governance competence, and the ability to negotiate and execute formal agreements with major technology companies.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">$1.59<span>M</span></div>
-          <div class="scale-label">NSF FW-HTF-R &mdash; Co-PI</div>
-          <p class="scale-desc">Led project teams of 4&ndash;8 within a 30+ person cross-institutional consortium spanning MSU, SIUE, and 4 partner institutions. 8+ publications.</p>
-          <p class="scale-gloss">Demonstrates grant writing success, program leadership, and multi-institution coordination at the consortium level &mdash; a track record that speaks to program officers.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">2,448<span>+</span></div>
-          <div class="scale-label">Survey Respondents</div>
-          <p class="scale-desc">Large-scale behavioral surveys on virtual meeting platform adoption, Zoom fatigue, social interaction anxiety, and avatar use across multiple studies.</p>
-          <p class="scale-gloss">Population-level survey research at scale &mdash; from instrument design through analysis and peer-reviewed publication.</p>
-        </div>
-        <div class="scale-card">
-          <div class="scale-num">5</div>
-          <div class="scale-label">Linked Studies &mdash; NSF Program</div>
-          <p class="scale-desc">NLP/STM &rarr; large-scale survey &rarr; semi-structured interviews &rarr; controlled experiment &rarr; VR prototype user testing. Full mixed-methods pipeline.</p>
-          <p class="scale-gloss">Demonstrates full methodological breadth: a single research program spanning computational, survey, qualitative, experimental, and prototype stages.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
-
-  <!-- GET IN TOUCH -->
-  <section class="section-dark" id="work">
-    <div class="container">
-      <span class="eyebrow">Get started</span>
-      <h2>Let&rsquo;s talk.</h2>
-      <p class="section-sub">
-        Tell us what you are working on. Whether it is a communication audit for your business,
-        a research collaboration, or a grant partnership &mdash; we respond to every inquiry.
-      </p>
-
-      <div class="consult-contact" style="margin-top:2.5rem; padding-top:0; border-top:none;">
-        <p class="consult-contact-text">
-          Email is the best way to reach us. Describe what you need and we will get back to you
-          with next steps, a scope estimate, and pricing.
+      <div class="narrative-body">
+        <p class="lead">
+          We&rsquo;ve collected <strong>321 million</strong> Twitch messages across <strong>117,943</strong> channels.
+          We&rsquo;ve built research corpora of <strong>2.8 million</strong> tweets across <strong>887,888</strong> unique users.
+          We&rsquo;ve negotiated formal data agreements with <strong>Riot Games</strong> for League of Legends
+          avatar data and with <strong>VRChat</strong> for social VR research. We co-led a
+          <strong>$1.59 million</strong> NSF Future-of-Work consortium across MSU, SIUE, and four
+          partner institutions, leading to <strong>eight peer-reviewed publications</strong>.
         </p>
-        <a href="mailto:hello@simdadllc.com" class="btn btn-ghost-white btn-lg">hello@simdadllc.com &rarr;</a>
+        <p>
+          Our surveys have reached <strong>2,448+ respondents</strong> across studies of virtual
+          meetings, Zoom fatigue, social interaction anxiety, and avatar use. Our methodology spans
+          NLP and structural topic modeling, large-scale survey, semi-structured interviews,
+          controlled experiments, and VR prototype user testing: a full mixed-methods pipeline
+          operating end-to-end on a single research program.
+        </p>
+        <p class="narrative-foot">
+          The numbers are the substrate. The methods are the practice. Both come with us into every
+          consulting engagement.
+        </p>
       </div>
     </div>
   </section>
 
 
-  <!-- SOFTWARE -->
+  <!-- ORNAMENT + SIGNATURE -->
+  <div class="ornament" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 24" fill="currentColor" style="width:8em;height:1.6em;display:inline-block;vertical-align:middle;">
+      <line x1="0"  y1="12" x2="50" y2="12" stroke="currentColor" stroke-width="1" opacity="0.55"/>
+      <line x1="70" y1="12" x2="120" y2="12" stroke="currentColor" stroke-width="1" opacity="0.55"/>
+      <g transform="translate(60, 12)">
+        <path d="M0 -7 L7 0 L0 7 L-7 0 Z"/>
+      </g>
+    </svg>
+  </div>
+  <div class="signature">
+    <img src="images/headshot.png" alt="Alex P. Leith" class="signature-avatar">
+    SIM DAD LLC &middot; Edwardsville, Illinois &middot; May 2026
+  </div>
+
+
+  <!-- COLOPHON: GET IN TOUCH -->
+  <section class="colophon" id="work">
+    <div class="colophon-row">
+      <span class="colophon-label">Get in touch</span>
+    </div>
+    <p style="font-family:var(--font-display);font-size:1.0625rem;color:var(--text);margin-bottom:1.25rem;">Tell us what you are working on. Whether it is a communication audit, a research collaboration, or a grant partnership, we respond to every inquiry. Email is the best way. Describe what you need and we will get back with next steps, a scope estimate, and pricing.</p>
+    <p><strong style="color:var(--accent);">General inquiries</strong> &middot; <a href="mailto:hello@simdadllc.com" style="color:var(--accent);border-bottom:1px solid var(--border);">hello@simdadllc.com</a></p>
+    <p><strong style="color:var(--accent);">Press</strong> &middot; <a href="mailto:ap@simdadllc.com" style="color:var(--accent);border-bottom:1px solid var(--border);">ap@simdadllc.com</a></p>
+  </section>
+
+
+  <!-- SECTION IV — SOFTWARE -->
+  <div class="section-marker">
+    <span class="numeral">§ IV</span>
+    <div class="heading">Tools we <em>publish</em>.</div>
+  </div>
+
+
+  <!-- SOFTWARE (existing structure preserved) -->
   <section class="section" id="products">
     <div class="container">
-      <span class="eyebrow">Software</span>
-      <h2>Tools we build.</h2>
       <p class="section-sub">
-        We also build software that grew out of our research work. Each product has its own site
-        with full details, demos, and pricing.
+        Our research practice produces software that makes sense to release publicly.
+        Each tool lives at its own site with full details and pricing.
       </p>
 
-      <div class="products-grid" style="grid-template-columns: repeat(4, 1fr);">
-
-        <div class="product-card product-card-ibis">
-          <div class="product-name">Ibis</div>
-          <div class="product-tag">Local AI transcription</div>
-          <a href="https://useibis.app" target="_blank" rel="noopener" class="product-link">useibis.app &rarr;</a>
-        </div>
-
-        <div class="product-card product-card-tass">
-          <div class="product-name">TASS</div>
-          <div class="product-tag">No-code text analysis</div>
-          <a href="https://usetass.app" target="_blank" rel="noopener" class="product-link">usetass.app &rarr;</a>
-        </div>
-
-        <div class="product-card product-card-lector">
-          <div class="product-name">Lector</div>
-          <div class="product-tag">Voice-enabled writing</div>
-          <a href="https://uselector.app" target="_blank" rel="noopener" class="product-link">uselector.app &rarr;</a>
-        </div>
-
-        <div class="product-card product-card-orator">
-          <div class="product-name">Orator</div>
-          <div class="product-tag">Markdown to narrated video</div>
-          <a href="https://useorator.app" target="_blank" rel="noopener" class="product-link">useorator.app &rarr;</a>
-        </div>
-
-      </div>
-
+      <ul class="tools-list">
+        <li class="tool-item">
+          <span class="tool-name">Ibis</span>
+          <span class="tool-tag">Local transcription for Windows. One-time purchase.</span>
+          <a class="tool-link" href="https://useibis.app" target="_blank" rel="noopener">useibis.app &rarr;</a>
+        </li>
+        <li class="tool-item">
+          <span class="tool-name">Lector</span>
+          <span class="tool-tag">Voice-enabled writing environment with read-aloud.</span>
+          <a class="tool-link" href="https://uselector.app" target="_blank" rel="noopener">uselector.app &rarr;</a>
+        </li>
+        <li class="tool-item">
+          <span class="tool-name">TASS</span>
+          <span class="tool-tag">No-code text analysis for social scientists.</span>
+          <a class="tool-link" href="https://usetass.app" target="_blank" rel="noopener">usetass.app &rarr;</a>
+        </li>
+        <li class="tool-item">
+          <span class="tool-name">Orator</span>
+          <span class="tool-tag">Markdown documents to narrated video.</span>
+          <a class="tool-link" href="https://useorator.app" target="_blank" rel="noopener">useorator.app &rarr;</a>
+        </li>
+        <li class="tool-item">
+          <span class="tool-name">Resero</span>
+          <span class="tool-tag">Free MIT-licensed decrypter for age-encrypted files.</span>
+          <a class="tool-link" href="https://useresero.app" target="_blank" rel="noopener">useresero.app &rarr;</a>
+        </li>
+      </ul>
     </div>
   </section>
 
 
-  <!-- TEAM -->
+  <!-- SECTION V — TEAM -->
+  <div class="section-marker">
+    <span class="numeral">§ V</span>
+    <div class="heading"><em>Leadership</em>.</div>
+  </div>
+
+
+  <!-- TEAM (existing structure preserved) -->
   <section class="section-alt" id="team">
     <div class="container">
-      <span class="eyebrow">Our team</span>
-      <h2>Leadership.</h2>
       <div class="team-grid">
 
         <div>
