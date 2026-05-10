@@ -341,6 +341,11 @@
     .team-links-pair .sidebar-block { padding: 0; border: none; }
     .team-links-pair .sidebar-block h3 { margin-bottom: 0.5rem; }
     .team-links-pair .sidebar-block a { font-size: 0.8125rem; }
+    .team-headshot {
+      width: 140px; height: 140px; border-radius: 50%;
+      object-fit: cover; display: block;
+      border: 1px solid var(--border); margin-bottom: 1.5rem;
+    }
 
     .partnerships { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 2rem; }
     .partner-card { padding: 1.25rem; border: 1px solid var(--border); border-radius: var(--radius); }
@@ -886,6 +891,10 @@
       <div class="team-grid">
 
         <div>
+          <img src="images/ap-headshot-256.png"
+               srcset="images/ap-headshot-256.png 1x, images/ap-headshot-512.png 2x"
+               alt="Alex P. Leith" class="team-headshot"
+               loading="lazy" decoding="async" width="140" height="140">
           <div class="team-role">Founder</div>
           <div class="team-name">Alex P. Leith</div>
           <p class="team-bio">
@@ -952,6 +961,10 @@
         </div>
 
         <div>
+          <img src="images/jv-headshot-256.png"
+               srcset="images/jv-headshot-256.png 1x, images/jv-headshot-512.png 2x"
+               alt="Janet V. Leith" class="team-headshot"
+               loading="lazy" decoding="async" width="140" height="140">
           <div class="team-role">Chief Operating Officer</div>
           <div class="team-name">Janet V. Leith</div>
           <p class="team-bio">
