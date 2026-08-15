@@ -62,7 +62,7 @@ Marketing claims about accuracy, encryption, or methodology are backed by public
 
 ## License posture
 
-Application binaries are commercial. The TASS Community Edition, the open lexicons ([tass-lexicons](https://github.com/SIM-DAD/tass-lexicons)), and the Velamen engine are open source. Encryption across the suite uses the [age format](https://age-encryption.org) with OS-native key storage; the user holds the keys and can recover their data without us.
+Application binaries are commercial. The TASS Community Edition, the open lexicons ([tass-lexicons](https://github.com/SIM-DAD/tass-lexicons)), and the Velamen engine are open source. Encryption across the suite is handled by Clavis (`@simdad/clavis`), our shared module wrapping the [age format](https://age-encryption.org) with OS-native key storage; the user holds the keys and can recover their data without us.
 
 ---
 
