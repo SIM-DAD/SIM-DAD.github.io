@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Media Kit — SIM DAD LLC</title>
   <link rel="icon" type="image/svg+xml" href="../images/logo.svg">
-  <meta name="description" content="Brand assets, logos, product descriptions, and press materials for SIM DAD LLC and its products: Ibis, TASS, and Lector.">
+  <meta name="description" content="Brand assets, logos, product descriptions, and press materials for SIM DAD LLC and its products: TASS, Resero, Ibis, Lector, Orator, and Velamen.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
@@ -28,6 +28,8 @@
       --tass:    #2E7D5E;
       --lector:  #5C4B8A;
       --orator:  #B45309;
+      --resero:  #44444C;
+      --velamen: #6D597A;
     }
 
     @media (prefers-color-scheme: dark) {
@@ -158,10 +160,12 @@
     .pcard::before {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
     }
-    .pcard-ibis::before   { background: var(--ibis); }
-    .pcard-tass::before   { background: var(--tass); }
-    .pcard-lector::before { background: var(--lector); }
-    .pcard-orator::before { background: var(--orator); }
+    .pcard-ibis::before    { background: var(--ibis); }
+    .pcard-tass::before    { background: var(--tass); }
+    .pcard-lector::before  { background: var(--lector); }
+    .pcard-orator::before  { background: var(--orator); }
+    .pcard-resero::before  { background: var(--resero); }
+    .pcard-velamen::before { background: var(--velamen); }
     .pcard-body { padding: 2rem; }
     .pcard-name { font-size: 1.25rem; font-weight: 800; letter-spacing: -0.025em; margin-bottom: 0.25rem; }
     .pcard-tag  { font-size: 0.75rem; color: var(--muted); font-weight: 500; margin-bottom: 1rem; }
@@ -364,7 +368,7 @@
       <span class="eyebrow">Typography</span>
       <h2>Plus Jakarta Sans.</h2>
       <p class="section-sub">
-        A single typeface across all four sites, differentiated by weight and size.
+        A single typeface across all product sites, differentiated by weight and size.
         800 for headlines, 400&ndash;600 for body and interface elements.
       </p>
       <div class="type-grid">
@@ -482,35 +486,55 @@
       <span class="eyebrow">Products</span>
       <h2 style="color:#fff;">The product portfolio.</h2>
       <p class="section-sub" style="color:rgba(255,255,255,0.5);">
-        Four commercial desktop applications, each built from our own research needs. All run
-        entirely on the user's machine &mdash; no cloud, no telemetry, no subscriptions.
+        Six products, each built from our own research needs. Desktop applications run
+        entirely on the user's machine: no cloud dependency, no telemetry, no subscriptions.
+        One-time purchase with included point updates.
       </p>
       <div class="product-grid" style="margin-top:3rem;">
-        <div class="pcard pcard-ibis">
-          <div class="pcard-body">
-            <div class="pcard-name">Ibis</div>
-            <div class="pcard-tag">Automatic transcription &middot; useibis.app</div>
-            <div class="pcard-desc">
-              Watches a folder and auto-transcribes audio files using local Whisper models.
-              No cloud, no API keys. Supports USB recorders and removable devices.
-            </div>
-            <div class="pcard-meta">
-              <strong>Pricing:</strong> Personal $24 / Pro $49 (one-time)<br>
-              <strong>Platforms:</strong> Windows, macOS (coming soon)
-            </div>
-          </div>
-        </div>
         <div class="pcard pcard-tass">
           <div class="pcard-body">
             <div class="pcard-name">TASS</div>
             <div class="pcard-tag">Text Analysis Support Software &middot; usetass.app</div>
             <div class="pcard-desc">
-              Dictionary-based text scoring with group comparisons, statistical tests,
-              and publication-ready exports. Built for social scientists and journalists.
+              Dictionary-based text scoring that is deterministic and provenance-first: every run
+              writes a manifest with versions, hashes, and citations. The free, open-source
+              Community Edition (Apache-2.0) carries the engine, CLI, and MCP server; the GUI
+              Edition adds a no-code workbench with inferential statistics, publication charts,
+              and APA-ready reports.
             </div>
             <div class="pcard-meta">
-              <strong>Pricing:</strong> Individual $49.99 / Team 5 $199.99 (one-time)<br>
-              <strong>Platforms:</strong> Windows, macOS (coming soon)
+              <strong>Pricing:</strong> Community free / $149 academic / $59 student / $399 professional / $499 five-seat lab (one-time)<br>
+              <strong>Platforms:</strong> Windows (GUI Edition); Windows, macOS, Linux (Community)
+            </div>
+          </div>
+        </div>
+        <div class="pcard pcard-resero">
+          <div class="pcard-body">
+            <div class="pcard-name">Resero</div>
+            <div class="pcard-tag">Research workbench &middot; useresero.app</div>
+            <div class="pcard-desc">
+              A desktop workbench for sensitive research material, with per-file secure tagging,
+              on-demand encryption at rest, and local-only AI routing for protected files. Hosts
+              the Ibis, Lector, Orator, and Velamen tools; TASS is its companion analysis
+              instrument, a separate product.
+            </div>
+            <div class="pcard-meta">
+              <strong>Pricing:</strong> $199 one-time<br>
+              <strong>Platforms:</strong> Windows, macOS (public beta ahead of launch)
+            </div>
+          </div>
+        </div>
+        <div class="pcard pcard-ibis">
+          <div class="pcard-body">
+            <div class="pcard-name">Ibis</div>
+            <div class="pcard-tag">Automatic transcription &middot; useibis.app</div>
+            <div class="pcard-desc">
+              Watches a folder and auto-transcribes audio using local Whisper models. No cloud,
+              no API keys. Originals are kept; encryption is non-destructive and optional.
+            </div>
+            <div class="pcard-meta">
+              <strong>Pricing:</strong> Personal $24 / Pro $59 (one-time)<br>
+              <strong>Platforms:</strong> Windows, macOS
             </div>
           </div>
         </div>
@@ -519,12 +543,13 @@
             <div class="pcard-name">Lector</div>
             <div class="pcard-tag">Manuscript editor with read-aloud &middot; uselector.app</div>
             <div class="pcard-desc">
-              Distraction-free Markdown editor with word-by-word TTS and voice cloning.
-              12 built-in voices (Kokoro) plus custom voice cloning (F5-TTS).
+              Distraction-free Markdown manuscript editor with source and visual modes and
+              built-in read-aloud for proofing by ear. Offline neural voices are on the roadmap
+              as a free update.
             </div>
             <div class="pcard-meta">
-              <strong>Pricing:</strong> $29 one-time, up to 3 devices<br>
-              <strong>Platforms:</strong> Windows, macOS (coming soon)
+              <strong>Pricing:</strong> $29 one-time<br>
+              <strong>Platforms:</strong> Windows, macOS (public beta ahead of launch)
             </div>
           </div>
         </div>
@@ -533,12 +558,28 @@
             <div class="pcard-name">Orator</div>
             <div class="pcard-tag">Document-to-video pipeline &middot; useorator.app</div>
             <div class="pcard-desc">
-              Turns markdown documents into narrated, camera-ready videos using local voice
-              cloning. One command: parse, narrate, render slides, compose MP4.
+              Turns Markdown documents into narrated, camera-ready videos with local
+              text-to-speech. One pipeline: parse, narrate, render slides, compose MP4.
             </div>
             <div class="pcard-meta">
-              <strong>Pricing:</strong> Personal $79 / Pro $149 (one-time)<br>
-              <strong>Platforms:</strong> Windows, macOS (coming soon)
+              <strong>Pricing:</strong> $129 one-time (waitlist honored at $79) / $449 five-seat team<br>
+              <strong>Platforms:</strong> Windows, macOS (public beta ahead of launch)
+            </div>
+          </div>
+        </div>
+        <div class="pcard pcard-velamen">
+          <div class="pcard-body">
+            <div class="pcard-name">Velamen</div>
+            <div class="pcard-tag">Data minimization aid &middot; free and open source</div>
+            <div class="pcard-desc">
+              Helps strip identifying data from research material before it is shared. Built with
+              the intention to support adherence to privacy standards; it does not promise
+              compliance outcomes. The engine, @simdad/wordlist-core, is open source (Apache-2.0)
+              on GitHub and npm.
+            </div>
+            <div class="pcard-meta">
+              <strong>Pricing:</strong> Name-your-price FOSS<br>
+              <strong>Platforms:</strong> Runs inside Resero; engine anywhere Node runs
             </div>
           </div>
         </div>
@@ -563,18 +604,20 @@
             <strong>Medium (2 sentences):</strong> SIM DAD LLC is a research and consulting practice
             led by Alex P. Leith, Associate Professor at SIUE, specializing in social and interactive
             media, human-computer interaction, and large-scale behavioral data analysis.
-            The company also develops commercial desktop applications &mdash; Ibis, TASS,
-            Lector, and Orator &mdash; built from its own research needs and available for purchase.
+            The company also develops desktop research software built from its own research needs:
+            TASS, Resero, Ibis, Lector, Orator, and the open-source Velamen.
           </p>
           <p>
-            <strong>Full:</strong> SIM DAD &mdash; Social and Interactive Media Data Analysis and
-            Design &mdash; is a research and consulting practice that combines academic rigor with
+            <strong>Full:</strong> SIM DAD (Social and Interactive Media Data Analysis and
+            Design) is a research and consulting practice that combines academic rigor with
             applied delivery. Led by Alex P. Leith, the practice designs studies, runs data pipelines
             across hundreds of millions of records, and produces findings that hold up to peer review.
-            Its software portfolio grew directly from research needs: Ibis for automatic transcription,
-            TASS for dictionary-based text analysis, Lector for manuscript editing with voice
-            cloning, and Orator for document-to-video production. All four products run entirely
-            on the user's machine with no cloud dependency.
+            Its software portfolio grew directly from research needs: TASS for dictionary-based text
+            analysis, Resero as a secure research workbench, Ibis for automatic transcription, Lector
+            for manuscript editing with read-aloud, Orator for document-to-video production, and
+            Velamen for data minimization. Every desktop product runs entirely on the user's machine
+            with no cloud dependency, sold as a one-time purchase rather than a subscription, and the
+            TASS Community Edition and Velamen engine are free, open-source software.
           </p>
         </div>
         <div class="boiler-sidebar">
@@ -598,9 +641,17 @@
           </div>
           <div class="boiler-block">
             <h3>Product sites</h3>
-            <a href="https://useibis.app">useibis.app</a>
             <a href="https://usetass.app">usetass.app</a>
+            <a href="https://useresero.app">useresero.app</a>
+            <a href="https://useibis.app">useibis.app</a>
             <a href="https://uselector.app">uselector.app</a>
+            <a href="https://useorator.app">useorator.app</a>
+          </div>
+          <div class="boiler-block">
+            <h3>Open source</h3>
+            <a href="https://github.com/SIM-DAD/tass">TASS Community Edition</a>
+            <a href="https://github.com/SIM-DAD/wordlist-core">Velamen engine (wordlist-core)</a>
+            <a href="https://github.com/SIM-DAD/tass-lexicons">T-Lex dictionary registry</a>
           </div>
         </div>
       </div>
