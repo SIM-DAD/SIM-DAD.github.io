@@ -10,7 +10,7 @@
 
 We ship desktop applications that do their work on the user&rsquo;s machine. No cloud round-trips, no account required, no telemetry. The category we serve is people whose source material has reasons to stay where it was authored: researchers under IRB, journalists with confidential sources, attorneys with privileged correspondence, clinicians with case notes, writers under embargo.
 
-Each product is a single purchase with a perpetual license and runs offline after install.
+Each desktop product is a single purchase with a perpetual license.
 
 ---
 
@@ -24,7 +24,7 @@ Dictionary-based text scoring that is deterministic and provenance-first: every 
 
 ### Resero: Workbench for sensitive material
 
-A desktop workbench for anyone whose material must stay on their own machine. Per-file secure tagging, on-demand encryption at rest, and local-only AI routing for protected files. Bundles the Ibis, Lector, Orator, and Velamen applications, each also sold standalone; TASS is its companion analysis instrument, a separate product.
+A desktop workbench for anyone whose material must stay on their own machine. Per-file secure tagging, on-demand encryption at rest, and local-only AI routing for protected files. Bundles the Ibis, Lector, Orator, and Velamen applications. Ibis, Lector, and Orator are also sold standalone; Velamen comes only with Resero. TASS is its companion analysis instrument, a separate product.
 
 → [useresero.app](https://useresero.app)
 
@@ -48,7 +48,7 @@ Turns Markdown documents into narrated, camera-ready videos with local text-to-s
 
 ### Velamen: Data minimization aid
 
-Helps strip identifying data from research material before it is shared. Built with the intention to support adherence to privacy standards; it does not promise compliance outcomes. Name-your-price, free software; the engine, `@simdad/wordlist-core`, is open source (Apache-2.0) on GitHub and npm.
+Helps strip identifying data from research material before it is shared. Built with the intention to support adherence to privacy standards; it does not promise compliance outcomes. It comes with Resero; the engine, `@simdad/wordlist-core`, is open source (Apache-2.0) on GitHub and npm.
 
 → [github.com/SIM-DAD/wordlist-core](https://github.com/SIM-DAD/wordlist-core)
 
@@ -56,7 +56,7 @@ Helps strip identifying data from research material before it is shared. Built w
 
 ## Substantiation
 
-Marketing claims about accuracy, encryption, or methodology are backed by public technical reports: we publish before we promote. Reports for the current product line are being prepared for each release and will be listed here with DOIs as they publish. Earlier reports on Zenodo describe superseded pre-release versions and should not be read against the current builds.
+Public technical reports on accuracy, encryption, and methodology for the current product line are being prepared for each release and will be listed here with DOIs as they publish. Earlier reports on Zenodo describe superseded pre-release versions and should not be read against the current builds.
 
 ---
 
