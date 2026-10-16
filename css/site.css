@@ -302,7 +302,7 @@ h3 { font-family: var(--serif); font-size: 1.375rem; font-weight: 650; line-heig
 h1 em, h2 em { font-style: normal; font-weight: inherit; color: inherit; }
 
 /* media kit type specimens */
-.specimen-xl { font-family: var(--sans); font-weight: 800; font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.05; margin-top: 0.35rem; }
-.specimen-lg { font-family: var(--sans); font-weight: 800; font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.15; margin-top: 0.35rem; }
-.specimen-body { font-family: var(--sans); font-size: 1rem; line-height: 1.75; margin-top: 0.35rem; max-width: 60ch; }
-.specimen-sm { font-family: var(--sans); font-weight: 700; font-size: 0.8125rem; margin-top: 0.35rem; }
+.specimen-xl { font-family: var(--serif); font-weight: 600; font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.05; margin-top: 0.35rem; }
+.specimen-lg { font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.15; margin-top: 0.35rem; }
+.specimen-body { font-family: var(--serif); font-size: 1.1875rem; line-height: 1.6; margin-top: 0.35rem; max-width: 60ch; }
+.specimen-sm { font-family: var(--sans); font-weight: 400; font-size: 0.9375rem; line-height: 1.5; margin-top: 0.35rem; }
