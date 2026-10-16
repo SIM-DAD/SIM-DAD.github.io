@@ -306,3 +306,22 @@ h1 em, h2 em { font-style: normal; font-weight: inherit; color: inherit; }
 .specimen-lg { font-family: var(--serif); font-weight: 600; font-size: clamp(1.5rem, 3vw, 2.25rem); line-height: 1.15; margin-top: 0.35rem; }
 .specimen-body { font-family: var(--serif); font-size: 1.1875rem; line-height: 1.6; margin-top: 0.35rem; max-width: 60ch; }
 .specimen-sm { font-family: var(--sans); font-weight: 400; font-size: 0.9375rem; line-height: 1.5; margin-top: 0.35rem; }
+
+/* ---------- analytics consent banner (index.html) ----------
+   The sheet's own tokens: paper ground, a proof-red top rule, the Accept action in proof red.
+   Display stays inline (display:none) because the consent script toggles it to flex. */
+#cookie-banner {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999;
+  gap: 1rem; padding: 1rem 1.5rem; align-items: center; justify-content: space-between;
+  background: var(--paper); color: var(--ink); border-top: 2px solid var(--proof);
+  font-family: var(--sans); font-size: 0.9375rem; line-height: 1.5;
+}
+#cookie-banner a { color: var(--ink); text-decoration: underline; }
+#cookie-banner button {
+  padding: 0.5rem 1rem; border-radius: 2px; cursor: pointer;
+  font-family: var(--sans); font-size: 0.9375rem;
+}
+#cookie-decline { border: 1px solid var(--note); background: transparent; color: var(--ink); }
+#cookie-accept { border: 1px solid var(--proof); background: var(--proof); color: var(--paper); }
+#cookie-banner a:focus-visible, #cookie-banner button:focus-visible { outline: 2px solid var(--proof); outline-offset: 2px; }
+@media (max-width: 40rem) { #cookie-banner { flex-direction: column; align-items: flex-start; } }
