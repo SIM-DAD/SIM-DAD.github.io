@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SIM DAD LLC — Communication Consulting &amp; Research</title>
+  <title>SIM DAD LLC · Communication Consulting &amp; Research</title>
   <link rel="icon" type="image/svg+xml" href="images/logo-teal.svg">
   <meta name="description" content="SIM DAD LLC is a communication consulting practice offering external communication audits, research consulting, and data analysis. Led by Dr. Alex P. Leith, Associate Professor at SIUE.">
-  <meta property="og:title" content="SIM DAD LLC — Communication Consulting &amp; Research">
+  <meta property="og:title" content="SIM DAD LLC · Communication Consulting &amp; Research">
   <meta property="og:description" content="Communication audits, research consulting, data analysis, and grant partnerships. We help organizations communicate more effectively with their audiences.">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://simdadllc.com/images/social-share.png">
@@ -67,7 +67,7 @@
       --accent:    #1E3A4A;
       --accent-h:  #162C3A;
       --text:      #0F0F0F;
-      --muted:     #6B7280;
+      --muted:     #586070;
       --bg:        #FFFFFF;
       --surface:   #F7F7F8;
       --border:    #E4E4E7;
@@ -367,7 +367,7 @@
     .pubs-more a { color: var(--text); border-bottom: 1px solid var(--border); }
     .pubs-more a:hover { border-color: var(--text); }
 
-    /* ═══ MANUSCRIPT LAYOUT — consulting-white-paper register ═══ */
+    /* ═══ MANUSCRIPT LAYOUT: consulting-white-paper register ═══ */
     .manuscript {
       max-width: 720px; margin: 0 auto; padding: 0 2rem;
       font-family: var(--font-display); color: var(--text);
@@ -487,14 +487,14 @@
     }
     .practice-num {
       font-family: var(--font-display); font-size: 0.85rem; font-weight: 500;
-      color: rgba(255,255,255,0.4); letter-spacing: 0.05em; padding-top: 0.45rem;
+      color: rgba(255,255,255,0.62); letter-spacing: 0.05em; padding-top: 0.45rem;
     }
     .practice-name {
       font-family: var(--font-display); font-size: 1.5rem; font-weight: 600;
       color: #fff; margin-bottom: 0.6rem; letter-spacing: -0.015em;
     }
     .practice-name em {
-      font-style: italic; color: var(--accent); font-weight: 500;
+      font-style: italic; color: #7BA1B8; font-weight: 500;
     }
     .practice-body p {
       font-size: 0.9375rem; color: rgba(255,255,255,0.7);
@@ -544,7 +544,7 @@
     }
     .tool-link:hover { border-color: var(--accent); }
 
-    /* Section H2 italic accent — for hero-style emphasis on consulting site */
+    /* Section H2 italic accent, for hero-style emphasis on consulting site */
     h2 em {
       font-family: var(--font-display); font-style: italic;
       color: var(--accent); font-weight: 500;
@@ -610,6 +610,12 @@
       .hero h1 { font-size: 2.6rem; }
       .hero-actions .btn { width: 100%; justify-content: center; }
     }
+    /* 5:1 floor: the small tracked labels measure below the floor in the muted gray even at 6.3:1 declared,
+       so they take a darker ink in light mode and keep the muted token in dark mode. */
+    .issue-marker, .opening .byline, .colophon-label { color: #4B5563; }
+    @media (prefers-color-scheme: dark) {
+      .issue-marker, .opening .byline, .colophon-label { color: var(--muted); }
+    }
   </style>
 </head>
 <body>
@@ -637,7 +643,7 @@
 
 
   <!-- ISSUE MARKER -->
-  <div class="issue-marker">SIM DAD LLC &middot; A practice statement &middot; May 2026</div>
+  <div class="issue-marker">SIM DAD LLC &middot; A practice statement &middot; October 2026</div>
 
 
   <!-- OPENING -->
@@ -651,7 +657,7 @@
   <article class="manuscript">
     <p class="lede"><span class="lede-opener">SIM DAD LLC is a</span> communication consulting practice led by Dr. Alex P. Leith, Associate Professor at SIUE. We help organizations audit and strengthen their external communications, including websites, press materials, social media, and reports, using the same research methods behind <strong>24 peer-reviewed publications</strong>. Whether you need a one-time audit or ongoing advisory, we meet you where you are.</p>
 
-    <p>SIM DAD stands for <em>Social and Interactive Media Data Analysis and Design</em>. We started as a research operation, and that foundation shows up in everything we do: structured methods, evidence-based recommendations, and findings that hold up under scrutiny. The work scales to fit the client. A local business sharpening its public-facing messaging gets the same methodological care as a multi-institution research program. The difference is scope, not rigor.</p>
+    <p>SIM DAD stands for <em>Social and Interactive Media Data Analysis and Design</em>, and the name describes the work: we study how messages travel through social and interactive media, and we turn that evidence into recommendations a client can act on.</p>
   </article>
 
 
@@ -659,7 +665,7 @@
   <blockquote class="pull-quote">A local business sharpening its messaging gets the same methodological care as a multi-institution research program.</blockquote>
 
 
-  <!-- SECTION I — SERVICES -->
+  <!-- SECTION I: SERVICES -->
   <div class="section-marker">
     <span class="numeral">§ I</span>
     <div class="heading">Four <em>practice areas</em>.</div>
@@ -681,7 +687,7 @@
             <h3 class="practice-name"><em>Communication audits.</em></h3>
             <p>We review your external-facing communications, including website copy, press releases, social media,
               reports, and email campaigns, and deliver a structured assessment of what is working,
-              what is not, and what to change. Grounded in communication research, not guesswork.
+              what is not, and what to change. Grounded in communication research.
               Suitable for businesses, nonprofits, and institutions of any size.</p>
           </div>
         </li>
@@ -718,7 +724,7 @@
   </section>
 
 
-  <!-- SECTION II — ABOUT -->
+  <!-- SECTION II: ABOUT -->
   <div class="section-marker">
     <span class="numeral">§ II</span>
     <div class="heading">About <em>SIM DAD LLC</em>.</div>
@@ -731,7 +737,7 @@
       <div class="about-grid">
         <div class="about-body">
           <p>
-            SIM DAD &mdash; Social and Interactive Media Data Analysis and Design &mdash; is a consulting
+            SIM DAD (Social and Interactive Media Data Analysis and Design) is a consulting
             practice that brings academic research rigor to real-world communication challenges. We started
             as a research operation, and that foundation shows up in everything we do: structured methods,
             evidence-based recommendations, and findings that hold up under scrutiny.
@@ -762,8 +768,8 @@
           </div>
           <div class="sidebar-block">
             <h3>Leadership</h3>
-            <a href="#team">Alex P. Leith &mdash; Founder</a>
-            <a href="#team">Janet V. Leith &mdash; COO</a>
+            <a href="#team">Alex P. Leith, Founder</a>
+            <a href="#team">Janet V. Leith, COO</a>
           </div>
         </div>
       </div>
@@ -771,7 +777,7 @@
   </section>
 
 
-  <!-- SECTION III — CREDENTIALS -->
+  <!-- SECTION III: CREDENTIALS -->
   <div class="section-marker">
     <span class="numeral">§ III</span>
     <div class="heading"><em>Built</em> on research.</div>
@@ -800,8 +806,7 @@
           operating end-to-end on a single research program.
         </p>
         <p class="narrative-foot">
-          The numbers are the substrate. The methods are the practice. Both come with us into every
-          consulting engagement.
+          The same methods come with us into every consulting engagement.
         </p>
       </div>
     </div>
@@ -820,24 +825,24 @@
   </div>
   <div class="signature">
     <img src="images/headshot.png" alt="Alex P. Leith" class="signature-avatar" loading="lazy" decoding="async" width="96" height="96">
-    SIM DAD LLC &middot; Metro East, Illinois &middot; May 2026
+    SIM DAD LLC &middot; Metro East, Illinois &middot; October 2026
   </div>
 
 
-  <!-- SECTION IV — SOFTWARE -->
+  <!-- SECTION IV: SOFTWARE -->
   <div class="section-marker">
     <span class="numeral">§ IV</span>
     <div class="heading">Tools <em>from the work</em>.</div>
   </div>
 
 
-  <!-- SOFTWARE — companion tools that come out of the practice -->
+  <!-- SOFTWARE: companion tools that come out of the practice -->
   <section class="section" id="products">
     <div class="container">
       <p class="section-sub">
         The consulting is what drives the software. A research problem or a client engagement surfaces a
         need we cannot buy off the shelf, so we build the tool for our own work. The suite is in active
-        development: every tool below is <strong>coming soon</strong>, and each site carries a live
+        development: TASS and Lector are in closed beta, the rest are coming soon, and each site carries a live
         development log.
       </p>
 
@@ -852,15 +857,15 @@
         <div class="product-card product-card-tass">
           <div class="product-num">02</div>
           <div class="product-name">TASS</div>
-          <div class="product-tag">Text analysis &middot; no-code &middot; coming soon</div>
+          <div class="product-tag">Text analysis &middot; no-code &middot; closed beta</div>
           <p class="product-desc">No-code text analysis built on open, citable dictionaries, with group comparisons and publication-ready charts. The analysis tool from our own research practice, packaged for social scientists and journalists.</p>
           <a class="product-link" href="https://usetass.app" target="_blank" rel="noopener">usetass.app &rarr;</a>
         </div>
         <div class="product-card product-card-lector">
           <div class="product-num">03</div>
           <div class="product-name">Lector</div>
-          <div class="product-tag">Writing + read-aloud &middot; coming soon</div>
-          <p class="product-desc">A distraction-free writing environment that reads your draft back to you, so you catch what you actually wrote rather than what you meant. Local by default, with an encrypted library.</p>
+          <div class="product-tag">Writing + read-aloud &middot; private beta</div>
+          <p class="product-desc">A distraction-free writing environment that reads your draft back to you, so you catch what you actually wrote rather than what you meant. Local by default.</p>
           <a class="product-link" href="https://uselector.app" target="_blank" rel="noopener">uselector.app &rarr;</a>
         </div>
         <div class="product-card product-card-orator">
@@ -873,8 +878,8 @@
         <div class="product-card product-card-cage">
           <div class="product-num">05</div>
           <div class="product-name">Velamen</div>
-          <div class="product-tag">De-identification &middot; coming soon</div>
-          <p class="product-desc">De-identification you can defend: it strips identifying detail from text and transcripts and keeps a record of what changed, so sensitive material can be shared without exposing the people in it.</p>
+          <div class="product-tag">De-identification &middot; engine open source</div>
+          <p class="product-desc">Finds structured identifiers in text and transcripts, shows every finding for review before it is replaced, and records what was checked and what was found. Built with the intention to support adherence to standards such as HIPAA Safe Harbor, FERPA, and the GDPR; it does not certify compliance.</p>
           <a class="product-link" href="https://github.com/SIM-DAD/wordlist-core" target="_blank" rel="noopener">engine on GitHub &rarr;</a>
         </div>
         <div class="product-card product-card-cage">
@@ -889,7 +894,7 @@
   </section>
 
 
-  <!-- SECTION V — TEAM -->
+  <!-- SECTION V: TEAM -->
   <div class="section-marker">
     <span class="numeral">§ V</span>
     <div class="heading"><em>Leadership</em>.</div>
@@ -915,7 +920,7 @@
             experience spanning proprietary Riot Games data and NSF-funded fieldwork in VRChat. Domain expertise in social VR/XR, parasocial
             media and streaming, virtual meetings and remote work, and NLP and computational text analysis.
             Alex is available for research consulting, speaking engagements, and grant collaborations
-            in these areas &mdash; <a href="mailto:ap@simdadllc.com" style="color:var(--text);border-bottom:1px solid var(--border);">reach out directly</a>.
+            in these areas. <a href="mailto:ap@simdadllc.com" style="color:var(--text);border-bottom:1px solid var(--border);">Email him directly</a>.
           </p>
 
           <div class="team-links-pair">
@@ -984,9 +989,7 @@
           <div class="team-name">Janet V. Leith</div>
           <p class="team-bio">
             Janet brings a background in business and management alongside extensive professional experience
-            as a paraprofessional. As COO, she serves as the company&rsquo;s C-level project manager &mdash;
-            overseeing daily operations, coordinating cross-functional workstreams, and ensuring project
-            goals are met on time and to standard.
+            as a paraprofessional. As COO, she is the company&rsquo;s project manager: she runs daily operations, coordinates the work across the practice and the software, and keeps projects on time and to standard.
           </p>
         </div>
 
