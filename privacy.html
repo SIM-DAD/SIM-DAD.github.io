@@ -18,6 +18,7 @@
 
 </head>
 <body>
+  <a class="skip" href="#main">Skip to main content</a>
 
   <nav class="nav">
     <div class="nav-inner">
@@ -26,13 +27,13 @@
     </div>
   </nav>
 
-  <main>
+  <main id="main" tabindex="-1">
     <header class="sheet masthead">
       <div class="row">
         <p class="m docinfo"><span>Legal</span></p>
         <div class="t">
           <h1>Privacy Policy</h1>
-          <p class="byline"><span>SIM DAD LLC</span><span>Effective October 15, 2026</span><span>Version 1.1</span></p>
+          <p class="byline"><span>SIM DAD LLC</span><span>Effective November 23, 2026</span><span>Version 1.2</span></p>
         </div>
       </div>
     </header>
@@ -61,7 +62,7 @@
     <h2>2. Information the Company Website Collects</h2>
     <p>The simdadllc.com website may collect the following information:</p>
     <ul>
-      <li><strong>Analytics data</strong>. We use Google Analytics 4 (measurement ID G-DYL27HWR71) to understand website traffic. Google Analytics uses cookies to collect anonymized usage data such as pages visited, time on site, and referral source. Analytics cookies are only set <strong>after you provide consent</strong> through the cookie banner that appears on first visit.</li>
+      <li><strong>Analytics data</strong>. We do not use third-party analytics, and this site sets no cookies. Each page sends a single, first-party, cookie-free page-view count to an endpoint we operate; it records only the page name and the date, is skipped entirely when your browser sends Do Not Track, and stores no IP address and no identifier.</li>
       <li><strong>Email address</strong>. If you voluntarily subscribe to a SIM DAD mailing list (for example, a product waitlist or research updates), your email address is collected and stored by Brevo (formerly Sendinblue), our email service provider.</li>
       <li><strong>Server logs</strong>. The website is hosted on GitHub Pages, which retains standard request metadata (IP address, user agent, request timestamp) for the operational purposes described in GitHub&rsquo;s own privacy statement.</li>
     </ul>
@@ -77,22 +78,16 @@
     <ul>
       <li><strong>Gumroad</strong>: payment processing for SIM DAD products sold through it. Gumroad operates as the Merchant of Record (MoR), meaning Gumroad collects and remits applicable sales tax and processes the customer&rsquo;s payment information directly. SIM DAD LLC receives payout summaries and customer email addresses (with the customer&rsquo;s consent at purchase). Gumroad&rsquo;s privacy policy: <a href="https://gumroad.com/privacy" target="_blank" rel="noopener">gumroad.com/privacy</a>.</li>
       <li><strong>Brevo</strong>: email list management and transactional email. If you subscribe to any SIM DAD mailing list, your email is stored by Brevo. Brevo&rsquo;s privacy policy: <a href="https://www.brevo.com/legal/privacypolicy/" target="_blank" rel="noopener">brevo.com/legal/privacypolicy</a>.</li>
-      <li><strong>Google Analytics 4</strong>: consent-based website analytics on simdadllc.com. The product websites run no analytics service, only a first-party, cookie-free page counter described in each product policy. Google&rsquo;s privacy policy: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">policies.google.com/privacy</a>.</li>
       <li><strong>GitHub Pages</strong>: static website hosting for simdadllc.com. GitHub&rsquo;s privacy statement: <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement" target="_blank" rel="noopener">github.com/site-policy</a>.</li>
       <li><strong>Zenodo</strong>: open-science repository for substantiation paper deposits. Zenodo is operated by CERN and provides DOIs for permanent academic citation. Zenodo&rsquo;s privacy policy: <a href="https://about.zenodo.org/privacy-policy/" target="_blank" rel="noopener">about.zenodo.org/privacy-policy</a>.</li>
       <li><strong>SocArXiv</strong> (operated by the Center for Open Science / OSF): preprint hosting for research artifacts. OSF&rsquo;s privacy policy: <a href="https://github.com/CenterForOpenScience/cos.io/blob/master/PRIVACY_POLICY.md" target="_blank" rel="noopener">cos.io/privacy</a>.</li>
     </ul>
 
     <h2>6. Cookies and Tracking Technologies</h2>
-    <p>The SIM DAD LLC website uses two categories of cookies:</p>
-    <ul>
-      <li><strong>Strictly necessary cookies</strong>. These are required for the website to function (for example, remembering your cookie consent choice). They are set without prompting because the website cannot operate without them.</li>
-      <li><strong>Analytics cookies</strong>. These are set by Google Analytics 4 to collect anonymized traffic data. They are set only after you click <em>Accept</em> on the cookie banner that appears on first visit. You can change your choice at any time by clearing your browser&rsquo;s storage for simdadllc.com and reloading the page.</li>
-    </ul>
-    <p>The SIM DAD LLC website does not use cross-site tracking cookies, advertising cookies, or fingerprinting techniques. There are no third-party advertising trackers on simdadllc.com.</p>
+    <p>The SIM DAD LLC website sets no cookies, so it has no cookie banner and nothing to consent to or withdraw. It does not use cross-site tracking, advertising cookies, or fingerprinting techniques, and there are no third-party trackers on simdadllc.com. The page counter described in section 2 is the only measurement on the site.</p>
 
     <h2>7. Data Retention and Deletion</h2>
-    <p>Mailing list email addresses are retained until you unsubscribe (every email contains an unsubscribe link) or until you request removal. Customer support correspondence is retained as long as needed to provide ongoing support. Analytics data is retained per Google Analytics 4 default settings (typically 14 months for user-scoped data).</p>
+    <p>Mailing list email addresses are retained until you unsubscribe (every email contains an unsubscribe link) or until you request removal. Customer support correspondence is retained as long as needed to provide ongoing support. Page-view counts are aggregate daily tallies that contain no personal data; each is deleted after about 13 months.</p>
     <p>To request deletion of any personal data SIM DAD LLC holds about you, contact us at <a href="mailto:hello@simdadllc.com">hello@simdadllc.com</a>. We will process your request within 30 days.</p>
 
     <h2>8. Data Security</h2>
@@ -152,5 +147,16 @@
     </div>
   </footer>
 
+  <!-- First-party, cookie-free page counter (aggregate daily counts only; no cookies, no IP stored, honors Do Not Track) -->
+  <script>
+    (function () {
+      try {
+        if (navigator.doNotTrack === "1" || window.doNotTrack === "1") return;
+        if (!navigator.sendBeacon) return;
+        navigator.sendBeacon("https://simdad-hits.ap-493.workers.dev/hit",
+          JSON.stringify({ site: "simdad", path: location.pathname }));
+      } catch (e) {}
+    })();
+  </script>
 </body>
 </html>
